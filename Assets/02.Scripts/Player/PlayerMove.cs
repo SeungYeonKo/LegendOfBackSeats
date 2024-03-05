@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-
+    [Header("플레이어 이동 요소")]
+    public float MoveSpeed;
     
+
 
     void Start()
     {
