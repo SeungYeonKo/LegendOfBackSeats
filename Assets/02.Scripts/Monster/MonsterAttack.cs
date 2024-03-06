@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class MonsterAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private MonsterMove _owner;
+  
     void Start()
     {
-        
+        _owner = GetComponentInParent<MonsterMove>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AttackEvent()
     {
-        
+        Debug.Log("어택");
+        _owner.PlayerAttack();
     }
 }
