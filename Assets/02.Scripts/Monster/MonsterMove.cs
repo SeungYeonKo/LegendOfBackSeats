@@ -47,11 +47,11 @@ public class MonsterMove : MonoBehaviour
     public Transform PatrolTarget;
 
     // 넉백
-    private Vector3 _knockbackStartPosition;
+  /*  private Vector3 _knockbackStartPosition;
     private Vector3 _knockbackEndPosition;
     private const float KNOCKBACK_DURATION = 0.1f;
     private float _knockbackProgress = 0f;
-    public float KnockbackPower = 1.2f;
+    public float KnockbackPower = 1.2f;*/
 
 
     void Start()
@@ -107,6 +107,10 @@ public class MonsterMove : MonoBehaviour
 
             case MonsterState.Damaged:
                 Damaged();
+                break;
+
+            case MonsterState.Die:
+                Die();
                 break;
         }
     }
@@ -208,7 +212,7 @@ public class MonsterMove : MonoBehaviour
 
     private void Damaged()
     {
-        if (_knockbackProgress == 0)
+       /* if (_knockbackProgress == 0)
         {
             _knockbackStartPosition = transform.position;
 
@@ -226,27 +230,23 @@ public class MonsterMove : MonoBehaviour
 
         if (_knockbackProgress > 1)
         {
-            _knockbackProgress = 0f;
+            _knockbackProgress = 0f;*/
 
             Debug.Log("상태 전환: Damaged -> Trace");
             _animator.SetTrigger("DamagedToTrace");
             _currentState = MonsterState.Trace;
         }
-    }
-    private void Die()
-    {
-        // 죽을때 아이템 생성
-        //ItemObjectFactory.Instance.MakePercent(transform.position);
-
-        Destroy(gameObject);
-    }
+    
 
     public void Hit(DamageInfo damage)
     {
         Health -= damage.Amount;
         if (Health <= 0)
         {
-            Die();
+            Debug.Log("상태 전환: Any -> Die");
+
+            _animator.SetTrigger($"Die{Random.Range(1, 3)}");
+            _currentState = MonsterState.Die;
         }
         else
         {
@@ -254,6 +254,32 @@ public class MonsterMove : MonoBehaviour
             _animator.SetTrigger("Damaged");
             _currentState = MonsterState.Damaged;
         }
+    }
+
+    private Coroutine _dieCoroutine;
+    private void Die()
+    {
+        // 죽을때 아이템 생성
+        //ItemObjectFactory.Instance.MakePercent(transform.position);
+        if (_dieCoroutine == null)
+        {
+            _dieCoroutine = StartCoroutine(Die_Coroutine());
+        }
+    }
+
+    private IEnumerator Die_Coroutine()
+    {
+        _navMeshAgent.isStopped = true;
+        _navMeshAgent.ResetPath();
+
+        HealthSliderUI.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(2f);
+
+        Destroy(gameObject);
+
+        // 죽을때 아이템 생성
+        //ItemObjectFactory.Instance.MakePercent(transform.position);
     }
 
     public void PlayerAttack()
