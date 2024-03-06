@@ -41,17 +41,22 @@ public class MonsterMove : MonoBehaviour
     public float FindDistance = 1f;
     public float AttackDistance = 3f;
     public float MoveDistance = 40f;
-    public const float TOLERANCE = 0.1f;
+    public const float TOLERANCE = 5f;
     private const float IDLE_DURATION = 3f;
     private float _idleTimer;
-    public Transform PatrolTarget;
+    //public Transform PatrolTarget;
+
+    // 몬스터가 이동할 랜덤한 순찰지점을 저장할 리스트
+    private List<Vector3> randomPatrolPoints = new List<Vector3>();
+    // 현재 몬스터가 이동 중인 랜덤 순찰 지점의 인덱스
+    private int currentPatrolIndex = 0;
 
     // 넉백
-  /*  private Vector3 _knockbackStartPosition;
-    private Vector3 _knockbackEndPosition;
-    private const float KNOCKBACK_DURATION = 0.1f;
-    private float _knockbackProgress = 0f;
-    public float KnockbackPower = 1.2f;*/
+    /*  private Vector3 _knockbackStartPosition;
+      private Vector3 _knockbackEndPosition;
+      private const float KNOCKBACK_DURATION = 0.1f;
+      private float _knockbackProgress = 0f;
+      public float KnockbackPower = 1.2f;*/
 
 
     void Start()
@@ -60,14 +65,14 @@ public class MonsterMove : MonoBehaviour
         _navMeshAgent.speed = MoveSpeed;
 
         _animator = GetComponent<Animator>();
-       /* if (_animator != null)
-        {
-            Debug.Log("뭐임진짜");
-        }
-        else
-        {
-            Debug.Log("Animator 컴포넌트가 연결되어 있지 않습니다. MonsterType_1 게임 오브젝트에 Animator를 추가하세요.");
-        }*/
+        /* if (_animator != null)
+         {
+             Debug.Log("뭐임진짜");
+         }
+         else
+         {
+             Debug.Log("Animator 컴포넌트가 연결되어 있지 않습니다. MonsterType_1 게임 오브젝트에 Animator를 추가하세요.");
+         }*/
         _target = GameObject.FindGameObjectWithTag("Player").transform;
 
         StartPosition = transform.position;
@@ -83,14 +88,14 @@ public class MonsterMove : MonoBehaviour
     {
         HealthSliderUI.value = (float)Health / (float)MaxHealth;
 
-        switch(_currentState)
+        switch (_currentState)
         {
             case MonsterState.Idle:
                 Idle();
                 break;
 
             case MonsterState.Trace:
-                Trace(); 
+                Trace();
                 break;
 
             case MonsterState.Patrol:
@@ -119,7 +124,7 @@ public class MonsterMove : MonoBehaviour
     {
         _idleTimer += Time.deltaTime;
 
-        if (PatrolTarget != null && _idleTimer >= IDLE_DURATION)
+        if (randomPatrolPoints != null && _idleTimer >= IDLE_DURATION)
         {
             _idleTimer = 0f;
             Debug.Log("상태 전환: Idle -> Patrol");
@@ -129,8 +134,8 @@ public class MonsterMove : MonoBehaviour
 
         if (Vector3.Distance(_target.position, transform.position) <= FindDistance)
         {
-            Debug.Log("상태 전환: Idle -> Trace");
-            _animator.SetTrigger("IdleToTrace");
+            Debug.Log("상태 전환: Patrol -> Trace");
+            _animator.SetTrigger("PatrolToTrace");
             _currentState = MonsterState.Trace;
         }
     }
@@ -148,9 +153,22 @@ public class MonsterMove : MonoBehaviour
 
     private void Patrol()
     {
-        _navMeshAgent.stoppingDistance = 0f;
-        _navMeshAgent.SetDestination(PatrolTarget.position);
+        if (randomPatrolPoints.Count == 0)
+        {
+            GenerateRandomPatrolPoints();
+        }
 
+        _navMeshAgent.SetDestination(randomPatrolPoints[currentPatrolIndex]);
+        _navMeshAgent.stoppingDistance = 0f;
+
+        if (randomPatrolPoints.Count == 0)
+        {
+            GenerateRandomPatrolPoints();   //랜덤 순찰 지점이 없다면 새로 생성
+        }
+
+        // 현재 몬스터가 이동 중인 랜덤 순찰 지점으로 목적지 설정
+        _navMeshAgent.SetDestination(randomPatrolPoints[currentPatrolIndex]);
+        // 목적지에 도달하면 상태를 Comeback으로 변경하고 돌아가도록 설정
         if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= TOLERANCE)
         {
             Debug.Log("상태 전환: Patrol -> Comeback");
@@ -158,12 +176,28 @@ public class MonsterMove : MonoBehaviour
             _currentState = MonsterState.Comeback;
         }
 
+        // 플레이어가 근처에 있으면 상태를 Trace로 변경하여 플레이어를 추적
         if (Vector3.Distance(_target.position, transform.position) <= FindDistance)
         {
             Debug.Log("상태 전환: Patrol -> Trace");
             _animator.SetTrigger("PatrolToTrace");
             _currentState = MonsterState.Trace;
         }
+    }
+    private void GenerateRandomPatrolPoints()   //랜덤 순찰지점 생성
+    {
+        randomPatrolPoints.Clear();
+
+        // 몬스터 시작 위치를 중심으로 정해진 반경 내에서 랜덤한 순찰 지점을 생성
+        for (int i = 0; i < 10; i++)        // 10개의 랜덤 지점을 생성하게 반복
+        {
+            Vector3 randomPoint = StartPosition + new Vector3(Random.Range(-10f, 50f), 0f, Random.Range(-10f, 50f));
+            randomPatrolPoints.Add(randomPoint);        // 생성된 랜덤 지점 리스트에 추가
+        }
+    }
+    private void UpdatePatrolIndex()
+    {
+        currentPatrolIndex = (currentPatrolIndex + 1) % randomPatrolPoints.Count;   // 다음 랜던 순찰 지점 업데이트
     }
 
     private void Comeback()
@@ -212,31 +246,31 @@ public class MonsterMove : MonoBehaviour
 
     private void Damaged()
     {
-       /* if (_knockbackProgress == 0)
-        {
-            _knockbackStartPosition = transform.position;
+        /* if (_knockbackProgress == 0)
+         {
+             _knockbackStartPosition = transform.position;
 
-            Vector3 dir = transform.position - _target.position;
-            dir.y = 0;
-            dir.Normalize();
+             Vector3 dir = transform.position - _target.position;
+             dir.y = 0;
+             dir.Normalize();
 
-            _knockbackEndPosition = transform.position + dir * KnockbackPower;
-        }
+             _knockbackEndPosition = transform.position + dir * KnockbackPower;
+         }
 
-        _knockbackProgress += Time.deltaTime / KNOCKBACK_DURATION;
+         _knockbackProgress += Time.deltaTime / KNOCKBACK_DURATION;
 
-        // 2-2. Lerp를 이용해 넉백하기
-        transform.position = Vector3.Lerp(_knockbackStartPosition, _knockbackEndPosition, _knockbackProgress);
+         // 2-2. Lerp를 이용해 넉백하기
+         transform.position = Vector3.Lerp(_knockbackStartPosition, _knockbackEndPosition, _knockbackProgress);
 
-        if (_knockbackProgress > 1)
-        {
-            _knockbackProgress = 0f;*/
+         if (_knockbackProgress > 1)
+         {
+             _knockbackProgress = 0f;*/
 
-            Debug.Log("상태 전환: Damaged -> Trace");
-            _animator.SetTrigger("DamagedToTrace");
-            _currentState = MonsterState.Trace;
-        }
-    
+        Debug.Log("상태 전환: Damaged -> Trace");
+        _animator.SetTrigger("DamagedToTrace");
+        _currentState = MonsterState.Trace;
+    }
+
 
     public void Hit(DamageInfo damage)
     {
