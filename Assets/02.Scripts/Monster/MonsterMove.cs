@@ -37,11 +37,11 @@ public class MonsterMove : MonoBehaviour
     private float _attackTimer = 0f;
 
     // AI
-    private Transform _target;
-    public float FindDistance = 1f;
+    private Transform _target;      
+    public float FindDistance = 10f;
     public float AttackDistance = 3f;
     public float MoveDistance = 40f;
-    public const float TOLERANCE = 5f;
+    public const float TOLERANCE = 0.1f;        //목적지 도착 판단하는 오차 범위 상수
     private const float IDLE_DURATION = 3f;
     private float _idleTimer;
     //public Transform PatrolTarget;
@@ -50,6 +50,7 @@ public class MonsterMove : MonoBehaviour
     private List<Vector3> randomPatrolPoints = new List<Vector3>();
     // 현재 몬스터가 이동 중인 랜덤 순찰 지점의 인덱스
     private int currentPatrolIndex = 0;
+
 
     // 넉백
     /*  private Vector3 _knockbackStartPosition;
@@ -62,9 +63,9 @@ public class MonsterMove : MonoBehaviour
     void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        _navMeshAgent.speed = MoveSpeed;
-
+        
         _animator = GetComponent<Animator>();
+        _navMeshAgent.speed = MoveSpeed;
         /* if (_animator != null)
          {
              Debug.Log("뭐임진짜");
@@ -82,6 +83,8 @@ public class MonsterMove : MonoBehaviour
     {
         _idleTimer = 0f;
         Health = MaxHealth;
+
+        GenerateRandomPatrolPoints();   // 몬스터 개별 관리
     }
 
     void Update()
@@ -184,7 +187,8 @@ public class MonsterMove : MonoBehaviour
             _currentState = MonsterState.Trace;
         }
     }
-    private void GenerateRandomPatrolPoints()   //랜덤 순찰지점 생성
+
+    public void GenerateRandomPatrolPoints()   //랜덤 순찰지점 생성
     {
         randomPatrolPoints.Clear();
 
