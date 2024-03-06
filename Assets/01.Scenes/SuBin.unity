@@ -4081,8 +4081,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 10
-  SprintSpeed: 15
+  MoveSpeed: 15
+  SprintSpeed: 20
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
   LandingAudioClip: {fileID: 8300000, guid: c9f960a79b9c6bd47bedf9c93acfd3f4, type: 3}
@@ -9684,9 +9684,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 6339037021241576709, guid: a28e3688cbfe7a5448ac80c53230af35, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7248521252415685452, guid: a28e3688cbfe7a5448ac80c53230af35, type: 3}
       propertyPath: m_Name
       value: Brazier_Small (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7248521252415685452, guid: a28e3688cbfe7a5448ac80c53230af35, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8970898640210095591, guid: a28e3688cbfe7a5448ac80c53230af35, type: 3}
       propertyPath: m_Shadows.m_NearPlane
@@ -19884,9 +19892,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 6339037021241576709, guid: a28e3688cbfe7a5448ac80c53230af35, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7248521252415685452, guid: a28e3688cbfe7a5448ac80c53230af35, type: 3}
       propertyPath: m_Name
       value: Brazier_Small (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7248521252415685452, guid: a28e3688cbfe7a5448ac80c53230af35, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8970898640210095591, guid: a28e3688cbfe7a5448ac80c53230af35, type: 3}
       propertyPath: m_Shadows.m_NearPlane
@@ -28539,7 +28555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1803108076}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Braziers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
