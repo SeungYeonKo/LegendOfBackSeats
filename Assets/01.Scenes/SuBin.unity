@@ -4081,20 +4081,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2
-  SprintSpeed: 5.335
+  MoveSpeed: 10
+  SprintSpeed: 15
   RotationSmoothTime: 0.12
   SpeedChangeRate: 10
   LandingAudioClip: {fileID: 8300000, guid: c9f960a79b9c6bd47bedf9c93acfd3f4, type: 3}
   FootstepAudioClips: []
   FootstepAudioVolume: 0.5
-  JumpHeight: 1.2
-  Gravity: -15
+  JumpHeight: 3
+  Gravity: -35
   JumpTimeout: 0.5
   FallTimeout: 0.15
   Grounded: 1
   GroundedOffset: 0
-  GroundedRadius: 0.28
+  GroundedRadius: 0.43
   GroundLayers:
     serializedVersion: 2
     m_Bits: 129
@@ -4177,7 +4177,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!95 &300563913
 Animator:
   serializedVersion: 5
@@ -4191,7 +4191,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: cba31054d99d8644c9f10fe2448b02f4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
