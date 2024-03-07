@@ -331,7 +331,7 @@ public class MonsterMove : MonoBehaviour
             Debug.Log("때렸다!");
 
             DamageInfo damageInfo = new DamageInfo(DamageType.Normal, Damage);
-            playerHitable.Hit(damageInfo);
+            playerHitable.Hit(Damage);
             _attackTimer = 0f;
         }
     }
