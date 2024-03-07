@@ -48,7 +48,7 @@ public class MonsterMove : MonoBehaviour
 
     // 랜덤하게 순찰지점 설정
     private Vector3 Destination;
-    public float MovementRange = 15f;  // 순찰 범위
+    public float MovementRange = 30f;  // 순찰 범위
 
     // 넉백
     private Vector3 _knockbackStartPosition;
@@ -117,14 +117,14 @@ public class MonsterMove : MonoBehaviour
         if (_idleTimer >= IDLE_DURATION)
         {
             _idleTimer = 0f;
-            Debug.Log("상태 전환: Idle -> Patrol");
+            Debug.Log("Monster : Idle -> Patrol");
             _animator.SetTrigger("IdleToPatrol");
             _currentState = MonsterState.Patrol;
         }
 
         if (Vector3.Distance(_target.position, transform.position) <= FindDistance)
         {
-            Debug.Log("상태 전환: Patrol -> Trace");
+            Debug.Log("Monster: Patrol -> Trace");
             _animator.SetTrigger("PatrolToTrace");
             _currentState = MonsterState.Trace;
         }
@@ -151,23 +151,26 @@ public class MonsterMove : MonoBehaviour
             _currentState = MonsterState.Comeback;
         }
 
-        // 현재 위치와 목표 지점과의 거리가 허용 범위 이내일 때 새로운 랜덤 위치로 이동
-        if (Vector3.Distance(transform.position, Destination) <= TOLERANCE)
-        {
-            MoveToRandomPosition();
-        }
         // 플레이어가 감지 범위 내에 있으면 추적 상태로 전환
         if (Vector3.Distance(_target.position, transform.position) <= FindDistance)
         {
-            Debug.Log("보스: 순찰 -> 추적");
+            Debug.Log("상태 전환: Patrol -> Trace");
+            _animator.SetTrigger("PatrolToTrace");
             _currentState = MonsterState.Trace;
+            return;
+        }
+
+        // 현재 위치와 목표 지점과의 거리가 허용 범위 이내일 때 새로운 랜덤 위치로 이동
+        if (Vector3.Distance(transform.position, _navMeshAgent.destination) <= TOLERANCE)
+        {
+            MoveToRandomPosition();
         }
     }
     private void MoveToRandomPosition()
     {
         // 일정 범위 내에서 랜덤한 위치로 이동
         Vector3 randomDirection = Random.insideUnitSphere * MovementRange;
-        randomDirection += transform.position;
+        randomDirection += _navMeshAgent.destination;
         NavMeshHit hit;
         NavMesh.SamplePosition(randomDirection, out hit, MovementRange, NavMesh.AllAreas);
         Vector3 targetPosition = hit.position;
@@ -188,14 +191,14 @@ public class MonsterMove : MonoBehaviour
 
         if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= TOLERANCE)
         {
-            Debug.Log("상태 전환: Comeback -> idle");
+            Debug.Log("Monster : Comeback -> idle");
             _animator.SetTrigger("ComebackToIdle");
 
             _currentState = MonsterState.Idle;
         }
         if (Vector3.Distance(StartPosition, transform.position) <= TOLERANCE)
         {
-            Debug.Log("상태 전환: Comeback -> idle");
+            Debug.Log("Monster : Comeback -> idle");
             _animator.SetTrigger("ComebackToIdle");
 
             _currentState = MonsterState.Idle;
@@ -207,7 +210,7 @@ public class MonsterMove : MonoBehaviour
         if (Vector3.Distance(_target.position, transform.position) > AttackDistance)
         {
             _delayTimer = 0f;
-            Debug.Log("상태 전환: Attack -> Trace");
+            Debug.Log("Monster: Attack -> Trace");
             _animator.SetTrigger("AttackToTrace");
 
             _currentState = MonsterState.Trace;
@@ -242,7 +245,7 @@ public class MonsterMove : MonoBehaviour
         {
             _knockbackProgress = 0f;
 
-            Debug.Log("몬스터 : Damaged -> Trace");
+            Debug.Log("Monster : Damaged -> Trace");
             _animator.SetTrigger("DamagedToTrace");
             _currentState = MonsterState.Trace;
         }
@@ -254,14 +257,14 @@ public class MonsterMove : MonoBehaviour
         Health -= damage.Amount;
         if (Health <= 0)
         {
-            Debug.Log("상태 전환: Any -> Die");
+            Debug.Log("Monster : Any -> Die");
 
             _animator.SetTrigger($"Die{Random.Range(1, 3)}");
             _currentState = MonsterState.Die;
         }
         else
         {
-            Debug.Log("상태 전환: Any -> Damaged");
+            Debug.Log("Monster : Any -> Damaged");
             _animator.SetTrigger("Damaged");
             _currentState = MonsterState.Damaged;
         }
