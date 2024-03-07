@@ -220,6 +220,7 @@ public class MonsterMove : MonoBehaviour
 
     private void Damaged()
     {
+        // 넉백
         if (_knockbackProgress == 0)
         {
             _knockbackStartPosition = transform.position;
@@ -230,10 +231,8 @@ public class MonsterMove : MonoBehaviour
 
             _knockbackEndPosition = transform.position + dir * KnockbackPower;
         }
-
         _knockbackProgress += Time.deltaTime / KNOCKBACK_DURATION;
 
-        // 2-2. Lerp를 이용해 넉백하기
         transform.position = Vector3.Lerp(_knockbackStartPosition, _knockbackEndPosition, _knockbackProgress);
 
         if (_knockbackProgress > 1)
