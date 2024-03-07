@@ -143,19 +143,18 @@ public class MonsterMove : MonoBehaviour
 
     private void Patrol()
     {
-        if(Vector3.Distance(transform.position, Destination) <= TOLERANCE)
+        if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= TOLERANCE)
         {
             MoveToRandomPosition();
         }
-
         // 플레이어가 감지 범위 내에 있으면 상태를 Trace로 변경하여 플레이어를 추적
-        if(Vector3.Distance(_target.position, transform.position) <= FindDistance)
+        if (Vector3.Distance(_target.position, transform.position) <= FindDistance)
         {
             Debug.Log("Monster : Patrol -> Trace");
             _animator.SetTrigger("PatrolToTrace");
             _currentState = MonsterState.Trace;
         }
-        if(!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= TOLERANCE)
+        if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= TOLERANCE)
         {
             Debug.Log("Monster : Patrol -> Comeback");
             _animator.SetTrigger("PatrolToComeback");
@@ -193,12 +192,12 @@ public class MonsterMove : MonoBehaviour
 
             _currentState = MonsterState.Idle;
         }
+        // 추가: 목적지에 도달하면 Patrol로 전환
         if (Vector3.Distance(StartPosition, transform.position) <= TOLERANCE)
         {
-            Debug.Log("Monster : Comeback -> idle");
-            _animator.SetTrigger("ComebackToIdle");
-
-            _currentState = MonsterState.Idle;
+            Debug.Log("Monster : Comeback -> Patrol");
+            _animator.SetTrigger("ComebackToPatrol");
+            _currentState = MonsterState.Patrol;
         }
     }
 
