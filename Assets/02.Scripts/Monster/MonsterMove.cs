@@ -53,11 +53,11 @@ public class MonsterMove : MonoBehaviour
 
 
     // 넉백
-    /*  private Vector3 _knockbackStartPosition;
+      private Vector3 _knockbackStartPosition;
       private Vector3 _knockbackEndPosition;
       private const float KNOCKBACK_DURATION = 0.1f;
       private float _knockbackProgress = 0f;
-      public float KnockbackPower = 1.2f;*/
+      public float KnockbackPower = 1.2f;
 
 
     void Start()
@@ -250,44 +250,32 @@ public class MonsterMove : MonoBehaviour
 
     private void Damaged()
     {
-<<<<<<< HEAD
-        // 넉백
         if (_knockbackProgress == 0)
         {
             _knockbackStartPosition = transform.position;
-=======
-        /* if (_knockbackProgress == 0)
-         {
-             _knockbackStartPosition = transform.position;
->>>>>>> a0c6120e4c51825c67dc1b3b4f43030b75ea8ffb
 
-             Vector3 dir = transform.position - _target.position;
-             dir.y = 0;
-             dir.Normalize();
+            Vector3 dir = transform.position - _target.position;
+            dir.y = 0;
+            dir.Normalize();
 
-<<<<<<< HEAD
             _knockbackEndPosition = transform.position + dir * KnockbackPower;
         }
+
         _knockbackProgress += Time.deltaTime / KNOCKBACK_DURATION;
 
+        // 2-2. Lerp를 이용해 넉백하기
         transform.position = Vector3.Lerp(_knockbackStartPosition, _knockbackEndPosition, _knockbackProgress);
-=======
-             _knockbackEndPosition = transform.position + dir * KnockbackPower;
-         }
 
-         _knockbackProgress += Time.deltaTime / KNOCKBACK_DURATION;
+        if (_knockbackProgress > 1)
+        {
+            _knockbackProgress = 0f;
 
-         // 2-2. Lerp를 이용해 넉백하기
-         transform.position = Vector3.Lerp(_knockbackStartPosition, _knockbackEndPosition, _knockbackProgress);
->>>>>>> a0c6120e4c51825c67dc1b3b4f43030b75ea8ffb
+            Debug.Log("몬스터 : Damaged -> Trace");
+            _animator.SetTrigger("DamagedToTrace");
+            _currentState = MonsterState.Trace;
+        }
 
-         if (_knockbackProgress > 1)
-         {
-             _knockbackProgress = 0f;*/
 
-        Debug.Log("상태 전환: Damaged -> Trace");
-        _animator.SetTrigger("DamagedToTrace");
-        _currentState = MonsterState.Trace;
     }
 
 
