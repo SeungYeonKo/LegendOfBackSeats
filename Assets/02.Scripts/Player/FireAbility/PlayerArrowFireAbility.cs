@@ -11,6 +11,8 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     public float shotInterval = 2f; // 화살을 발사하는 간격
 
+    private bool _isRightMouseClicked = false;
+
     private void Start()
     {
         _animator = GetComponentInChildren<Animator>();
@@ -18,9 +20,14 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     private void Update()
     {
+
+        _isRightMouseClicked = false;
+
         // 오른쪽 마우스 버튼 클릭 시 조준
         if (Input.GetMouseButton(1))
         {
+            _isRightMouseClicked = true;
+
             _animator.SetTrigger("DrawArrow");
 
             if (Input.GetMouseButtonDown(0)) // 왼쪽 마우스 버튼 클릭 시 발사
@@ -38,6 +45,11 @@ public class PlayerArrowFireAbility : MonoBehaviour
                     // direction을 곱해 발사 각도에 맞게 발사 위치를 띄웁니다. 이는 화살이 나아가고자 하는 방향으로 간격을 띄우는 것입니다.
                 }
             }
+        }
+
+        if (_isRightMouseClicked == false)
+        {
+
         }
 
 
