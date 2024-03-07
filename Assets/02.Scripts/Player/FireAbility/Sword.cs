@@ -32,8 +32,8 @@ public class Sword : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Monster"))
-        {
+/*        if (other.CompareTag("Monster"))
+        {*/
             IHitable hitMonster = other.GetComponent<IHitable>();
             if (hitMonster != null)
             {
@@ -41,5 +41,5 @@ public class Sword : MonoBehaviour
                 Debug.Log(other);
             }
         }
-    }
+/*    }*/
 }
