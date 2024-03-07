@@ -122,12 +122,14 @@ public class MonsterMove : MonoBehaviour, IHitable
             _currentState = MonsterState.Patrol;
         }
 
-        if (Vector3.Distance(_target.position, transform.position) <= FindDistance)
+        if (Vector3.Distance(_target.position, transform.position) <= FindDistance && _idleTimer >= IDLE_DURATION / 2)
         {
-            Debug.Log("Monster: Patrol -> Trace");
-            _animator.SetTrigger("PatrolToTrace");
+            Debug.Log("Monster: Idle -> Trace");
+            _animator.SetTrigger("IdleToTrace");
             _currentState = MonsterState.Trace;
         }
+
+
     }
 
     private void Trace()
@@ -139,6 +141,13 @@ public class MonsterMove : MonoBehaviour, IHitable
         _navMeshAgent.stoppingDistance = AttackDistance;
 
         _navMeshAgent.destination = _target.position;
+
+        if((Vector3.Distance(_target.position, transform.position) >= FindDistance))
+        {
+            Debug.Log("Monster : Trace -> Comeback");
+            _animator.SetTrigger("TraceToComeback");
+            _currentState = MonsterState.Comeback;
+        }
     }
 
     private void Patrol()
@@ -147,6 +156,7 @@ public class MonsterMove : MonoBehaviour, IHitable
         {
             MoveToRandomPosition();
         }
+
         // 플레이어가 감지 범위 내에 있으면 상태를 Trace로 변경하여 플레이어를 추적
         if (Vector3.Distance(_target.position, transform.position) <= FindDistance)
         {
@@ -154,14 +164,22 @@ public class MonsterMove : MonoBehaviour, IHitable
             _animator.SetTrigger("PatrolToTrace");
             _currentState = MonsterState.Trace;
         }
+
+        // 추가: Patrol 상태에서 일정 시간 대기 후 Comeback으로 전환
         if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= TOLERANCE)
         {
-            Debug.Log("Monster : Patrol -> Comeback");
-            _animator.SetTrigger("PatrolToComeback");
-            _currentState = MonsterState.Comeback;
+            StartCoroutine(WaitAndComeback());
         }
-
     }
+
+    private IEnumerator WaitAndComeback()
+    {
+        yield return new WaitForSeconds(2f);  // 대기 시간 조절 필요
+        Debug.Log("Monster : Patrol -> Comeback");
+        _animator.SetTrigger("PatrolToComeback");
+        _currentState = MonsterState.Comeback;
+    }
+
     private void MoveToRandomPosition()
     {
         // 일정 범위 내에서 랜덤한 위치로 이동
@@ -173,7 +191,6 @@ public class MonsterMove : MonoBehaviour, IHitable
         _navMeshAgent.SetDestination(targetPosition);
         Destination = targetPosition;
     }
-
 
     private void Comeback()
     {
@@ -192,13 +209,7 @@ public class MonsterMove : MonoBehaviour, IHitable
 
             _currentState = MonsterState.Idle;
         }
-        // 추가: 목적지에 도달하면 Patrol로 전환
-        if (Vector3.Distance(StartPosition, transform.position) <= TOLERANCE)
-        {
-            Debug.Log("Monster : Comeback -> Patrol");
-            _animator.SetTrigger("ComebackToPatrol");
-            _currentState = MonsterState.Patrol;
-        }
+    
     }
 
     private void Attack()
@@ -218,7 +229,6 @@ public class MonsterMove : MonoBehaviour, IHitable
             _animator.SetTrigger("Attack");
         }
     }
-
     private void Damaged()
     {
         if (_knockbackProgress == 0)
@@ -246,7 +256,6 @@ public class MonsterMove : MonoBehaviour, IHitable
             _currentState = MonsterState.Trace;
         }
     }
-
 
     public void Hit(int amount)
     {
@@ -276,7 +285,6 @@ public class MonsterMove : MonoBehaviour, IHitable
             _dieCoroutine = StartCoroutine(Die_Coroutine());
         }
     }
-
     private IEnumerator Die_Coroutine()
     {
         _navMeshAgent.isStopped = true;
@@ -291,7 +299,6 @@ public class MonsterMove : MonoBehaviour, IHitable
         // 죽을때 아이템 생성
         //ItemObjectFactory.Instance.MakePercent(transform.position);
     }
-
     public void PlayerAttack()
     {
         IHitable playerHitable = _target.GetComponent<IHitable>();
