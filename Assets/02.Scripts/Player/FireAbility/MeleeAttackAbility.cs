@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class MeleeAttackAbility : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Animator _playerAnimator;
+    public GameObject MeleeWeapon;
+    private Sword _sword;
+
     void Start()
     {
-        
+        _playerAnimator = GetComponent<Animator>();
+        _sword = MeleeWeapon.GetComponent<Sword>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            _playerAnimator.SetTrigger("Attack");
+            _sword.Use();
+        }
     }
 }
