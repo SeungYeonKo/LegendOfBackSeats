@@ -4236,7 +4236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ArrowPrefab: {fileID: 1927996576}
-  ArrowContainer: {fileID: 0}
+  arrowSpeed: 30
   shotInterval: 2
 --- !u!1 &305750925 stripped
 GameObject:

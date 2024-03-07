@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerArrowFireAbility : MonoBehaviour
 {
     public GameObject ArrowPrefab; // 발사할 화살 객체
-    public Transform ArrowContainer; // 화살이 위치할 곳
+    public float arrowSpeed = 30f; // 화살의 초기 속도
 
     private Animator _animator;
 
@@ -27,6 +27,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             _isRightMouseClicked = true;
+            _animator.SetLayerWeight(1, 1);
 
             _animator.SetTrigger("DrawArrow");
 
@@ -34,25 +35,23 @@ public class PlayerArrowFireAbility : MonoBehaviour
             {
                 _animator.SetTrigger("AimRecoil");
 
-                // 화살 발사각도 = 20 + 20i (20, 40, 60)
-                for (int i = 0; i < 3; i++)
-                {
-                    GameObject tempObject = Instantiate(ArrowPrefab, ArrowContainer);
-                    Vector3 direction = new Vector3(Mathf.Cos((20 + 20 * i) * Mathf.Deg2Rad), 0, Mathf.Sin((20 + 20 * i) * Mathf.Deg2Rad));
-                    tempObject.transform.forward = direction; // 화살의 방향을 설정합니다.
-                    tempObject.transform.position = transform.position + shotInterval * direction;
-                    // shotInterval * direction은 화살이 플레이어 앞에서 발사되도록 자연스럽게 만들어주기 위해
-                    // direction을 곱해 발사 각도에 맞게 발사 위치를 띄웁니다. 이는 화살이 나아가고자 하는 방향으로 간격을 띄우는 것입니다.
-                }
+                FireArrow();
             }
         }
 
         if (_isRightMouseClicked == false)
         {
-
+            _animator.SetLayerWeight(1, 0);
         }
-
 
     }
 
+
+    void FireArrow()
+    {
+        // 화살 인스턴스를 생성하고 위치 및 회전을 초기화합니다
+        GameObject arrowInstance = Instantiate(ArrowPrefab, transform.position, Quaternion.identity);
+        // 화살에 속도를 부여합니다
+        arrowInstance.GetComponent<Rigidbody>().velocity = transform.forward * arrowSpeed;
+    }
 }
