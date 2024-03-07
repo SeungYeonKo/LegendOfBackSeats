@@ -16,7 +16,7 @@ public enum MonsterState
     Die
 }
 
-public class MonsterMove : MonoBehaviour
+public class MonsterMove : MonoBehaviour, IHitable
 {
     private NavMeshAgent _navMeshAgent;
     private Animator _animator;
@@ -248,9 +248,9 @@ public class MonsterMove : MonoBehaviour
     }
 
 
-    public void Hit(DamageInfo damage)
+    public void Hit(int amount)
     {
-        Health -= damage.Amount;
+        Health -= amount;
         if (Health <= 0)
         {
             Debug.Log("Monster : Any -> Die");

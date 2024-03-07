@@ -131,7 +131,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -149,13 +149,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 0
   MaxHealth: 10
-  HealthSliderUI: {fileID: 0}
   MoveSpeed: 4
   StartPosition: {x: 0, y: 0, z: 0}
   Damage: 3
   FindDistance: 10
   AttackDistance: 3
   MoveDistance: 40
+  MovementRange: 15
+  KnockbackPower: 1.2
 --- !u!1001 &7389944216568963447
 PrefabInstance:
   m_ObjectHideFlags: 0
