@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowFireAbility : MonoBehaviour
+public class PlayerArrowFireAbility : MonoBehaviour
 {
     public GameObject ArrowPrefab; // 발사할 화살 객체
     public Transform ArrowContainer; // 화살이 위치할 곳
+
+    private Animator _animator;
 
     public float shotInterval = 2f; // 화살을 발사하는 간격
 
@@ -18,6 +20,8 @@ public class ArrowFireAbility : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0)) // 왼쪽 마우스 버튼 클릭 시
         {
+
+
             // 화살 발사각도 = 20 + 20i (20, 40, 60)
             for (int i = 0; i < 3; i++)
             {
