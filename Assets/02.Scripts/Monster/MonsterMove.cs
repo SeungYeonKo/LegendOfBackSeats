@@ -26,7 +26,6 @@ public class MonsterMove : MonoBehaviour
     public int Health;
     public int MaxHealth = 10;
     //public Slider HealthSliderUI;
-    //확인용
 
     // 이동
     public float MoveSpeed = 4f;
