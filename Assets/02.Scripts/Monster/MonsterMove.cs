@@ -25,7 +25,7 @@ public class MonsterMove : MonoBehaviour
     // 체력
     public int Health;
     public int MaxHealth = 10;
-   // public Slider HealthSliderUI;
+    public Slider HealthSliderUI;
 
     // 이동
     public float MoveSpeed = 4f;
@@ -53,11 +53,11 @@ public class MonsterMove : MonoBehaviour
 
 
     // 넉백
-    /*  private Vector3 _knockbackStartPosition;
+      private Vector3 _knockbackStartPosition;
       private Vector3 _knockbackEndPosition;
       private const float KNOCKBACK_DURATION = 0.1f;
       private float _knockbackProgress = 0f;
-      public float KnockbackPower = 1.2f;*/
+      public float KnockbackPower = 1.2f;
 
 
     void Start()
@@ -89,7 +89,7 @@ public class MonsterMove : MonoBehaviour
 
     void Update()
     {
-        // HealthSliderUI.value = (float)Health / (float)MaxHealth;
+        HealthSliderUI.value = (float)Health / (float)MaxHealth;
 
         switch (_currentState)
         {
@@ -250,29 +250,32 @@ public class MonsterMove : MonoBehaviour
 
     private void Damaged()
     {
-        /* if (_knockbackProgress == 0)
-         {
-             _knockbackStartPosition = transform.position;
+        if (_knockbackProgress == 0)
+        {
+            _knockbackStartPosition = transform.position;
 
-             Vector3 dir = transform.position - _target.position;
-             dir.y = 0;
-             dir.Normalize();
+            Vector3 dir = transform.position - _target.position;
+            dir.y = 0;
+            dir.Normalize();
 
-             _knockbackEndPosition = transform.position + dir * KnockbackPower;
-         }
+            _knockbackEndPosition = transform.position + dir * KnockbackPower;
+        }
 
-         _knockbackProgress += Time.deltaTime / KNOCKBACK_DURATION;
+        _knockbackProgress += Time.deltaTime / KNOCKBACK_DURATION;
 
-         // 2-2. Lerp를 이용해 넉백하기
-         transform.position = Vector3.Lerp(_knockbackStartPosition, _knockbackEndPosition, _knockbackProgress);
+        // 2-2. Lerp를 이용해 넉백하기
+        transform.position = Vector3.Lerp(_knockbackStartPosition, _knockbackEndPosition, _knockbackProgress);
 
-         if (_knockbackProgress > 1)
-         {
-             _knockbackProgress = 0f;*/
+        if (_knockbackProgress > 1)
+        {
+            _knockbackProgress = 0f;
 
-        Debug.Log("상태 전환: Damaged -> Trace");
-        _animator.SetTrigger("DamagedToTrace");
-        _currentState = MonsterState.Trace;
+            Debug.Log("몬스터 : Damaged -> Trace");
+            _animator.SetTrigger("DamagedToTrace");
+            _currentState = MonsterState.Trace;
+        }
+
+
     }
 
 
@@ -310,7 +313,7 @@ public class MonsterMove : MonoBehaviour
         _navMeshAgent.isStopped = true;
         _navMeshAgent.ResetPath();
 
-        // HealthSliderUI.gameObject.SetActive(false);
+        HealthSliderUI.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(2f);
 
@@ -327,8 +330,8 @@ public class MonsterMove : MonoBehaviour
         {
             Debug.Log("때렸다!");
 
-            //DamageInfo damageInfo = new DamageInfo(DamageType.Normal, Damage);
-            playerHitable.Hit(Damage);
+            DamageInfo damageInfo = new DamageInfo(DamageType.Normal, Damage);
+            playerHitable.Hit(damageInfo);
             _attackTimer = 0f;
         }
     }
