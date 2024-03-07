@@ -25,7 +25,7 @@ public class MonsterMove : MonoBehaviour
     // 체력
     public int Health;
     public int MaxHealth = 10;
-    public Slider HealthSliderUI;
+    //public Slider HealthSliderUI;
 
     // 이동
     public float MoveSpeed = 4f;
@@ -34,10 +34,10 @@ public class MonsterMove : MonoBehaviour
     // 공격
     public int Damage = 3;
     public const float AttackDelay = 0.8f;
-    private float _attackTimer = 0f;
+    private float _delayTimer = 0f;
 
     // AI
-    private Transform _target;      
+    private Transform _target;
     public float FindDistance = 10f;
     public float AttackDistance = 3f;
     public float MoveDistance = 40f;
@@ -46,36 +46,25 @@ public class MonsterMove : MonoBehaviour
     private float _idleTimer;
     //public Transform PatrolTarget;
 
-    // 몬스터가 이동할 랜덤한 순찰지점을 저장할 리스트
-    private List<Vector3> randomPatrolPoints = new List<Vector3>();
-    // 현재 몬스터가 이동 중인 랜덤 순찰 지점의 인덱스
-    private int currentPatrolIndex = 0;
-
+    // 랜덤하게 순찰지점 설정
+    private Vector3 Destination;
+    public float MovementRange = 15f;  // 순찰 범위
 
     // 넉백
-      private Vector3 _knockbackStartPosition;
-      private Vector3 _knockbackEndPosition;
-      private const float KNOCKBACK_DURATION = 0.1f;
-      private float _knockbackProgress = 0f;
-      public float KnockbackPower = 1.2f;
+    private Vector3 _knockbackStartPosition;
+    private Vector3 _knockbackEndPosition;
+    private const float KNOCKBACK_DURATION = 0.1f;
+    private float _knockbackProgress = 0f;
+    public float KnockbackPower = 1.2f;
 
 
     void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        
         _animator = GetComponent<Animator>();
-        _navMeshAgent.speed = MoveSpeed;
-        /* if (_animator != null)
-         {
-             Debug.Log("뭐임진짜");
-         }
-         else
-         {
-             Debug.Log("Animator 컴포넌트가 연결되어 있지 않습니다. MonsterType_1 게임 오브젝트에 Animator를 추가하세요.");
-         }*/
+        Destination = _navMeshAgent.transform.position;
         _target = GameObject.FindGameObjectWithTag("Player").transform;
-
+        _delayTimer = 0f;
         StartPosition = transform.position;
         Init();
     }
@@ -83,13 +72,11 @@ public class MonsterMove : MonoBehaviour
     {
         _idleTimer = 0f;
         Health = MaxHealth;
-
-        GenerateRandomPatrolPoints();   // 몬스터 개별 관리
     }
 
     void Update()
     {
-        HealthSliderUI.value = (float)Health / (float)MaxHealth;
+        //HealthSliderUI.value = (float)Health / (float)MaxHealth;
 
         switch (_currentState)
         {
@@ -127,7 +114,7 @@ public class MonsterMove : MonoBehaviour
     {
         _idleTimer += Time.deltaTime;
 
-        if (randomPatrolPoints != null && _idleTimer >= IDLE_DURATION)
+        if (_idleTimer >= IDLE_DURATION)
         {
             _idleTimer = 0f;
             Debug.Log("상태 전환: Idle -> Patrol");
@@ -156,21 +143,6 @@ public class MonsterMove : MonoBehaviour
 
     private void Patrol()
     {
-        if (randomPatrolPoints.Count == 0)
-        {
-            GenerateRandomPatrolPoints();
-        }
-
-        _navMeshAgent.SetDestination(randomPatrolPoints[currentPatrolIndex]);
-        _navMeshAgent.stoppingDistance = 0f;
-
-        if (randomPatrolPoints.Count == 0)
-        {
-            GenerateRandomPatrolPoints();   //랜덤 순찰 지점이 없다면 새로 생성
-        }
-
-        // 현재 몬스터가 이동 중인 랜덤 순찰 지점으로 목적지 설정
-        _navMeshAgent.SetDestination(randomPatrolPoints[currentPatrolIndex]);
         // 목적지에 도달하면 상태를 Comeback으로 변경하고 돌아가도록 설정
         if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= TOLERANCE)
         {
@@ -179,30 +151,30 @@ public class MonsterMove : MonoBehaviour
             _currentState = MonsterState.Comeback;
         }
 
-        // 플레이어가 근처에 있으면 상태를 Trace로 변경하여 플레이어를 추적
+        // 현재 위치와 목표 지점과의 거리가 허용 범위 이내일 때 새로운 랜덤 위치로 이동
+        if (Vector3.Distance(transform.position, Destination) <= TOLERANCE)
+        {
+            MoveToRandomPosition();
+        }
+        // 플레이어가 감지 범위 내에 있으면 추적 상태로 전환
         if (Vector3.Distance(_target.position, transform.position) <= FindDistance)
         {
-            Debug.Log("상태 전환: Patrol -> Trace");
-            _animator.SetTrigger("PatrolToTrace");
+            Debug.Log("보스: 순찰 -> 추적");
             _currentState = MonsterState.Trace;
         }
     }
-
-    public void GenerateRandomPatrolPoints()   //랜덤 순찰지점 생성
+    private void MoveToRandomPosition()
     {
-        randomPatrolPoints.Clear();
+        // 일정 범위 내에서 랜덤한 위치로 이동
+        Vector3 randomDirection = Random.insideUnitSphere * MovementRange;
+        randomDirection += transform.position;
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomDirection, out hit, MovementRange, NavMesh.AllAreas);
+        Vector3 targetPosition = hit.position;
+        _navMeshAgent.SetDestination(targetPosition);
+        Destination = targetPosition;
+    }
 
-        // 몬스터 시작 위치를 중심으로 정해진 반경 내에서 랜덤한 순찰 지점을 생성
-        for (int i = 0; i < 10; i++)        // 10개의 랜덤 지점을 생성하게 반복
-        {
-            Vector3 randomPoint = StartPosition + new Vector3(Random.Range(-10f, 50f), 0f, Random.Range(-10f, 50f));
-            randomPatrolPoints.Add(randomPoint);        // 생성된 랜덤 지점 리스트에 추가
-        }
-    }
-    private void UpdatePatrolIndex()
-    {
-        currentPatrolIndex = (currentPatrolIndex + 1) % randomPatrolPoints.Count;   // 다음 랜던 순찰 지점 업데이트
-    }
 
     private void Comeback()
     {
@@ -234,15 +206,15 @@ public class MonsterMove : MonoBehaviour
     {
         if (Vector3.Distance(_target.position, transform.position) > AttackDistance)
         {
-            _attackTimer = 0f;
+            _delayTimer = 0f;
             Debug.Log("상태 전환: Attack -> Trace");
             _animator.SetTrigger("AttackToTrace");
 
             _currentState = MonsterState.Trace;
             return;
         }
-        _attackTimer += Time.deltaTime;
-        if (_attackTimer >= AttackDelay)
+        _delayTimer += Time.deltaTime;
+        if (_delayTimer >= AttackDelay)
         {
             _animator.SetTrigger("Attack");
         }
@@ -274,8 +246,6 @@ public class MonsterMove : MonoBehaviour
             _animator.SetTrigger("DamagedToTrace");
             _currentState = MonsterState.Trace;
         }
-
-
     }
 
 
@@ -313,7 +283,7 @@ public class MonsterMove : MonoBehaviour
         _navMeshAgent.isStopped = true;
         _navMeshAgent.ResetPath();
 
-        HealthSliderUI.gameObject.SetActive(false);
+        //HealthSliderUI.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(2f);
 
@@ -332,7 +302,7 @@ public class MonsterMove : MonoBehaviour
 
             DamageInfo damageInfo = new DamageInfo(DamageType.Normal, Damage);
             playerHitable.Hit(Damage);
-            _attackTimer = 0f;
+            _delayTimer = 0f;
         }
     }
 }
