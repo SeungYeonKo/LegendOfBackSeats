@@ -25,7 +25,7 @@ public class MonsterMove : MonoBehaviour
     // 체력
     public int Health;
     public int MaxHealth = 10;
-    public Slider HealthSliderUI;
+   // public Slider HealthSliderUI;
 
     // 이동
     public float MoveSpeed = 4f;
@@ -89,7 +89,7 @@ public class MonsterMove : MonoBehaviour
 
     void Update()
     {
-        HealthSliderUI.value = (float)Health / (float)MaxHealth;
+        // HealthSliderUI.value = (float)Health / (float)MaxHealth;
 
         switch (_currentState)
         {
@@ -310,7 +310,7 @@ public class MonsterMove : MonoBehaviour
         _navMeshAgent.isStopped = true;
         _navMeshAgent.ResetPath();
 
-        HealthSliderUI.gameObject.SetActive(false);
+        // HealthSliderUI.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(2f);
 
@@ -327,8 +327,8 @@ public class MonsterMove : MonoBehaviour
         {
             Debug.Log("때렸다!");
 
-            DamageInfo damageInfo = new DamageInfo(DamageType.Normal, Damage);
-            playerHitable.Hit(damageInfo);
+            //DamageInfo damageInfo = new DamageInfo(DamageType.Normal, Damage);
+            playerHitable.Hit(Damage);
             _attackTimer = 0f;
         }
     }
