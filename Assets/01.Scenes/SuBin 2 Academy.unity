@@ -33723,10 +33723,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arrow
       objectReference: {fileID: 0}
-    - target: {fileID: 1607560853642190831, guid: 9234c973f65eb71469c1a17dc93747e0, type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3440662830758758319, guid: 9234c973f65eb71469c1a17dc93747e0, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.24999993
@@ -33778,10 +33774,6 @@ PrefabInstance:
     - target: {fileID: 3440662830758758319, guid: 9234c973f65eb71469c1a17dc93747e0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 109.372
-      objectReference: {fileID: 0}
-    - target: {fileID: 8121632491437178944, guid: 9234c973f65eb71469c1a17dc93747e0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
