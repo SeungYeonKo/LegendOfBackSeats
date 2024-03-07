@@ -143,28 +143,25 @@ public class MonsterMove : MonoBehaviour
 
     private void Patrol()
     {
-        // 목적지에 도달하면 상태를 Comeback으로 변경하고 돌아가도록 설정
-        if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= TOLERANCE)
+        if(Vector3.Distance(transform.position, Destination) <= TOLERANCE)
         {
-            Debug.Log("상태 전환: Patrol -> Comeback");
+            MoveToRandomPosition();
+        }
+
+        // 플레이어가 감지 범위 내에 있으면 상태를 Trace로 변경하여 플레이어를 추적
+        if(Vector3.Distance(_target.position, transform.position) <= FindDistance)
+        {
+            Debug.Log("Monster : Patrol -> Trace");
+            _animator.SetTrigger("PatrolToTrace");
+            _currentState = MonsterState.Trace;
+        }
+        if(!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= TOLERANCE)
+        {
+            Debug.Log("Monster : Patrol -> Comeback");
             _animator.SetTrigger("PatrolToComeback");
             _currentState = MonsterState.Comeback;
         }
 
-        // 플레이어가 감지 범위 내에 있으면 추적 상태로 전환
-        if (Vector3.Distance(_target.position, transform.position) <= FindDistance)
-        {
-            Debug.Log("상태 전환: Patrol -> Trace");
-            _animator.SetTrigger("PatrolToTrace");
-            _currentState = MonsterState.Trace;
-            return;
-        }
-
-        // 현재 위치와 목표 지점과의 거리가 허용 범위 이내일 때 새로운 랜덤 위치로 이동
-        if (Vector3.Distance(transform.position, _navMeshAgent.destination) <= TOLERANCE)
-        {
-            MoveToRandomPosition();
-        }
     }
     private void MoveToRandomPosition()
     {
