@@ -13,7 +13,7 @@ public class Arrow : MonoBehaviour
         arrowRigidbody = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate() // 물리 연산은 FixedUpdate에서 처리하는 것이 좋습니다
+    private void FixedUpdate() // 물리 연산은 FixedUpdate
     {
         if (arrowRigidbody.velocity.magnitude > 0.1f) // 속도가 충분히 클 때만 방향을 바꿉니다
         {
