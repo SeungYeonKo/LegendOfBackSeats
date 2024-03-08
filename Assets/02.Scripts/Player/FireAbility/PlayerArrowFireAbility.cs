@@ -58,45 +58,21 @@ public class PlayerArrowFireAbility : MonoBehaviour
             Power += Time.deltaTime * 2f;
             Power = Mathf.Min(MAX_POWER, Power);
 
-            if (Input.GetKey(KeyCode.A))
-            {
-                _animator.SetTrigger("WalkAimLeft");
-            }
-            else if (Input.GetKey(KeyCode.D))
-            {
-                _animator.SetTrigger("WalkAimRight");
-            }
-            else if (Input.GetKey(KeyCode.W))
-            {
-                _animator.SetTrigger("WalkAimFoward");
-            }
-            else if (Input.GetKey(KeyCode.S))
-            {
-                _animator.SetTrigger("WalkAimBack");
-            }
 
-            if (_isRightMouseClicked)  // 줌인
-            {
-            }
-
-            if (Input.GetMouseButtonDown(0)) // 왼쪽 마우스 버튼 클릭 시 발사
-            {
-                _animator.SetTrigger("AimRecoil");
-
-                FireArrow();
-            }
         }
         else if (Input.GetMouseButtonUp(1))
         {
             Power = 100f;
-        }
+            _animator.SetTrigger("AimRecoil");
 
-        if (_isRightMouseClicked == false)
-        {
+            FireArrow();
+            _isRightMouseClicked = false;
+
             _animator.SetLayerWeight(1, 0);
             Vcam.m_Lens.FieldOfView = NormalFOV;
 
         }
+
 
     }
 
