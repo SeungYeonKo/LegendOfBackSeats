@@ -74,7 +74,7 @@ public class ItemObject : MonoBehaviour
             yield return null;
         }
 
-        //ItemManager.Instance.AddItem(ItemType);
+        ItemManager.Instance.AddItem(ItemType);
         gameObject.SetActive(false);
     }
 }

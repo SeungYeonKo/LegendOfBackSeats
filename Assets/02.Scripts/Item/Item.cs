@@ -19,26 +19,26 @@ public class Item : MonoBehaviour
         ItemType = itemType;
         Count = count;
     }
-
-    /*public bool TryUse()
+}
+/*    public bool TryUse()
     {
-            if(Count == 0)
-         {
-             return false;
-         }
-         Count -= 1;
+        if (Count == 0)
+        {
+            return false;
+        }
+        Count -= 1;
          switch(ItemType)
          {
              case ItemType.Health:
              {
-                Health아이템 사용시 플레이어 체력 꽉차기
+                // Health아이템 사용시 플레이어 체력 꽉차기
                  PlayerMoveAbility playerMoveAbility = GameObject.FindWithTag("Player").GetComponent<PlayerMoveAbility>();
                  playerMoveAbility.Health = playerMoveAbility.MaxHealth;
                  break;
              }
              case ItemType.Arrow:
              {
-                 Arrow아이템 사용시 Player가 들고있는 Arrow + 1
+                 // Arrow아이템 사용시 Player가 들고있는 Arrow + 1
                  PlayerGunFireAbility ability = GameObject.FindWithTag("Player").GetComponent<PlayerGunFireAbility>();
                  ability.CurrentGun.BulletRemainCount = ability.CurrentGun.BulletMaxCount;
                  ability.RefreshUI();
@@ -47,5 +47,6 @@ public class Item : MonoBehaviour
          }
      return true;
         }
-    }*/
-}
+    }
+*/
+
