@@ -230,7 +230,7 @@ public class MonsterMove : MonoBehaviour, IHitable
             {
                 // 공격 애니메이션 실행
                 _animator.SetTrigger("Attack");
-               // PlayerAttack(); // 플레이어 공격 로직을 호출
+               PlayerAttack(); // 플레이어 공격 로직을 호출
             }
         }
         else if(Vector3.Distance(_target.position, transform.position) > AttackDistance)
