@@ -137,11 +137,22 @@ public class MonsterMove : MonoBehaviour, IHitable
         dir.Normalize();
 
         _navMeshAgent.stoppingDistance = AttackDistance;
-
         _navMeshAgent.destination = _target.position;
 
-        if((Vector3.Distance(_target.position, transform.position) >= FindDistance))
+        // 플레이어와의 거리가 공격 범위 내에 있는지 확인
+        if (Vector3.Distance(_target.position, transform.position) <= AttackDistance)
         {
+            // 공격 범위 내에 있으면 Attack 상태로 전환
+            if (_currentState != MonsterState.Attack)   // 현재 상태가 Attack이 아닐 때만 전환
+            {
+                Debug.Log("Monster : Trace -> Attack");
+                _animator.SetTrigger("TraceToAttack");
+                _currentState = MonsterState.Attack;
+            }
+        }
+        else if (Vector3.Distance(_target.position, transform.position) >= FindDistance)
+        {
+            // 플레이어와의 거리가 찾기 범위를 벗어나면 Comeback 상태로 전환
             Debug.Log("Monster : Trace -> Comeback");
             _animator.SetTrigger("TraceToComeback");
             _currentState = MonsterState.Comeback;
@@ -211,28 +222,29 @@ public class MonsterMove : MonoBehaviour, IHitable
 
     private void Attack()
     {
-        Debug.Log(Vector3.Distance(_target.position, transform.position));
-        
+        //Debug.Log(Vector3.Distance(_target.position, transform.position));  
         if (Vector3.Distance(_target.position, transform.position) <= AttackDistance)
         {
             _delayTimer += Time.deltaTime;
             if (_delayTimer >= AttackDelay)
             {
+                // 공격 애니메이션 실행
                 _animator.SetTrigger("Attack");
-                // 플레이어 공격 로직을 호출
-                PlayerAttack(); // 필요한 경우
-                _delayTimer = 0f; 
+               // PlayerAttack(); // 플레이어 공격 로직을 호출
             }
         }
-        else
+        else if(Vector3.Distance(_target.position, transform.position) > AttackDistance)
         {
-            _animator.ResetTrigger("Attack");
-            // 플레이어와의 거리가 공격 범위를 벗어난 경우, Trace 상태로 전환
+            // 플레이어와의 거리가 공격 범위를 벗어난 경우 Trace 상태로 전환
+            _delayTimer = 0f;
             Debug.Log("Monster : Attack -> Trace");
             _animator.SetTrigger("AttackToTrace");
             _currentState = MonsterState.Trace;
+
+            return;
         }
     }
+
     private void Damaged()
     {
         // 넉백
