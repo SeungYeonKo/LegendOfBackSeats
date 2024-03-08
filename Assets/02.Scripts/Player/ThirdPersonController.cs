@@ -1,4 +1,7 @@
- using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro.EditorUtilities;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -23,7 +26,9 @@ namespace StarterAssets
         public float SprintSpeed = 15f;
         private float _currentStamina;
         private float MaxStamina = 20f;
-        public Slider StaminaSlider;
+        public Image StaminaSlider;
+        private const float TOLERANCE = 0.1f;
+        private bool _isFatigue;
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
@@ -139,7 +144,7 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<PlayerInputs>();
@@ -163,6 +168,8 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            MakeVisbleStaminaSlider();
+
         }
 
         private void LateUpdate()
@@ -214,26 +221,51 @@ namespace StarterAssets
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
         }
-
+        private void MakeVisbleStaminaSlider()
+        {
+            if (_currentStamina > MaxStamina + TOLERANCE)
+            {
+                StaminaSlider.gameObject.SetActive(false);
+            }
+            else if (_currentStamina < 0 - TOLERANCE)
+            {
+                StaminaSlider.gameObject.SetActive(false);
+            }
+            else
+            {
+                StaminaSlider.gameObject.SetActive(true);
+            }
+        }
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed;
-            if (_input.sprint && _currentStamina > 0)
+            if (_input.sprint && _currentStamina > 0f - TOLERANCE)
             {
                 targetSpeed = SprintSpeed;
                 _currentStamina -= 10f * Time.deltaTime;
                 Mathf.Clamp(_currentStamina, 0f, MaxStamina);
-                StaminaSlider.value = _currentStamina / MaxStamina;
+                StaminaSlider.fillAmount = _currentStamina / MaxStamina;
             }
             else
             {
-                if (_currentStamina < MaxStamina)
+
+                if (_currentStamina < MaxStamina + TOLERANCE && !_isFatigue)
                 {
                     _currentStamina += 5f * Time.deltaTime;
                 }
-                StaminaSlider.value = _currentStamina / MaxStamina;
+                else if (_isFatigue)
+                {
+                    StartCoroutine(Timer_Coroutine(2f));
+                }
+
+
+                StaminaSlider.fillAmount = _currentStamina / MaxStamina;
                 targetSpeed = MoveSpeed;
+            }
+            if (_currentStamina < 0f - TOLERANCE && !_isFatigue)
+            {
+                _isFatigue = true;
             }
 
 
@@ -409,5 +441,13 @@ namespace StarterAssets
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
         }
+
+        private IEnumerator Timer_Coroutine(float timer)
+        {
+            yield return new WaitForSeconds(timer);
+            _isFatigue = false;
+        }
+
+
     }
 }
