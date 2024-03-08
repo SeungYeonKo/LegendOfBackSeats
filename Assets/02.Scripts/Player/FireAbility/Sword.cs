@@ -43,8 +43,6 @@ public class Sword : MonoBehaviour
             IHitable hitMonster = other.GetComponent<IHitable>();
             if (hitMonster != null)
             {
-                Debug.Log("hit");
-
                 hitMonster.Hit(Damage);
             }
 

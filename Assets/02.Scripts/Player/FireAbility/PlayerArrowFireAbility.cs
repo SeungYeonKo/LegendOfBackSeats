@@ -53,14 +53,31 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
             _animator.SetTrigger("DrawArrow");
 
+
+
+
             Power += Time.deltaTime * 2f;
             Power = Mathf.Min(MAX_POWER, Power);
 
+            if (Input.GetKey(KeyCode.A))
+            {
+                _animator.SetTrigger("WalkAimLeft");
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                _animator.SetTrigger("WalkAimRight");
+            }
+            else if (Input.GetKey(KeyCode.W))
+            {
+                _animator.SetTrigger("WalkAimFoward");
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                _animator.SetTrigger("WalkAimBack");
+            }
 
             if (_isRightMouseClicked)  // 줌인
             {
-                _zoomProgress += Time.deltaTime / ZoomInDuration;
-                Vcam.m_Lens.FieldOfView = Mathf.Lerp(NormalFOV, ZoomFOV, _zoomProgress);
             }
 
             if (Input.GetMouseButtonDown(0)) // 왼쪽 마우스 버튼 클릭 시 발사
