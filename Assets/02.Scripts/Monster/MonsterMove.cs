@@ -222,12 +222,15 @@ public class MonsterMove : MonoBehaviour, IHitable
 
     private void Attack()
     {
+        // 플레이어와의 거리를 체크합니다.
+        float distanceToTarget = Vector3.Distance(_target.position, transform.position);
         //Debug.Log(Vector3.Distance(_target.position, transform.position));  
         if (Vector3.Distance(_target.position, transform.position) <= AttackDistance)
         {
             _delayTimer += Time.deltaTime;
             if (_delayTimer >= AttackDelay)
             {
+                _delayTimer = 0;
                 // 공격 애니메이션 실행
                 _animator.SetTrigger("Attack");
                PlayerAttack(); // 플레이어 공격 로직을 호출
