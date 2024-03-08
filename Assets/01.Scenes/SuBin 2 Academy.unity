@@ -4233,7 +4233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0867e689a3e939140a6d2826e175a6d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowPrefab: {fileID: 8327420206365126244, guid: 9234c973f65eb71469c1a17dc93747e0, type: 3}
+  ArrowPrefab: {fileID: 8651048343773779208, guid: 8302326f01cb503479c647a8e8a83e1b, type: 3}
   ArrowPlace: {fileID: 1121283824}
   Power: 3
 --- !u!1 &305750925 stripped
