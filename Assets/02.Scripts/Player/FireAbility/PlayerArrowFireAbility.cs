@@ -9,6 +9,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
     // - 조준: 마우스 오른쪽 버튼
     // - 발사: 마우스 오른쪽 버튼을 누르고 있는 동안 마우스 왼쪽 버튼 누르면 발사
     // 
+
     [Header("플레이어 활 쏠때")]
     public CinemachineVirtualCamera Vcam;
     private const float ZoomFOV = 35f;    // 최소 FOV
@@ -45,7 +46,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
         _isRightMouseClicked = false;
 
         // 오른쪽 마우스 버튼 클릭 시 조준
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
             
             _isRightMouseClicked = true;
@@ -54,53 +55,26 @@ public class PlayerArrowFireAbility : MonoBehaviour
             _animator.SetTrigger("DrawArrow");
 
 
-
-
             Power += Time.deltaTime * 2f;
             Power = Mathf.Min(MAX_POWER, Power);
 
-            if (Input.GetKey(KeyCode.A))
-            {
-                _animator.SetTrigger("WalkAimLeft");
-            }
-            else if (Input.GetKey(KeyCode.D))
-            {
-                _animator.SetTrigger("WalkAimRight");
-            }
-            else if (Input.GetKey(KeyCode.W))
-            {
-                _animator.SetTrigger("WalkAimFoward");
-            }
-            else if (Input.GetKey(KeyCode.S))
-            {
-                _animator.SetTrigger("WalkAimBack");
-            }
 
-            if (_isRightMouseClicked)  // 줌인
-            {
-            }
-
-            if (Input.GetMouseButtonDown(0)) // 왼쪽 마우스 버튼 클릭 시 발사
-            {
-                _animator.SetTrigger("AimRecoil");
-
-                FireArrow();
-            }
         }
-        else
+        else if (Input.GetMouseButtonUp(1))
         {
             Power = 100f;
-        }
+            _animator.SetTrigger("AimRecoil");
 
-        if (_isRightMouseClicked == false)
-        {
+            FireArrow();
+            _isRightMouseClicked = false;
+
             _animator.SetLayerWeight(1, 0);
             Vcam.m_Lens.FieldOfView = NormalFOV;
 
         }
 
-    }
 
+    }
 
     void FireArrow()
     {
