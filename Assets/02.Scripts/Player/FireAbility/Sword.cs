@@ -22,24 +22,27 @@ public class Sword : MonoBehaviour
 
     private IEnumerator Attack_Coroutine()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.2f);
         MeleeArea.enabled = true;
         Debug.Log("Sword Collider enabled");
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.7f);
         Debug.Log("Sword Collider disabled");
         MeleeArea.enabled = false;
         yield return null;
     }
+
     private void OnTriggerEnter(Collider other)
     {
-/*        if (other.CompareTag("Monster"))
-        {*/
+        if (other.CompareTag("Monster"))
+        {
             IHitable hitMonster = other.GetComponent<IHitable>();
             if (hitMonster != null)
             {
+                Debug.Log("hit");
+
                 hitMonster.Hit(Damage);
-                Debug.Log(other);
             }
+
         }
-/*    }*/
+    }
 }
