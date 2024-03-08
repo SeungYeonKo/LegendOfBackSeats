@@ -34,8 +34,6 @@ public class Sword : MonoBehaviour
         Traileffect.enabled = false;
         MeleeArea.enabled = false;
 
-
-
     }
 
     private void OnTriggerEnter(Collider other)

@@ -1,6 +1,7 @@
  using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -16,10 +17,13 @@ namespace StarterAssets
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
-        public float MoveSpeed = 2.0f;
+        public float MoveSpeed = 5f;
 
         [Tooltip("Sprint speed of the character in m/s")]
-        public float SprintSpeed = 5.335f;
+        public float SprintSpeed = 15f;
+        private float _currentStamina;
+        private float MaxStamina = 20f;
+        public Slider StaminaSlider;
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
@@ -144,7 +148,7 @@ namespace StarterAssets
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
-
+            _currentStamina = MaxStamina;
             AssignAnimationIDs();
 
             // reset our timeouts on start
@@ -214,7 +218,24 @@ namespace StarterAssets
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            float targetSpeed;
+            if (_input.sprint && _currentStamina > 0)
+            {
+                targetSpeed = SprintSpeed;
+                _currentStamina -= 10f * Time.deltaTime;
+                Mathf.Clamp(_currentStamina, 0f, MaxStamina);
+                StaminaSlider.value = _currentStamina / MaxStamina;
+            }
+            else
+            {
+                if (_currentStamina < MaxStamina)
+                {
+                    _currentStamina += 5f * Time.deltaTime;
+                }
+                StaminaSlider.value = _currentStamina / MaxStamina;
+                targetSpeed = MoveSpeed;
+            }
+
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
