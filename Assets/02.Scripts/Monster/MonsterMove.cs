@@ -211,6 +211,8 @@ public class MonsterMove : MonoBehaviour, IHitable
 
     private void Attack()
     {
+        Debug.Log(Vector3.Distance(_target.position, transform.position));
+        
         if (Vector3.Distance(_target.position, transform.position) <= AttackDistance)
         {
             _delayTimer += Time.deltaTime;
