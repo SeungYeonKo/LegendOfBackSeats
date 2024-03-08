@@ -19,7 +19,11 @@ public class MeleeAttackAbility : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             _playerAnimator.SetTrigger("Attack");
-            _sword.Use();
         }
+    }
+
+    void UseSwordForAnimator()
+    {
+        _sword.Use();
     }
 }
