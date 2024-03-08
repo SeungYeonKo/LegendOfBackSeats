@@ -278,9 +278,6 @@ public class MonsterMove : MonoBehaviour, IHitable
     private Coroutine _dieCoroutine;
     private void Die()
     {
-        // 죽을때 아이템 생성
-        //ItemObjectFactory.Instance.MakePercent(transform.position);
-        
         _animator.SetTrigger("Die");
         if (_dieCoroutine == null)
         {
@@ -299,7 +296,7 @@ public class MonsterMove : MonoBehaviour, IHitable
         Destroy(gameObject);
 
         // 죽을때 아이템 생성
-        //ItemObjectFactory.Instance.MakePercent(transform.position);
+        ItemObjectFactory.Instance.MakePercent(transform.position);
     }
     public void PlayerAttack()
     {
