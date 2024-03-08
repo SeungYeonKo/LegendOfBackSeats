@@ -218,12 +218,13 @@ public class MonsterMove : MonoBehaviour, IHitable
             {
                 _animator.SetTrigger("Attack");
                 // 플레이어 공격 로직을 호출
-                // PlayerAttack(); // 필요한 경우
+                PlayerAttack(); // 필요한 경우
                 _delayTimer = 0f; 
             }
         }
         else
         {
+            _animator.ResetTrigger("Attack");
             // 플레이어와의 거리가 공격 범위를 벗어난 경우, Trace 상태로 전환
             Debug.Log("Monster : Attack -> Trace");
             _animator.SetTrigger("AttackToTrace");
@@ -263,6 +264,7 @@ public class MonsterMove : MonoBehaviour, IHitable
         if (Health <= 0)
         {
             _currentState = MonsterState.Die;
+            Debug.Log("Monster : Any -> Die");
             Die();
         }
         else
@@ -278,10 +280,8 @@ public class MonsterMove : MonoBehaviour, IHitable
     {
         // 죽을때 아이템 생성
         //ItemObjectFactory.Instance.MakePercent(transform.position);
-        Debug.Log("Monster : Any -> Die");
-
-        _animator.SetTrigger("Die");
         
+        _animator.SetTrigger("Die");
         if (_dieCoroutine == null)
         {
             _dieCoroutine = StartCoroutine(Die_Coroutine());
@@ -294,7 +294,7 @@ public class MonsterMove : MonoBehaviour, IHitable
 
         HealthSliderUI.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         Destroy(gameObject);
 
