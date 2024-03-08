@@ -42,8 +42,13 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     private void Update()
     {
-        _zoomProgress = 0;
-        _isRightMouseClicked = false;
+        //_isRightMouseClicked = false;
+
+        if (_isRightMouseClicked)
+        {
+
+        }
+
 
         // 오른쪽 마우스 버튼 클릭 시 조준
         if (Input.GetMouseButtonDown(1))
@@ -54,6 +59,16 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
             _animator.SetTrigger("DrawArrow");
 
+        }
+
+        else if (Input.GetMouseButton(1))
+        {
+
+            if (_zoomProgress < 1 && _isRightMouseClicked)
+            {
+                _zoomProgress += Time.deltaTime / ZoomInDuration;
+                Vcam.m_Lens.FieldOfView = Mathf.Lerp(NormalFOV, ZoomFOV, _zoomProgress);
+            }
 
             Power += Time.deltaTime * 2f;
             Power = Mathf.Min(MAX_POWER, Power);
@@ -62,6 +77,8 @@ public class PlayerArrowFireAbility : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(1))
         {
+            _zoomProgress = 0;
+
             Power = 100f;
             _animator.SetTrigger("AimRecoil");
 
