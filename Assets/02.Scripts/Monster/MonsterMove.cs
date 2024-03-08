@@ -128,8 +128,6 @@ public class MonsterMove : MonoBehaviour, IHitable
             _animator.SetTrigger("IdleToTrace");
             _currentState = MonsterState.Trace;
         }
-
-
     }
 
     private void Trace()
@@ -213,19 +211,23 @@ public class MonsterMove : MonoBehaviour, IHitable
 
     private void Attack()
     {
-        if (Vector3.Distance(_target.position, transform.position) > AttackDistance)
+        if (Vector3.Distance(_target.position, transform.position) <= AttackDistance)
         {
-            _delayTimer = 0f;
-            Debug.Log("Monster: Attack -> Trace");
-            _animator.SetTrigger("AttackToTrace");
-
-            _currentState = MonsterState.Trace;
-            return;
+            _delayTimer += Time.deltaTime;
+            if (_delayTimer >= AttackDelay)
+            {
+                _animator.SetTrigger("Attack");
+                // 플레이어 공격 로직을 호출
+                // PlayerAttack(); // 필요한 경우
+                _delayTimer = 0f; 
+            }
         }
-        _delayTimer += Time.deltaTime;
-        if (_delayTimer >= AttackDelay)
+        else
         {
-            _animator.SetTrigger("Attack");
+            // 플레이어와의 거리가 공격 범위를 벗어난 경우, Trace 상태로 전환
+            Debug.Log("Monster : Attack -> Trace");
+            _animator.SetTrigger("AttackToTrace");
+            _currentState = MonsterState.Trace;
         }
     }
     private void Damaged()
@@ -245,7 +247,6 @@ public class MonsterMove : MonoBehaviour, IHitable
         transform.position = Vector3.Lerp(_knockbackStartPosition, _knockbackEndPosition, _knockbackProgress);
         _animator.SetTrigger("Damaged");
         Debug.Log("Monster : 넉백!");
-
         if (_knockbackProgress > 1)
         {
             _knockbackProgress = 0f;
@@ -261,10 +262,8 @@ public class MonsterMove : MonoBehaviour, IHitable
         Health -= amount;
         if (Health <= 0)
         {
-            Debug.Log("Monster : Any -> Die");
-
-            _animator.SetTrigger("Die");
             _currentState = MonsterState.Die;
+            Die();
         }
         else
         {
@@ -279,12 +278,12 @@ public class MonsterMove : MonoBehaviour, IHitable
     {
         // 죽을때 아이템 생성
         //ItemObjectFactory.Instance.MakePercent(transform.position);
+        Debug.Log("Monster : Any -> Die");
+
+        _animator.SetTrigger("Die");
+        
         if (_dieCoroutine == null)
         {
-            Debug.Log("Monster : Any -> Die");
-
-            _animator.SetTrigger("Die");
-            _currentState = MonsterState.Die;
             _dieCoroutine = StartCoroutine(Die_Coroutine());
         }
     }
@@ -295,7 +294,7 @@ public class MonsterMove : MonoBehaviour, IHitable
 
         HealthSliderUI.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         Destroy(gameObject);
 
@@ -309,7 +308,7 @@ public class MonsterMove : MonoBehaviour, IHitable
         {
             Debug.Log("때렸다!");
 
-            DamageInfo damageInfo = new DamageInfo(DamageType.Normal, Damage);
+            //DamageInfo damageInfo = new DamageInfo(DamageType.Normal, Damage);
             playerHitable.Hit(Damage);
             _delayTimer = 0f;
         }
