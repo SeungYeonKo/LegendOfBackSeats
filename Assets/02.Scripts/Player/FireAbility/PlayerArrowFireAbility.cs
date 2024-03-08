@@ -1,9 +1,26 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerArrowFireAbility : MonoBehaviour
 {
+    // 화살 구현 방법: 
+    // - 조준: 마우스 오른쪽 버튼
+    // - 발사: 마우스 오른쪽 버튼을 누르고 있는 동안 마우스 왼쪽 버튼 누르면 발사
+    // 
+    [Header("플레이어 활 쏠때")]
+    public CinemachineVirtualCamera Vcam;
+    private const float ZoomFOV = 35f;    // 최소 FOV
+    private const float NormalFOV = 70f;  // 최대 FOV
+    
+    // 보간법 사용할 것
+    private const float ZoomInDuration = 0.4f;   
+    private const float ZoomOutDuration = 0.2f;  
+    private float _zoomProgress; // 0~1
+
+
+
     public Arrow ArrowPrefab; // 발사할 화살 객체
 
     private Animator _animator;   // 
@@ -24,12 +41,13 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     private void Update()
     {
-
+        _zoomProgress = 0;
         _isRightMouseClicked = false;
 
         // 오른쪽 마우스 버튼 클릭 시 조준
         if (Input.GetMouseButton(1))
         {
+            
             _isRightMouseClicked = true;
             _animator.SetLayerWeight(1, 1);
 
@@ -37,6 +55,13 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
             Power += Time.deltaTime * 2f;
             Power = Mathf.Min(MAX_POWER, Power);
+
+
+            if (_isRightMouseClicked)  // 줌인
+            {
+                _zoomProgress += Time.deltaTime / ZoomInDuration;
+                Vcam.m_Lens.FieldOfView = Mathf.Lerp(NormalFOV, ZoomFOV, _zoomProgress);
+            }
 
             if (Input.GetMouseButtonDown(0)) // 왼쪽 마우스 버튼 클릭 시 발사
             {
@@ -53,6 +78,8 @@ public class PlayerArrowFireAbility : MonoBehaviour
         if (_isRightMouseClicked == false)
         {
             _animator.SetLayerWeight(1, 0);
+            Vcam.m_Lens.FieldOfView = NormalFOV;
+
         }
 
     }
