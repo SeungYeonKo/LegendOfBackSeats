@@ -9,6 +9,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
     // - 조준: 마우스 오른쪽 버튼
     // - 발사: 마우스 오른쪽 버튼을 누르고 있는 동안 마우스 왼쪽 버튼 누르면 발사
     // 
+
     [Header("플레이어 활 쏠때")]
     public CinemachineVirtualCamera Vcam;
     private const float ZoomFOV = 35f;    // 최소 FOV
@@ -45,15 +46,13 @@ public class PlayerArrowFireAbility : MonoBehaviour
         _isRightMouseClicked = false;
 
         // 오른쪽 마우스 버튼 클릭 시 조준
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
             
             _isRightMouseClicked = true;
             _animator.SetLayerWeight(1, 1);
 
             _animator.SetTrigger("DrawArrow");
-
-
 
 
             Power += Time.deltaTime * 2f;
@@ -87,7 +86,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
                 FireArrow();
             }
         }
-        else
+        else if (Input.GetMouseButtonUp(1))
         {
             Power = 100f;
         }
@@ -100,7 +99,6 @@ public class PlayerArrowFireAbility : MonoBehaviour
         }
 
     }
-
 
     void FireArrow()
     {
