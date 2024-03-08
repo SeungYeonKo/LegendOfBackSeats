@@ -19,6 +19,9 @@ namespace StarterAssets
     public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
+        public int MaxHealth = 20;
+        public int CurrentHealth;
+
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 5f;
 
@@ -29,6 +32,8 @@ namespace StarterAssets
         public Image StaminaSlider;
         private const float TOLERANCE = 0.1f;
         private bool _isFatigue;
+
+
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
@@ -143,6 +148,8 @@ namespace StarterAssets
 
         private void Start()
         {
+            CurrentHealth = MaxHealth;
+
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
 
             _hasAnimator = TryGetComponent(out _animator);
@@ -159,6 +166,7 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
         }
 
         private void Update()
@@ -169,6 +177,7 @@ namespace StarterAssets
             GroundedCheck();
             Move();
             MakeVisbleStaminaSlider();
+            ShowHealthStatus();
 
         }
 
@@ -236,6 +245,7 @@ namespace StarterAssets
                 StaminaSlider.gameObject.SetActive(true);
             }
         }
+
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
@@ -331,7 +341,10 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
         }
+        public void ShowHealthStatus()
+        {
 
+        }
         private void JumpAndGravity()
         {
             if (Grounded)
