@@ -209,7 +209,6 @@ public class MonsterMove : MonoBehaviour, IHitable
 
             _currentState = MonsterState.Idle;
         }
-    
     }
 
     private void Attack()
@@ -231,6 +230,7 @@ public class MonsterMove : MonoBehaviour, IHitable
     }
     private void Damaged()
     {
+        // 넉백
         if (_knockbackProgress == 0)
         {
             _knockbackStartPosition = transform.position;
@@ -241,11 +241,10 @@ public class MonsterMove : MonoBehaviour, IHitable
 
             _knockbackEndPosition = transform.position + dir * KnockbackPower;
         }
-
         _knockbackProgress += Time.deltaTime / KNOCKBACK_DURATION;
-
-        // 넉백
         transform.position = Vector3.Lerp(_knockbackStartPosition, _knockbackEndPosition, _knockbackProgress);
+        _animator.SetTrigger("Damaged");
+        Debug.Log("Monster : 넉백!");
 
         if (_knockbackProgress > 1)
         {
@@ -264,7 +263,7 @@ public class MonsterMove : MonoBehaviour, IHitable
         {
             Debug.Log("Monster : Any -> Die");
 
-            _animator.SetTrigger($"Die{Random.Range(1, 3)}");
+            _animator.SetTrigger("Die");
             _currentState = MonsterState.Die;
         }
         else
@@ -282,6 +281,10 @@ public class MonsterMove : MonoBehaviour, IHitable
         //ItemObjectFactory.Instance.MakePercent(transform.position);
         if (_dieCoroutine == null)
         {
+            Debug.Log("Monster : Any -> Die");
+
+            _animator.SetTrigger("Die");
+            _currentState = MonsterState.Die;
             _dieCoroutine = StartCoroutine(Die_Coroutine());
         }
     }
