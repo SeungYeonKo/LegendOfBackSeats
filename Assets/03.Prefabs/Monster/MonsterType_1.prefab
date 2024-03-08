@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 0
   MaxHealth: 10
+  HealthSliderUI: {fileID: 5032230176206974793}
   MoveSpeed: 5
   StartPosition: {x: 0, y: 0, z: 0}
   Damage: 3

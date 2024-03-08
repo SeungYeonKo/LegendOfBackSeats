@@ -25,7 +25,7 @@ public class MonsterMove : MonoBehaviour, IHitable
     // 체력
     public int Health;
     public int MaxHealth = 10;
-    //public Slider HealthSliderUI;
+    public Slider HealthSliderUI;
 
     // 이동
     public float MoveSpeed = 4f;
@@ -76,7 +76,7 @@ public class MonsterMove : MonoBehaviour, IHitable
 
     void Update()
     {
-        //HealthSliderUI.value = (float)Health / (float)MaxHealth;
+        HealthSliderUI.value = (float)Health / (float)MaxHealth;
 
         switch (_currentState)
         {
@@ -244,7 +244,7 @@ public class MonsterMove : MonoBehaviour, IHitable
 
         _knockbackProgress += Time.deltaTime / KNOCKBACK_DURATION;
 
-        // 2-2. Lerp를 이용해 넉백하기
+        // 넉백
         transform.position = Vector3.Lerp(_knockbackStartPosition, _knockbackEndPosition, _knockbackProgress);
 
         if (_knockbackProgress > 1)
@@ -290,7 +290,7 @@ public class MonsterMove : MonoBehaviour, IHitable
         _navMeshAgent.isStopped = true;
         _navMeshAgent.ResetPath();
 
-        //HealthSliderUI.gameObject.SetActive(false);
+        HealthSliderUI.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(2f);
 
