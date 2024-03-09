@@ -231,6 +231,7 @@ public class MonsterMove : MonoBehaviour, IHitable
         {
              // 공격 애니메이션 실행
              _animator.SetTrigger("Attack");
+            PlayerAttack();
         }
         else if (distanceToTarget > AttackDistance)
         {
