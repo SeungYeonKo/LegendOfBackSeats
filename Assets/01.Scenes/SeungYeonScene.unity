@@ -3604,11 +3604,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 281815186521240273, guid: 2b464759cf88d404aa172787eb328e81, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.938
+      value: 39.391003
       objectReference: {fileID: 0}
     - target: {fileID: 281815186521240273, guid: 2b464759cf88d404aa172787eb328e81, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.516
+      value: 6.472
       objectReference: {fileID: 0}
     - target: {fileID: 281815186521240273, guid: 2b464759cf88d404aa172787eb328e81, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10938,6 +10938,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4567340450170375005, guid: d99184b144396224ca042645e2c5615e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567340450170375005, guid: d99184b144396224ca042645e2c5615e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567340450170375005, guid: d99184b144396224ca042645e2c5615e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4567340450170375005, guid: d99184b144396224ca042645e2c5615e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 27.75
       objectReference: {fileID: 0}
@@ -17938,6 +17950,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterType_1 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1918164055780312810, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5752304600918599378, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.46
@@ -18028,6 +18044,10 @@ PrefabInstance:
     - target: {fileID: 311025335147345083, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
       propertyPath: m_Name
       value: MonsterType_1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1918164055780312810, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5752304600918599378, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20310,6 +20330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterType_1 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1918164055780312810, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5752304600918599378, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.32
@@ -21162,6 +21186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterType_1 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1918164055780312810, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5752304600918599378, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.46
@@ -21673,11 +21701,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3505008835373214679, guid: 5b298b7db402e3f47a366f882070d968, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.938
+      value: 39.391003
       objectReference: {fileID: 0}
     - target: {fileID: 3505008835373214679, guid: 5b298b7db402e3f47a366f882070d968, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.516
+      value: 6.472
       objectReference: {fileID: 0}
     - target: {fileID: 3505008835373214679, guid: 5b298b7db402e3f47a366f882070d968, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26780,6 +26808,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterType_1
       objectReference: {fileID: 0}
+    - target: {fileID: 1918164055780312810, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5752304600918599378, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -30792,6 +30824,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterType_1 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1918164055780312810, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5752304600918599378, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 33.3
@@ -31355,6 +31391,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterType_1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1918164055780312810, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5752304600918599378, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.32
@@ -31485,6 +31525,10 @@ PrefabInstance:
     - target: {fileID: 311025335147345083, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
       propertyPath: m_Name
       value: MonsterType_1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1918164055780312810, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5752304600918599378, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
       propertyPath: m_LocalPosition.x
