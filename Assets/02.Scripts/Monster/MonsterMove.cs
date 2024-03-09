@@ -34,12 +34,12 @@ public class MonsterMove : MonoBehaviour, IHitable
     // 공격
     public int Damage = 3;
     public const float AttackDelay = 0.8f;
-    private float _delayTimer = 0f;
+    private float _attackTimer = 0f;
 
     // AI
     private Transform _target;
     public float FindDistance = 10f;
-    public float AttackDistance = 3f;
+    public float AttackDistance = 7f;
     public float MoveDistance = 40f;
     public const float TOLERANCE = 0.1f;        //목적지 도착 판단하는 오차 범위 상수
     private const float IDLE_DURATION = 3f;
@@ -64,7 +64,6 @@ public class MonsterMove : MonoBehaviour, IHitable
         _animator = GetComponent<Animator>();
         Destination = _navMeshAgent.transform.position;
         _target = GameObject.FindGameObjectWithTag("Player").transform;
-        _delayTimer = 0f;
         StartPosition = transform.position;
         Init();
     }
@@ -222,28 +221,24 @@ public class MonsterMove : MonoBehaviour, IHitable
 
     private void Attack()
     {
-        // 플레이어와의 거리를 체크합니다.
+        // 플레이어와의 거리를 체크
         float distanceToTarget = Vector3.Distance(_target.position, transform.position);
-        //Debug.Log(Vector3.Distance(_target.position, transform.position));  
-        if (Vector3.Distance(_target.position, transform.position) <= AttackDistance)
+
+        // 공격 딜레이 타이머를 증가시킵니다.
+        _attackTimer += Time.deltaTime;
+        // 플레이어가 공격 범위 내에 있고, 공격 딜레이 시간이 충족되었는지 확인
+        if ( _attackTimer >= AttackDelay)
         {
-            _delayTimer += Time.deltaTime;
-            if (_delayTimer >= AttackDelay)
-            {
-                _delayTimer = 0;
-                // 공격 애니메이션 실행
-                _animator.SetTrigger("Attack");
-               PlayerAttack(); // 플레이어 공격 로직을 호출
-            }
+             // 공격 애니메이션 실행
+             _animator.SetTrigger("Attack");
         }
-        else if(Vector3.Distance(_target.position, transform.position) > AttackDistance)
+        else if (distanceToTarget > AttackDistance)
         {
+            _attackTimer = 0f;
             // 플레이어와의 거리가 공격 범위를 벗어난 경우 Trace 상태로 전환
-            _delayTimer = 0f;
             Debug.Log("Monster : Attack -> Trace");
             _animator.SetTrigger("AttackToTrace");
             _currentState = MonsterState.Trace;
-
             return;
         }
     }
@@ -324,7 +319,7 @@ public class MonsterMove : MonoBehaviour, IHitable
 
             //DamageInfo damageInfo = new DamageInfo(DamageType.Normal, Damage);
             playerHitable.Hit(Damage);
-            _delayTimer = 0f;
+            _attackTimer = 0f;
         }
     }
 }
