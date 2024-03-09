@@ -1714,7 +1714,7 @@ CharacterController:
   m_Height: 1.7
   m_Radius: 0.4
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 2
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.8, z: 0}
@@ -1816,7 +1816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55ffe7844e8cab54aae3fd828b686d02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MeleeWeapon: {fileID: 0}
+  MeleeWeapon: {fileID: 7579562056141150377}
 --- !u!114 &8601190463117251918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2264,6 +2264,11 @@ Transform:
 --- !u!96 &6708138141052621389 stripped
 TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 3921556265010648769, guid: b999a4997585158428b72e83d4da2e57, type: 3}
+  m_PrefabInstance: {fileID: 7742869443853288588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7579562056141150377 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 163309587817602085, guid: b999a4997585158428b72e83d4da2e57, type: 3}
   m_PrefabInstance: {fileID: 7742869443853288588}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9163636387474855590
