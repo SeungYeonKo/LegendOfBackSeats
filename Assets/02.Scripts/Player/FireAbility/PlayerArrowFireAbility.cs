@@ -12,7 +12,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     [Header("플레이어 활 쏠때")]
     public CinemachineVirtualCamera Vcam;
-    private const float ZoomFOV = 45f;    // 최소 FOV
+    private const float ZoomFOV = 29.95f;    // 최소 FOV
     private const float NormalFOV = 70f;  // 최대 FOV
     
     // 보간법 사용할 것
@@ -56,7 +56,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
             
             _isRightMouseClicked = true;
             _animator.SetLayerWeight(1, 1);
-
+            
             _animator.SetTrigger("DrawArrow");
 
         }
@@ -92,7 +92,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
 
     }
-
+    
     void FireArrow()
     {
         _animator = GetComponentInChildren<Animator>();
