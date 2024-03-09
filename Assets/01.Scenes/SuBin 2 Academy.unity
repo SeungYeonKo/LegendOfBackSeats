@@ -531,6 +531,7 @@ GameObject:
   - component: {fileID: 300563911}
   - component: {fileID: 300563910}
   - component: {fileID: 300563909}
+  - component: {fileID: 300563916}
   - component: {fileID: 300563915}
   m_Layer: 6
   m_Name: Player
@@ -708,6 +709,19 @@ MonoBehaviour:
   ArrowPrefab: {fileID: 8651048343773779208, guid: 8302326f01cb503479c647a8e8a83e1b, type: 3}
   ArrowPlace: {fileID: 1121283824}
   Power: 3
+--- !u!114 &300563916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300563908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ffe7844e8cab54aae3fd828b686d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MeleeWeapon: {fileID: 0}
 --- !u!1 &306777675
 GameObject:
   m_ObjectHideFlags: 0
