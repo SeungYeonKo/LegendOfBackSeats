@@ -16,7 +16,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM 
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class ThirdPersonController : MonoBehaviour
+    public class ThirdPersonController : MonoBehaviour, IHitable
     {
         [Header("Player")]
         public int MaxHealth = 20;
@@ -244,6 +244,19 @@ namespace StarterAssets
             {
                 StaminaSlider.gameObject.SetActive(true);
             }
+        }
+        public void Hit(int damage)
+        {
+            CurrentHealth -= damage;
+            if (CurrentHealth < 0)
+            {
+                Die();
+            }
+        }
+        private void Die()
+        {
+            _animator.SetTrigger("Die");
+            Gamemanager.Instance.GameOver();
         }
 
         private void Move()
