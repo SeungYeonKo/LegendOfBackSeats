@@ -10053,5 +10053,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38de2be692c86cb41b8ece348623ca5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemType: 1
+  ItemType: 0
   EatDistance: 5

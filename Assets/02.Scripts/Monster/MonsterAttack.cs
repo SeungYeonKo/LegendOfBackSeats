@@ -8,7 +8,7 @@ public class MonsterAttack : MonoBehaviour
   
     void Start()
     {
-        _owner = GetComponentInParent<MonsterMove>();
+        _owner = GetComponent<MonsterMove>();
     }
 
     public void AttackEvent()

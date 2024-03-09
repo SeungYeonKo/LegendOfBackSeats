@@ -33,7 +33,7 @@ public class MonsterMove : MonoBehaviour, IHitable
 
     // 공격
     public int Damage = 3;
-    public const float AttackDelay = 0.8f;
+    public const float AttackDelay = 1f;
     private float _attackTimer = 0f;
 
     // AI
@@ -231,6 +231,8 @@ public class MonsterMove : MonoBehaviour, IHitable
         {
              // 공격 애니메이션 실행
              _animator.SetTrigger("Attack");
+            PlayerAttack();
+            _attackTimer = 0f; // 공격 후 타이머 리셋
         }
         else if (distanceToTarget > AttackDistance)
         {
@@ -239,7 +241,7 @@ public class MonsterMove : MonoBehaviour, IHitable
             Debug.Log("Monster : Attack -> Trace");
             _animator.SetTrigger("AttackToTrace");
             _currentState = MonsterState.Trace;
-            return;
+            _attackTimer = 0f;
         }
     }
 
