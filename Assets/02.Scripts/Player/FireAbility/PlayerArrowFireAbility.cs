@@ -35,14 +35,14 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     private bool _isRightMouseClicked = false;
 
-    private bool _isDrawingArrow = false;
+
+
     private void Start()
     {
         _animator = GetComponentInChildren<Animator>();
 
         Power = 100f;
 
-        Arrow_Timer = Arrow_Cool_Time;
     }
 
     private void Update()
@@ -54,26 +54,18 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
         }
 
-       if (Input.GetMouseButtonDown(1))
-        {
-            _animator.SetBool("DrawArrow", true);
-            _isDrawingArrow = true;
-
-        }
-
 
         // 오른쪽 마우스 버튼 클릭 시 조준
-        if (Input.GetMouseButtonDown(1) && Arrow_Timer >= Arrow_Cool_Time)
+        if (Input.GetMouseButtonDown(1))
         {
             
             _isRightMouseClicked = true;
-            _animator.SetLayerWeight(1, 1);
             
             
 
         }
 
-        else if (Input.GetMouseButton(1) )
+        else if (Input.GetMouseButton(1))
         {
 
             if (_zoomProgress < 1 && _isRightMouseClicked)
@@ -88,7 +80,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
              
 
         }
-        else if (Input.GetMouseButtonUp(1) && Arrow_Timer >= Arrow_Cool_Time && _isDrawingArrow)
+        else if (Input.GetMouseButtonUp(1))
         {
             _zoomProgress = 0;
 
@@ -101,15 +93,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
             _animator.SetLayerWeight(1, 0);
             Vcam.m_Lens.FieldOfView = NormalFOV;
 
-            Arrow_Timer = 0;
             
-            _isDrawingArrow = false;
-            _animator.SetBool("DrawArrow", false);
-        }
-
-        if (Arrow_Timer >= 0)
-        {
-            Arrow_Timer += Time.deltaTime;
         }
 
 
