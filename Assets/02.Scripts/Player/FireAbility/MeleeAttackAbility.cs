@@ -6,12 +6,16 @@ public class MeleeAttackAbility : MonoBehaviour
 {
     private Animator _playerAnimator;
     public GameObject MeleeWeapon;
+    [SerializeField]
+    private PlayerArrowFireAbility _bowFireAbility;
+
     private Sword _sword;
 
     void Start()
     {
         _playerAnimator = GetComponent<Animator>();
         _sword = MeleeWeapon.GetComponent<Sword>();
+        _bowFireAbility = GetComponent<PlayerArrowFireAbility>();
     }
 
     void Update()
@@ -21,11 +25,11 @@ public class MeleeAttackAbility : MonoBehaviour
             _playerAnimator.SetTrigger("Attack");
         }
 
-        if (Input.GetMouseButton(1))
+        if (_bowFireAbility.IsAiming)
         {
             MeleeWeapon.SetActive(false);
         }
-        else if (Input.GetMouseButtonUp(1))
+        else if (!_bowFireAbility.IsAiming)
         {
             MeleeWeapon.SetActive(true);
         }

@@ -21,8 +21,8 @@ public class PlayerArrowFireAbility : MonoBehaviour
     private float _zoomProgress; // 0~1
 
     // 화살 쿨타임
-    private float Arrow_Cool_Time = 3f;
-    private float Arrow_Timer = 0f;
+    private float _arrow_Cool_Time = 3f;
+    private float _arrow_Timer = 0f;
 
     public Arrow ArrowPrefab; // 발사할 화살 객체
 
@@ -33,50 +33,39 @@ public class PlayerArrowFireAbility : MonoBehaviour
     public float Power = 3f;
     private const float MAX_POWER = 200;
 
-    private bool _isRightMouseClicked = false;
+    // private bool _isRightMouseClicked = false;
 
-    private bool _isDrawingArrow = false;
+    private bool _isFireableArrow = false;
+    public bool IsAiming;
+
     private void Start()
     {
-        _animator = GetComponentInChildren<Animator>();
+        _animator = GetComponent<Animator>();
 
         Power = 100f;
 
-        Arrow_Timer = Arrow_Cool_Time;
     }
 
     private void Update()
     {
-        //_isRightMouseClicked = false;
-
-        if (_isRightMouseClicked)
-        {
-
-        }
-
-       if (Input.GetMouseButtonDown(1))
-        {
-            _animator.SetBool("DrawArrow", true);
-            _isDrawingArrow = true;
-
-        }
 
 
         // 오른쪽 마우스 버튼 클릭 시 조준
-        if (Input.GetMouseButtonDown(1) && Arrow_Timer >= Arrow_Cool_Time)
+        if (Input.GetMouseButtonDown(1))
         {
-            
-            _isRightMouseClicked = true;
+            _animator.SetTrigger("DrawArrow");
+            IsAiming = true;
             _animator.SetLayerWeight(1, 1);
-            
-            
-
         }
 
-        else if (Input.GetMouseButton(1) )
+        else if (Input.GetMouseButton(1))
         {
-
-            if (_zoomProgress < 1 && _isRightMouseClicked)
+            _arrow_Timer += Time.deltaTime;
+            if (_arrow_Timer > 0.4f)
+            {
+                _isFireableArrow = true;
+            }
+            if (_zoomProgress < 1)
             {
                 _zoomProgress += Time.deltaTime / ZoomInDuration;
                 Vcam.m_Lens.FieldOfView = Mathf.Lerp(NormalFOV, ZoomFOV, _zoomProgress);
@@ -85,31 +74,23 @@ public class PlayerArrowFireAbility : MonoBehaviour
             Power += Time.deltaTime * 2f;
             Power = Mathf.Min(MAX_POWER, Power);
 
-             
-
         }
-        else if (Input.GetMouseButtonUp(1) && Arrow_Timer >= Arrow_Cool_Time && _isDrawingArrow)
+        else if (Input.GetMouseButtonUp(1))
         {
+            _arrow_Timer = 0;
             _zoomProgress = 0;
+            IsAiming = false;
 
             Power = 100f;
             _animator.SetTrigger("AimRecoil");
-
-            FireArrow();
-            _isRightMouseClicked = false;
+            if(_isFireableArrow)
+            {
+                FireArrow();
+                _isFireableArrow= false;
+            }
 
             _animator.SetLayerWeight(1, 0);
             Vcam.m_Lens.FieldOfView = NormalFOV;
-
-            Arrow_Timer = 0;
-            
-            _isDrawingArrow = false;
-            _animator.SetBool("DrawArrow", false);
-        }
-
-        if (Arrow_Timer >= 0)
-        {
-            Arrow_Timer += Time.deltaTime;
         }
 
 
