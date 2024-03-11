@@ -21,7 +21,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
     private float _zoomProgress; // 0~1
 
     // 화살 쿨타임
-    private float Arrow_Cool_Time = 1f;
+    private float Arrow_Cool_Time = 3f;
     private float Arrow_Timer = 0f;
 
     public Arrow ArrowPrefab; // 발사할 화살 객체
@@ -35,6 +35,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     private bool _isRightMouseClicked = false;
 
+    private bool _isDrawingArrow = false;
     private void Start()
     {
         _animator = GetComponentInChildren<Animator>();
@@ -53,7 +54,13 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
         }
 
-       
+       if (Input.GetMouseButtonDown(1))
+        {
+            _animator.SetBool("DrawArrow", true);
+            _isDrawingArrow = true;
+
+        }
+
 
         // 오른쪽 마우스 버튼 클릭 시 조준
         if (Input.GetMouseButtonDown(1) && Arrow_Timer >= Arrow_Cool_Time)
@@ -62,13 +69,11 @@ public class PlayerArrowFireAbility : MonoBehaviour
             _isRightMouseClicked = true;
             _animator.SetLayerWeight(1, 1);
             
-            _animator.SetTrigger("DrawArrow");
             
-
 
         }
 
-        else if (Input.GetMouseButton(1))
+        else if (Input.GetMouseButton(1) )
         {
 
             if (_zoomProgress < 1 && _isRightMouseClicked)
@@ -80,10 +85,10 @@ public class PlayerArrowFireAbility : MonoBehaviour
             Power += Time.deltaTime * 2f;
             Power = Mathf.Min(MAX_POWER, Power);
 
-
+             
 
         }
-        else if (Input.GetMouseButtonUp(1) && Arrow_Timer >= Arrow_Cool_Time)
+        else if (Input.GetMouseButtonUp(1) && Arrow_Timer >= Arrow_Cool_Time && _isDrawingArrow)
         {
             _zoomProgress = 0;
 
@@ -98,6 +103,8 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
             Arrow_Timer = 0;
             
+            _isDrawingArrow = false;
+            _animator.SetBool("DrawArrow", false);
         }
 
         if (Arrow_Timer >= 0)
