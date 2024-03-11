@@ -29,14 +29,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 163309587817602085}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.29883623, y: 0.18301262, z: 0.6408564, w: 0.6830127}
+  m_LocalRotation: {x: 0.4055798, y: 0.29883623, z: 0.5792279, w: 0.64085644}
   m_LocalPosition: {x: 0.184, y: -0.123, z: 0.417}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4801794910596490186}
   m_Father: {fileID: 4117321167829087484}
-  m_LocalEulerAnglesHint: {x: 10, y: 40, z: 90}
+  m_LocalEulerAnglesHint: {x: 10, y: 60, z: 90}
 --- !u!33 &7385206005667366117
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 2
   MeleeArea: {fileID: 8067779893281209325}
-  Traileffect: {fileID: 0}
+  Traileffect: {fileID: 3921556265010648769}
 --- !u!1 &4691673083980845448
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,14 +168,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4691673083980845448}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.23061746, y: -0.72749484, z: -0.024245977, w: 0.6457392}
+  m_LocalRotation: {x: -0.230618, y: -0.7274941, z: -0.024245664, w: 0.6457398}
   m_LocalPosition: {x: 27.437277, y: 2.5830076, z: 17.103552}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6197267842959917484}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -19.458, y: -100.07, z: 18.824}
 --- !u!1 &9078764250689518717
 GameObject:
   m_ObjectHideFlags: 0

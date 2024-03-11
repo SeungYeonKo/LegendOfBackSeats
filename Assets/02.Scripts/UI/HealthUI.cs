@@ -26,12 +26,7 @@ public class HealthUI : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Playerinfo.CurrentHealth--;
-            Debug.Log(Playerinfo.CurrentHealth);
-        }
-        RefreshUI();
+      //  RefreshUI();
 
     }
     void RefreshUI()
