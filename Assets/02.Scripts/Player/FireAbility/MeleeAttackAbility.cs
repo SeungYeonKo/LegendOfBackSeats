@@ -16,12 +16,21 @@ public class MeleeAttackAbility : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && MeleeWeapon.gameObject.activeSelf == true)
         {
             _playerAnimator.SetTrigger("Attack");
         }
-    }
 
+        if (Input.GetMouseButton(1))
+        {
+            MeleeWeapon.SetActive(false);
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            MeleeWeapon.SetActive(true);
+        }
+
+    }
     void UseSwordForAnimator()
     {
         _sword.Use();
