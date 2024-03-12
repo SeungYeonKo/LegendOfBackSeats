@@ -28,24 +28,45 @@ public class ItemManager : MonoBehaviour
     private void Start()
     {
         ItemList.Add(new Item(ItemType.Health, 0));
-        ItemList.Add(new Item(ItemType.Arrow, 0));
+        ItemList.Add(new Item(ItemType.Arrow, 5));
         OnDataChanged.Invoke();
     }
 
     // 1. 아이템 추가(생성)
     public void AddItem(ItemType itemType)
     {
-        for (int i = 0; i < ItemList.Count; i++)
+        if(itemType == ItemType.Health)
         {
-            if (ItemList[i].ItemType == itemType)
+            for (int i = 0; i < ItemList.Count; i++)
             {
-                ItemList[i].Count++;
-
-                if (OnDataChanged != null)
+                if (ItemList[i].ItemType == itemType)
                 {
-                    OnDataChanged.Invoke();
+                    ItemList[i].Count += 1;
+                    Debug.Log("체력 아이템이 추가되었습니다");
+
+                    if (OnDataChanged != null)
+                    {
+                        OnDataChanged.Invoke();
+                    }
+                    break;
                 }
-                break;
+            }
+        }
+       else if (itemType == ItemType.Arrow)
+        {
+            for (int i = 0; i < ItemList.Count; i++)
+            {
+                if (ItemList[i].ItemType == itemType)
+                {
+                    ItemList[i].Count += 2;
+                    Debug.Log("화살 아이템이 추가되었습니다");
+
+                    if (OnDataChanged != null)
+                    {
+                        OnDataChanged.Invoke();
+                    }
+                    break;
+                }
             }
         }
     }

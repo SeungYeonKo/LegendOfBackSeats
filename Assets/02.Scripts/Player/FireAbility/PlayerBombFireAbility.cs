@@ -121,6 +121,7 @@ public class PlayerBombFireAbility : MonoBehaviour
     void PutBack()
     {
         IsCarrying = false;
+        BombObject.SetActive(false);
         Debug.Log("Putback -> Neutral");
     }
 
