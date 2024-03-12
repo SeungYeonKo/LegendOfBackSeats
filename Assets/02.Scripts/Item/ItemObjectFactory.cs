@@ -44,6 +44,7 @@ public class ItemObjectFactory : MonoBehaviour
             Make(ItemType.Arrow, position);
         }
     }
+
     private ItemObject Get(ItemType itemType)       // 창고 뒤지기
     {
         foreach (ItemObject itemObject in _itemPool)         // 창고를 뒤진다

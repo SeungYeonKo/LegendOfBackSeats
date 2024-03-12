@@ -41,17 +41,18 @@ public class PlayerArrowFireAbility : MonoBehaviour
     private bool _isFireable;
 
     // 화살 개수
-    public int ArrowCurrentCount = 5;
+    public int ArrowStartCount = 5;
+    public int ArrowCurrentCount;
     // 현재 화살 개수 텍스트
-    // public TextMeshProUGUI ArrowCountText;
+     public TextMeshProUGUI ArrowCountText;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
-
         Power = 100f;
         _isFireable = true;
         _offset = new Vector3(0, 20, 0);
+        ArrowCurrentCount  =  ArrowStartCount;
     }
 
     private void Update()
@@ -92,11 +93,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
                 Power = 100f;
                 _animator.SetTrigger("AimRecoil");
                 Vcam.m_Lens.FieldOfView = NormalFOV;
-
-              /*  CountArrow();
-                RefreshUI();*/
             }
-
         }
     }
 
@@ -108,29 +105,28 @@ public class PlayerArrowFireAbility : MonoBehaviour
             arrowInstance.transform.forward = Camera.main.transform.forward + _offset;
 
             arrowInstance.Shoot(Camera.main.transform.forward, Power);
+            CountArrow();
+            RefreshUI();
     }
 
     private void SetAimingTrue()
     {
             IsAiming = true;
     }
+
     private void SetAimingFalse()
     {
         IsAiming = false;
     }
-/*    public void RefreshUI()
+
+    public void RefreshUI()
     {
         ArrowCountText.text = $"{ArrowCurrentCount}";
-    }
-
-    public void SetVisibility(bool isVisible)
-    {
-        gameObject.SetActive(isVisible);
     }
 
     public void CountArrow()
     {
         ArrowCurrentCount -= 1;
-    }*/
+    }
 }
 

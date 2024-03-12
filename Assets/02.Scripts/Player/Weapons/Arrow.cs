@@ -14,24 +14,17 @@ public class Arrow : MonoBehaviour
 
     public TrailRenderer trailRenderer;
 
-
     private Rigidbody arrowRigidbody;
-
- 
 
     void Awake()
     {
         arrowRigidbody = GetComponent<Rigidbody>();
         trailRenderer = GetComponentInChildren<TrailRenderer>();
-        
     }
-
 
     private void Start()
     {
-
         StartCoroutine(ArrowEffect_Coroutine());
-
     }
 
     private void FixedUpdate() // 물리 연산은 FixedUpdate
