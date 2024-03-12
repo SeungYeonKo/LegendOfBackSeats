@@ -39,6 +39,8 @@ public class PlayerArrowFireAbility : MonoBehaviour
     public bool IsAiming;
     private bool _isFireable;
 
+    // 화살 개수
+    public int ArrowCount = 5;
 
     private void Start()
     {
@@ -52,6 +54,8 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     private void Update()
     {
+
+
         if (Input.GetMouseButtonDown(1) && _isFireable)
         {
             _buttonDowntime = Time.time;
@@ -101,6 +105,9 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
 
         arrowInstance.Shoot(Camera.main.transform.forward, Power);
+
+
+
     }
     private void SetAimingTrue()
     {
