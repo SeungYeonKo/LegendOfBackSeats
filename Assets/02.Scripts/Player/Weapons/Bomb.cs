@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public enum BombState
+{
+    Carry,
+    Placed
+}
 public class Bomb : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public BombState state { get; set; }
 
-    // Update is called once per frame
+    void OnEnable()
+    {
+        state = BombState.Carry;
+    }
     void Update()
     {
         
+    }
+    public void ExplodeBomb()
+    {
+
+            this.gameObject.SetActive(false);
     }
 }
