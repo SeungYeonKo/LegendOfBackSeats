@@ -8,9 +8,11 @@ public class Sword : MonoBehaviour
     // public float Rate;
     public BoxCollider MeleeArea;
     public TrailRenderer Traileffect;
+    private MeleeAttackAbility _meleeAttack;
 
     private void Start()
     {
+        _meleeAttack = GetComponentInParent<MeleeAttackAbility>();
         Damage = 2;
         MeleeArea = GetComponent<BoxCollider>();
         Traileffect = GetComponentInChildren<TrailRenderer>();
@@ -22,6 +24,13 @@ public class Sword : MonoBehaviour
     {
         StartCoroutine(Attack_Coroutine());
 
+    }
+    private void Update()
+    {
+        if (!_meleeAttack.isActiveAndEnabled)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     private IEnumerator Attack_Coroutine()
