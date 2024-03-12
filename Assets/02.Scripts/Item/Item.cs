@@ -37,13 +37,15 @@ public class Item
                 // Health아이템 사용시 플레이어 체력 꽉차기
                 ThirdPersonController ThirdPersonController = GameObject.FindWithTag("Player").GetComponent<ThirdPersonController>();
                 ThirdPersonController.CurrentHealth = ThirdPersonController.MaxHealth;
+                Debug.Log("체력 Max!");
                 break;
             }
             case ItemType.Arrow:
             {
-                // Arrow아이템 사용시 Player가 들고있는 Arrow + 1
+                // Arrow아이템 사용시 Player가 들고있는 Arrow + 2
                 PlayerArrowFireAbility ability = GameObject.FindWithTag("Player").GetComponent<PlayerArrowFireAbility>();
                 ability.ArrowCurrentCount += 2;
+                Debug.Log("화살 +2");
                 break;
             }
         }
