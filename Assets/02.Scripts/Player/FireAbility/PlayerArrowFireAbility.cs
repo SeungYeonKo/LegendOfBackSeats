@@ -40,7 +40,8 @@ public class PlayerArrowFireAbility : MonoBehaviour
     private bool _isFireable;
 
     // 화살 개수
-    public int ArrowCount = 5;
+    public int ArrowMaxCount = 5;
+    public int ArrowCurrentCount;
 
     private void Start()
     {
@@ -49,12 +50,12 @@ public class PlayerArrowFireAbility : MonoBehaviour
         Power = 100f;
         _isFireable = true;
         _offset = new Vector3(0, 20, 0);
-
+        ArrowCurrentCount = ArrowMaxCount;
     }
 
     private void Update()
     {
-        if (ArrowCount != 0)
+        if (ArrowCurrentCount != 0)
         {
             if (Input.GetMouseButtonDown(1) && _isFireable)
             {
@@ -91,7 +92,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
                 _animator.SetTrigger("AimRecoil");
                 Vcam.m_Lens.FieldOfView = NormalFOV;
 
-                ArrowCount -= 1;
+                ArrowCurrentCount -= 1;
             }
 
         }
@@ -121,8 +122,11 @@ public class PlayerArrowFireAbility : MonoBehaviour
     private void SetAimingFalse()
     {
         IsAiming = false;
-    }    
+    }
 
-
+    public void SetVisibility(bool isVisible)
+    {
+        gameObject.SetActive(isVisible);
+    }
 }
 

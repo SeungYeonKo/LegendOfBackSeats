@@ -43,8 +43,7 @@ public class Item
             {
                 // Arrow아이템 사용시 Player가 들고있는 Arrow + 1
                 PlayerArrowFireAbility ability = GameObject.FindWithTag("Player").GetComponent<PlayerArrowFireAbility>();
-                ability.CurrentGun.BulletRemainCount = ability.CurrentGun.BulletMaxCount;
-                ability.RefreshUI();
+                ability.ArrowCurrentCount += 2;
                 break;
             }
         }
