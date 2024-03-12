@@ -49,7 +49,7 @@ public class ItemManager : MonoBehaviour
             }
         }
     }
-   /* // 아이템 개수 조회
+   // 아이템 개수 조회
     public int GetItemCount(ItemType itemType)
     {
         for (int i = 0; i < ItemList.Count; i++)
@@ -81,7 +81,7 @@ public class ItemManager : MonoBehaviour
         }
 
         return false;
-    }*/
+    }
 }
 
  
