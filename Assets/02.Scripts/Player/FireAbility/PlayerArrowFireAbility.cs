@@ -54,45 +54,48 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     private void Update()
     {
-
-
-        if (Input.GetMouseButtonDown(1) && _isFireable)
+        if (ArrowCount != 0)
         {
-            _buttonDowntime = Time.time;
-            _animator.SetTrigger("DrawArrow");
-
-        }
-        if (Input.GetMouseButton(1))
-        {
-            
-            if (_zoomProgress < 1)
+            if (Input.GetMouseButtonDown(1) && _isFireable)
             {
-                _zoomProgress += Time.deltaTime / ZoomInDuration;
-                Vcam.m_Lens.FieldOfView = Mathf.Lerp(NormalFOV, ZoomFOV, _zoomProgress);
+                _buttonDowntime = Time.time;
+                _animator.SetTrigger("DrawArrow");
+
             }
-/*            Power += Time.deltaTime * 2f;
-            Power = Mathf.Min(MAX_POWER, Power);*/
-        }
-
-        if (Input.GetMouseButtonUp(1))
-        {
-/*            float heldTime = Time.time - _buttonDowntime;
-            if (heldTime < 1f)
+            if (Input.GetMouseButton(1))
             {
-                StartCoroutine(Shoot_Coroutine(1f - heldTime));
+
+                if (_zoomProgress < 1)
+                {
+                    _zoomProgress += Time.deltaTime / ZoomInDuration;
+                    Vcam.m_Lens.FieldOfView = Mathf.Lerp(NormalFOV, ZoomFOV, _zoomProgress);
+                }
+                /*            Power += Time.deltaTime * 2f;
+                            Power = Mathf.Min(MAX_POWER, Power);*/
             }
-            else if (heldTime >= 1f)
-            {
-                Debug.Log(heldTime);
-                StartCoroutine(Shoot_Coroutine(0f));
-            }*/
-            _zoomProgress = 0;
-            Power = 100f;
-            _animator.SetTrigger("AimRecoil");
-            Vcam.m_Lens.FieldOfView = NormalFOV;
 
-            ArrowCount -= 1;
+            if (Input.GetMouseButtonUp(1))
+            {
+                /*            float heldTime = Time.time - _buttonDowntime;
+                            if (heldTime < 1f)
+                            {
+                                StartCoroutine(Shoot_Coroutine(1f - heldTime));
+                            }
+                            else if (heldTime >= 1f)
+                            {
+                                Debug.Log(heldTime);
+                                StartCoroutine(Shoot_Coroutine(0f));
+                            }*/
+                _zoomProgress = 0;
+                Power = 100f;
+                _animator.SetTrigger("AimRecoil");
+                Vcam.m_Lens.FieldOfView = NormalFOV;
+
+                ArrowCount -= 1;
+            }
+
         }
+
 
 
     }
@@ -105,8 +108,8 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
         arrowInstance.transform.forward = Camera.main.transform.forward + _offset;
 
-
         arrowInstance.Shoot(Camera.main.transform.forward, Power);
+
 
         
 
