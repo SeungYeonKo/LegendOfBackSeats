@@ -40,14 +40,14 @@ public class Item
                 Debug.Log("체력 +5!");
                 break;
             }
-            case ItemType.Arrow:
+          /*  case ItemType.Arrow:
             {
                 // Arrow아이템 사용시 Player가 들고있는 Arrow + 2
-                PlayerArrowFireAbility ability = GameObject.FindWithTag("Player").GetComponent<PlayerArrowFireAbility>();
-                ability.ArrowCurrentCount += 2;
+                PlayerArrowFireAbility PlayerArrowFireAbility = GameObject.FindWithTag("Player").GetComponent<PlayerArrowFireAbility>();
+                PlayerArrowFireAbility.ArrowCurrentCount += 2;
                 Debug.Log("화살 +2");
                 break;
-            }
+            }*/
         }
         return true;
     }

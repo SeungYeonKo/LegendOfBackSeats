@@ -44,7 +44,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
     public int ArrowStartCount = 5;
     public int ArrowCurrentCount;
     // 현재 화살 개수 텍스트
-     public TextMeshProUGUI ArrowCountText;
+    public TextMeshProUGUI ArrowCountText;
 
     private void Start()
     {
@@ -52,11 +52,12 @@ public class PlayerArrowFireAbility : MonoBehaviour
         Power = 100f;
         _isFireable = true;
         _offset = new Vector3(0, 20, 0);
-        ArrowCurrentCount  =  ArrowStartCount;
+
     }
 
     private void Update()
     {
+        
         if (ArrowCurrentCount != 0)
         {
             if (Input.GetMouseButtonDown(1) && _isFireable)
@@ -67,7 +68,6 @@ public class PlayerArrowFireAbility : MonoBehaviour
             }
             if (Input.GetMouseButton(1))
             {
-
                 if (_zoomProgress < 1)
                 {
                     _zoomProgress += Time.deltaTime / ZoomInDuration;
@@ -105,8 +105,6 @@ public class PlayerArrowFireAbility : MonoBehaviour
             arrowInstance.transform.forward = Camera.main.transform.forward + _offset;
 
             arrowInstance.Shoot(Camera.main.transform.forward, Power);
-            CountArrow();
-            RefreshUI();
     }
 
     private void SetAimingTrue()
