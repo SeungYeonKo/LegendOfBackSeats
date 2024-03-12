@@ -19,6 +19,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
     private const float ZoomInDuration = 0.4f;   
     private const float ZoomOutDuration = 0.2f;  
     private float _zoomProgress; // 0~1
+    private Vector3 _offset;
 
     // 화살 쿨타임
     /*    private float _arrow_Cool_Time = 3f;
@@ -45,6 +46,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
         Power = 100f;
         _isFireable = true;
+        _offset = new Vector3(0, 20, 0);
 
     }
 
@@ -95,7 +97,8 @@ public class PlayerArrowFireAbility : MonoBehaviour
         // 화살 인스턴스를 생성하고 위치 및 회전을 초기화
        Arrow arrowInstance = Instantiate<Arrow>(ArrowPrefab, ArrowPlace.position, Quaternion.identity);
 
-        arrowInstance.transform.forward = Camera.main.transform.forward + new Vector3(0, 10, 0);
+        arrowInstance.transform.forward = Camera.main.transform.forward + _offset;
+
 
         arrowInstance.Shoot(Camera.main.transform.forward, Power);
     }
