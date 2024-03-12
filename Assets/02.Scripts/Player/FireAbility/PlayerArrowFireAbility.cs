@@ -32,6 +32,10 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     public Transform ArrowPlace;  // 화살 생성 위치
 
+
+    // UI
+    public GameObject AimUI;
+
     private float _buttonDowntime;
     public float Power = 3f;
     private const float MAX_POWER = 200;
@@ -51,16 +55,23 @@ public class PlayerArrowFireAbility : MonoBehaviour
         _isFireable = true;
         _offset = new Vector3(0, 20, 0);
         ArrowCurrentCount = ArrowMaxCount;
+
+        AimUI.SetActive(false);
     }
 
     private void Update()
     {
+
+        AimUI.SetActive(false);
+
         if (ArrowCurrentCount != 0)
         {
             if (Input.GetMouseButtonDown(1) && _isFireable)
             {
                 _buttonDowntime = Time.time;
                 _animator.SetTrigger("DrawArrow");
+
+                AimUI.SetActive(true);
 
             }
             if (Input.GetMouseButton(1))
@@ -73,6 +84,8 @@ public class PlayerArrowFireAbility : MonoBehaviour
                 }
                 /*            Power += Time.deltaTime * 2f;
                             Power = Mathf.Min(MAX_POWER, Power);*/
+                AimUI.SetActive(true);
+
             }
 
             if (Input.GetMouseButtonUp(1))
@@ -93,6 +106,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
                 Vcam.m_Lens.FieldOfView = NormalFOV;
 
                 ArrowCurrentCount -= 1;
+                AimUI.SetActive(false);
             }
 
         }
