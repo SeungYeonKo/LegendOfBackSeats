@@ -37,9 +37,21 @@ public class ItemManager : MonoBehaviour
     {
         for (int i = 0; i < ItemList.Count; i++)
         {
-            if (ItemList[i].ItemType == itemType)
+            if (ItemList[i].ItemType == ItemType.Health)
             {
-                ItemList[i].Count++;
+                ItemList[i].Count+=1;
+                Debug.Log("체력 아이템이 추가되었습니다");
+
+                if (OnDataChanged != null)
+                {
+                    OnDataChanged.Invoke();
+                }
+                break;
+            }
+            else if (ItemList[i].ItemType == ItemType.Arrow)
+            {
+                ItemList[i].Count += 2;
+                Debug.Log(" 화살 아이템이 추가되었습니다");
 
                 if (OnDataChanged != null)
                 {
