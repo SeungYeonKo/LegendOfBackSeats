@@ -36612,6 +36612,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1000012593831414, guid: 0f4d6d5d6c245bd44a2e7270636f7531, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8983698327242090545}
     - targetCorrespondingSourceObject: {fileID: 1000010403326344, guid: 0f4d6d5d6c245bd44a2e7270636f7531, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1059168708223732216}
@@ -37159,6 +37162,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8045483410442027004}
   m_SourcePrefab: {fileID: 100100000, guid: 0f4d6d5d6c245bd44a2e7270636f7531, type: 3}
+--- !u!95 &3802339685129861735 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95000011739385590, guid: 0f4d6d5d6c245bd44a2e7270636f7531, type: 3}
+  m_PrefabInstance: {fileID: 3861025024646018193}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3861432386645172591 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000012884989438, guid: 0f4d6d5d6c245bd44a2e7270636f7531, type: 3}
@@ -38293,6 +38301,24 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300334, guid: 5b205bd9734467e4d81f3df70d1c0a3f, type: 3}
+--- !u!1 &3861432387506694503 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000012593831414, guid: 0f4d6d5d6c245bd44a2e7270636f7531, type: 3}
+  m_PrefabInstance: {fileID: 3861025024646018193}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8983698327242090545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3861432387506694503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7bfc3f9fbef48459fd4e6536610da1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 3802339685129861735}
 --- !u!1 &3861432387507649319 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1000012595040182, guid: 0f4d6d5d6c245bd44a2e7270636f7531, type: 3}
@@ -71849,6 +71875,10 @@ PrefabInstance:
     - target: {fileID: 3644235072520926540, guid: 6c4b29d7ffd11154ba9e2e36e4aad43c, type: 3}
       propertyPath: m_Name
       value: Throne
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106856540774741643, guid: 6c4b29d7ffd11154ba9e2e36e4aad43c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.04
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

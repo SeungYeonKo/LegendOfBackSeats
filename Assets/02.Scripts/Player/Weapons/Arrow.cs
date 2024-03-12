@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -8,6 +9,8 @@ public class Arrow : MonoBehaviour
 
     public float arrowSpeed = 30f; // 화살의 초기 속도
     public float shotInterval = 2f; // 화살을 발사하는 간격
+
+    private int damage = 3;  // 화살이 몬스터에게 입히는 데미지
 
     public TrailRenderer trailRenderer;
 
@@ -59,4 +62,14 @@ public class Arrow : MonoBehaviour
         trailRenderer.enabled = false;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        // 충돌한 오브젝트가 몬스터인지 확인
+        MonsterMove monster = collision.collider.GetComponent<MonsterMove>();
+        if (monster != null)
+        {
+            // 몬스터의 TakeDamage 메서드를 호출하여 체력을 줄임
+            monster.Hit(damage);
+        }
+    }
 }
