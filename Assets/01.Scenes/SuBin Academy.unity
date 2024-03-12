@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7587966579888469064, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8265437126830359009, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -534,11 +538,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 982949548}
   m_CullTransparentMesh: 1
---- !u!4 &1093984969 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5752304600918599378, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
-  m_PrefabInstance: {fileID: 1635597861}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1100557480
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,11 +567,16 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2114531631}
-  - {fileID: 1093984969}
-  - {fileID: 1631356101}
+  - {fileID: 1210254253}
+  - {fileID: 1292082787}
+  - {fileID: 2017326260}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1210254253 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4154220426052414867, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+  m_PrefabInstance: {fileID: 631245593}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1212830845 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4567340450170375005, guid: d99184b144396224ca042645e2c5615e, type: 3}
@@ -630,6 +634,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7587966579888469064, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8265437126830359009, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -639,6 +647,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+--- !u!4 &1292082787 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4154220426052414867, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+  m_PrefabInstance: {fileID: 1635597861}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1320660529
 GameObject:
   m_ObjectHideFlags: 3
@@ -726,11 +739,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1631356101 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5752304600918599378, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
-  m_PrefabInstance: {fileID: 1225193699}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1635597861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -781,6 +789,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5752304600918599378, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7587966579888469064, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8265437126830359009, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
@@ -1098,10 +1110,10 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949184936}
   m_CullTransparentMesh: 1
---- !u!4 &2114531631 stripped
+--- !u!4 &2017326260 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5752304600918599378, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
-  m_PrefabInstance: {fileID: 631245593}
+  m_CorrespondingSourceObject: {fileID: 4154220426052414867, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+  m_PrefabInstance: {fileID: 1225193699}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2125114103
 GameObject:
