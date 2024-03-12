@@ -70,6 +70,8 @@ public class Arrow : MonoBehaviour
         {
             // 몬스터의 TakeDamage 메서드를 호출하여 체력을 줄임
             monster.Hit(damage);
+            this.gameObject.SetActive(false);
         }
+       
     }
 }
