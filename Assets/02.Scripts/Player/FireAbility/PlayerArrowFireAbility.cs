@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerArrowFireAbility : MonoBehaviour
@@ -40,8 +41,9 @@ public class PlayerArrowFireAbility : MonoBehaviour
     private bool _isFireable;
 
     // 화살 개수
-    public int ArrowMaxCount = 5;
-    public int ArrowCurrentCount;
+    public int ArrowCurrentCount = 5;
+    // 현재 화살 개수 텍스트
+    // public TextMeshProUGUI ArrowCountText;
 
     private void Start()
     {
@@ -50,7 +52,6 @@ public class PlayerArrowFireAbility : MonoBehaviour
         Power = 100f;
         _isFireable = true;
         _offset = new Vector3(0, 20, 0);
-        ArrowCurrentCount = ArrowMaxCount;
     }
 
     private void Update()
@@ -92,29 +93,23 @@ public class PlayerArrowFireAbility : MonoBehaviour
                 _animator.SetTrigger("AimRecoil");
                 Vcam.m_Lens.FieldOfView = NormalFOV;
 
-                ArrowCurrentCount -= 1;
+              /*  CountArrow();
+                RefreshUI();*/
             }
 
         }
-
-
-
     }
 
     void FireArrow()
     {
+            // 화살 인스턴스를 생성하고 위치 및 회전을 초기화
+            Arrow arrowInstance = Instantiate<Arrow>(ArrowPrefab, ArrowPlace.position, Quaternion.identity);
 
-        // 화살 인스턴스를 생성하고 위치 및 회전을 초기화
-       Arrow arrowInstance = Instantiate<Arrow>(ArrowPrefab, ArrowPlace.position, Quaternion.identity);
+            arrowInstance.transform.forward = Camera.main.transform.forward + _offset;
 
-        arrowInstance.transform.forward = Camera.main.transform.forward + _offset;
-
-        arrowInstance.Shoot(Camera.main.transform.forward, Power);
-
-
-        
-
+            arrowInstance.Shoot(Camera.main.transform.forward, Power);
     }
+
     private void SetAimingTrue()
     {
             IsAiming = true;
@@ -123,10 +118,19 @@ public class PlayerArrowFireAbility : MonoBehaviour
     {
         IsAiming = false;
     }
+/*    public void RefreshUI()
+    {
+        ArrowCountText.text = $"{ArrowCurrentCount}";
+    }
 
     public void SetVisibility(bool isVisible)
     {
         gameObject.SetActive(isVisible);
     }
+
+    public void CountArrow()
+    {
+        ArrowCurrentCount -= 1;
+    }*/
 }
 

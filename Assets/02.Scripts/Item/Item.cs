@@ -36,8 +36,8 @@ public class Item
             {
                 // Health아이템 사용시 플레이어 체력 꽉차기
                 ThirdPersonController ThirdPersonController = GameObject.FindWithTag("Player").GetComponent<ThirdPersonController>();
-                ThirdPersonController.CurrentHealth = ThirdPersonController.MaxHealth;
-                Debug.Log("체력 Max!");
+                ThirdPersonController.CurrentHealth += 5;
+                Debug.Log("체력 +5!");
                 break;
             }
             case ItemType.Arrow:
