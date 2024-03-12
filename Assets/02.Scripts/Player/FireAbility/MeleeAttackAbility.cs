@@ -6,7 +6,6 @@ public class MeleeAttackAbility : MonoBehaviour
 {
     private Animator _playerAnimator;
     public GameObject MeleeWeapon;
-    [SerializeField]
     private PlayerArrowFireAbility _bowFireAbility;
 
     private Sword _sword;

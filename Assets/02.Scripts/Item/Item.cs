@@ -27,7 +27,9 @@ public class Item
         {
             return false;
         }
+
         Count -= 1;
+
         switch (ItemType)
         {
             case ItemType.Health:
@@ -37,14 +39,13 @@ public class Item
                 ThirdPersonController.CurrentHealth = ThirdPersonController.MaxHealth;
                 break;
             }
-           /* case ItemType.Arrow:
+            case ItemType.Arrow:
             {
                 // Arrow아이템 사용시 Player가 들고있는 Arrow + 1
                 PlayerArrowFireAbility ability = GameObject.FindWithTag("Player").GetComponent<PlayerArrowFireAbility>();
-                ability.CurrentGun.BulletRemainCount = ability.CurrentGun.BulletMaxCount;
-                ability.RefreshUI();
+                ability.ArrowCurrentCount += 2;
                 break;
-            }*/
+            }
         }
         return true;
     }
