@@ -90,6 +90,8 @@ public class PlayerArrowFireAbility : MonoBehaviour
             Power = 100f;
             _animator.SetTrigger("AimRecoil");
             Vcam.m_Lens.FieldOfView = NormalFOV;
+
+            ArrowCount -= 1;
         }
 
 
@@ -106,7 +108,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
         arrowInstance.Shoot(Camera.main.transform.forward, Power);
 
-
+        
 
     }
     private void SetAimingTrue()
@@ -117,6 +119,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
     {
         IsAiming = false;
     }    
+
 
 }
 
