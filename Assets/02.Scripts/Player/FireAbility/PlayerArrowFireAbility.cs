@@ -12,7 +12,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     [Header("플레이어 활 쏠때")]
     public CinemachineVirtualCamera Vcam;
-    private const float ZoomFOV = 29.95f;    // 최소 FOV
+    private const float ZoomFOV = 30f;    // 최소 FOV
     private const float NormalFOV = 70f;  // 최대 FOV
     
     // 보간법 사용할 것
@@ -21,8 +21,9 @@ public class PlayerArrowFireAbility : MonoBehaviour
     private float _zoomProgress; // 0~1
 
     // 화살 쿨타임
-    private float _arrow_Cool_Time = 3f;
-    private float _arrow_Timer = 0f;
+    /*    private float _arrow_Cool_Time = 3f;
+        private float _arrow_Timer = 0f;*/
+    private float _arrowPowerFactor;
 
     public Arrow ArrowPrefab; // 발사할 화살 객체
 
@@ -30,66 +31,58 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     public Transform ArrowPlace;  // 화살 생성 위치
 
+    private float _buttonDowntime;
     public float Power = 3f;
     private const float MAX_POWER = 200;
 
-    // private bool _isRightMouseClicked = false;
-
-    private bool _isFireableArrow = false;
     public bool IsAiming;
+    private bool _isFireable;
+
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
 
         Power = 100f;
+        _isFireable = true;
 
     }
 
     private void Update()
     {
-
-
-        // 오른쪽 마우스 버튼 클릭 시 조준
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && _isFireable)
         {
+            _buttonDowntime = Time.time;
             _animator.SetTrigger("DrawArrow");
-            IsAiming = true;
-            _animator.SetLayerWeight(1, 1);
-        }
 
-        else if (Input.GetMouseButton(1))
+        }
+        if (Input.GetMouseButton(1))
         {
-            _arrow_Timer += Time.deltaTime;
-            if (_arrow_Timer > 0.4f)
-            {
-                _isFireableArrow = true;
-            }
+            
             if (_zoomProgress < 1)
             {
                 _zoomProgress += Time.deltaTime / ZoomInDuration;
                 Vcam.m_Lens.FieldOfView = Mathf.Lerp(NormalFOV, ZoomFOV, _zoomProgress);
             }
-
-            Power += Time.deltaTime * 2f;
-            Power = Mathf.Min(MAX_POWER, Power);
-
+/*            Power += Time.deltaTime * 2f;
+            Power = Mathf.Min(MAX_POWER, Power);*/
         }
-        else if (Input.GetMouseButtonUp(1))
-        {
-            _arrow_Timer = 0;
-            _zoomProgress = 0;
-            IsAiming = false;
 
+        if (Input.GetMouseButtonUp(1))
+        {
+/*            float heldTime = Time.time - _buttonDowntime;
+            if (heldTime < 1f)
+            {
+                StartCoroutine(Shoot_Coroutine(1f - heldTime));
+            }
+            else if (heldTime >= 1f)
+            {
+                Debug.Log(heldTime);
+                StartCoroutine(Shoot_Coroutine(0f));
+            }*/
+            _zoomProgress = 0;
             Power = 100f;
             _animator.SetTrigger("AimRecoil");
-            if(_isFireableArrow)
-            {
-                FireArrow();
-                _isFireableArrow= false;
-            }
-
-            _animator.SetLayerWeight(1, 0);
             Vcam.m_Lens.FieldOfView = NormalFOV;
         }
 
@@ -98,12 +91,22 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     void FireArrow()
     {
-        _animator = GetComponentInChildren<Animator>();
 
         // 화살 인스턴스를 생성하고 위치 및 회전을 초기화
        Arrow arrowInstance = Instantiate<Arrow>(ArrowPrefab, ArrowPlace.position, Quaternion.identity);
 
-        arrowInstance.transform.forward = Camera.main.transform.forward;
+        arrowInstance.transform.forward = Camera.main.transform.forward + new Vector3(0, 10, 0);
+
         arrowInstance.Shoot(Camera.main.transform.forward, Power);
     }
+    private void SetAimingTrue()
+    {
+            IsAiming = true;
+    }
+    private void SetAimingFalse()
+    {
+        IsAiming = false;
+    }    
+
 }
+
