@@ -18,7 +18,10 @@ public class PlayerBombFireAbility : MonoBehaviour
     public bool IsThrown;
     private PlayerArrowFireAbility _arrowFireAbility;
     private MeleeAttackAbility _meleeAttackAbility;
+    [Header ("Bomb Put Position")]
     public Transform BombPosition;
+    public Transform BombPutdownPosition;
+
     public GameObject BombObject;
     private Rigidbody _bombRigidBody;
     private Bomb _bomb;
@@ -87,6 +90,14 @@ public class PlayerBombFireAbility : MonoBehaviour
             _animator.SetBool("Carry", false);
             _animator.SetTrigger("Throw");
         }
+        else if (Input.GetMouseButtonDown(1))
+        {
+            _currentStage = BombFireStage.Neutral;
+            PutDown();
+            Debug.Log("Carry -> Putdown -> Neutral");
+            _animator.SetBool("Carry", false);
+            _animator.SetTrigger("Putdown");
+        }
     }
     void SpawnBomb()
     {
@@ -107,7 +118,7 @@ public class PlayerBombFireAbility : MonoBehaviour
         BombObject.transform.SetParent(null);
         Vector3 throwingDir = transform.forward;
         throwingDir += new Vector3(0, 0.5f, 0);
-        _bombRigidBody.AddForce(throwingDir* 8f, ForceMode.Impulse);
+        _bombRigidBody.AddForce(throwingDir* 5f, ForceMode.Impulse);
         // 던지고 나서 Neutral로 transition
         // 오브젝트 던지기
 
@@ -124,7 +135,15 @@ public class PlayerBombFireAbility : MonoBehaviour
         BombObject.SetActive(false);
         Debug.Log("Putback -> Neutral");
     }
+    void PutDown()
+    {
+        IsCarrying = false;
+        IsThrown = true;
 
+        BombObject.transform.SetParent(null);
+        BombObject.transform.position = BombPutdownPosition.position;
+        _bombRigidBody.isKinematic = false;
+    }
     
 
 }

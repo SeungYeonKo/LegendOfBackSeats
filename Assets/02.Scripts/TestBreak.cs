@@ -5,14 +5,17 @@ using UnityEngine;
 public class TestBreak : MonoBehaviour, IHitable
 {
     public Animator _animator;
+    private BoxCollider _collider;
 
     void Start()
     {
-       // StartCoroutine(Break_Coroutine());
+
     }
     public void Hit(int amount)
     {
         _animator.SetBool("Break", true);
+        _collider = GetComponent<BoxCollider>();
+        _collider.enabled = false;
     }
     
     void Update()

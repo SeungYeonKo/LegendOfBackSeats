@@ -27,15 +27,16 @@ public class Bomb : MonoBehaviour
         int layer = (LayerMask.GetMask("Monster") | LayerMask.GetMask("Player") | LayerMask.GetMask("Breakable"));
         int count = Physics.OverlapSphereNonAlloc(transform.position, BurstingExplosionRadius, _colliders, layer);
         Debug.Log(count);
-                foreach (Collider collider in _colliders)
-                {
-                    IHitable hitableObject;
-                    if (collider.TryGetComponent<IHitable>(out hitableObject))
-                    {
-                        hitableObject.Hit(Damage);
-                        Debug.Log(hitableObject);
-                    }
-                }
+        for (int i = 0; i < count; i++)
+        {
+            Collider c = _colliders[i];
+            IHitable hitableObject = c.GetComponent<IHitable>();
+            if (hitableObject != null)
+            {
+                hitableObject.Hit(Damage);
+                Debug.Log(hitableObject);
+            }
+        }
         this.gameObject.SetActive(false);
     }
 }
