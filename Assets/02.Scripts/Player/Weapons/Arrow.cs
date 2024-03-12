@@ -16,6 +16,8 @@ public class Arrow : MonoBehaviour
 
     private Rigidbody arrowRigidbody;
 
+  
+
     void Awake()
     {
         arrowRigidbody = GetComponent<Rigidbody>();

@@ -8,6 +8,8 @@ public class UI_ItemInventory : MonoBehaviour
     public TextMeshProUGUI HealthItemCountText;
     public TextMeshProUGUI ArrowItemCountText;
 
+  
+
     public void Refresh()
     {
         HealthItemCountText.text = $"x{ItemManager.Instance.GetItemCount(ItemType.Health)}";
