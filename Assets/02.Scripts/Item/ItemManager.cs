@@ -28,7 +28,7 @@ public class ItemManager : MonoBehaviour
     private void Start()
     {
         ItemList.Add(new Item(ItemType.Health, 0));
-        ItemList.Add(new Item(ItemType.Arrow, 0));
+        ItemList.Add(new Item(ItemType.Arrow, 5));
         OnDataChanged.Invoke();
     }
 

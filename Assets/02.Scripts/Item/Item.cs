@@ -41,7 +41,7 @@ public class Item
             }
             case ItemType.Arrow:
             {
-                // Arrow아이템 사용시 Player가 들고있는 Arrow + 1
+                // Arrow아이템 사용시 Player가 들고있는 Arrow + 2
                 PlayerArrowFireAbility ability = GameObject.FindWithTag("Player").GetComponent<PlayerArrowFireAbility>();
                 ability.ArrowCurrentCount += 2;
                 break;

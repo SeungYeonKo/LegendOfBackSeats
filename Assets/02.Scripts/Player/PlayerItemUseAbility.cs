@@ -6,10 +6,7 @@ public class PlayerItemUseAbility : MonoBehaviour
 {
     void Update()
     {
-        /*        if (GameManager.Instance.state != GameState.Start)
-                {
-                    return;
-                }*/
+        
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             // 체력 아이템 사용
@@ -17,8 +14,8 @@ public class PlayerItemUseAbility : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-                // 화살 아이템 사용
-                ItemManager.Instance.TryUseItem(ItemType.Arrow);
+            // 화살 아이템 사용
+            ItemManager.Instance.TryUseItem(ItemType.Arrow);
         }
     }
 }
