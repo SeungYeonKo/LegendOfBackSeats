@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class LobbyScene : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    private enum SceneNames
+    {
+        Lobby,
+        Loading,
+        Main
+    }
+
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
+
 }
