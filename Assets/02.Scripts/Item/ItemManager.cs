@@ -11,7 +11,6 @@ public class ItemManager : MonoBehaviour
 {
     public UnityEvent OnDataChanged;
 
-
     public static ItemManager Instance { get; private set; }
 
     private void Awake()
@@ -91,16 +90,12 @@ public class ItemManager : MonoBehaviour
                         break;
                     }
 
-
                     case ItemType.Arrow:
                     {
                         Debug.Log("화살 사용됨!");
                         break;
                     }
                 }
-
-
-
                 OnDataChanged?.Invoke();
                 return true;
             }
