@@ -33,12 +33,10 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     public Transform ArrowPlace;  // 화살 생성 위치
 
-    private float _buttonDowntime;
     public float Power = 3f;
     private const float MAX_POWER = 200;
 
     public bool IsAiming;
-    private bool _isFireable;
 
     // 화살 개수
     public int ArrowStartCount = 5;
@@ -50,19 +48,17 @@ public class PlayerArrowFireAbility : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         Power = 100f;
-        _isFireable = true;
         _offset = new Vector3(0, 20, 0);
-
+        ArrowCurrentCount = ArrowStartCount;
     }
 
     private void Update()
     {
         
-        if (ArrowCurrentCount != 0)
+        if (ArrowCurrentCount > 0)
         {
-            if (Input.GetMouseButtonDown(1) && _isFireable)
+            if (Input.GetMouseButtonDown(1))
             {
-                _buttonDowntime = Time.time;
                 _animator.SetTrigger("DrawArrow");
 
             }
@@ -79,16 +75,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
             if (Input.GetMouseButtonUp(1))
             {
-                /*            float heldTime = Time.time - _buttonDowntime;
-                            if (heldTime < 1f)
-                            {
-                                StartCoroutine(Shoot_Coroutine(1f - heldTime));
-                            }
-                            else if (heldTime >= 1f)
-                            {
-                                Debug.Log(heldTime);
-                                StartCoroutine(Shoot_Coroutine(0f));
-                            }*/
+
                 _zoomProgress = 0;
                 Power = 100f;
                 _animator.SetTrigger("AimRecoil");
@@ -105,6 +92,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
             arrowInstance.transform.forward = Camera.main.transform.forward + _offset;
 
             arrowInstance.Shoot(Camera.main.transform.forward, Power);
+            
     }
 
     private void SetAimingTrue()
