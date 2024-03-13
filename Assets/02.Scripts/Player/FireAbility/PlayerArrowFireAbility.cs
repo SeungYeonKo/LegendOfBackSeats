@@ -44,11 +44,11 @@ public class PlayerArrowFireAbility : MonoBehaviour
     // 현재 화살 개수 텍스트
     public TextMeshProUGUI ArrowCountText;
     // 화살 없을 때 띄우는 텍스트
-    public TextMeshProUGUI noArrowTextUI;
+    public TextMeshProUGUI NoArrowTextUI;
 
     private void Start()
     {
-        noArrowTextUI.text = string.Empty;
+        NoArrowTextUI.text = string.Empty;
         _animator = GetComponent<Animator>();
         Power = 100f;
         _offset = new Vector3(0, 20, 0);
@@ -108,10 +108,10 @@ public class PlayerArrowFireAbility : MonoBehaviour
     }
     IEnumerator ShowNoArrowMessage()
     {
-        noArrowTextUI.gameObject.SetActive(true); // 메시지 표시
-        noArrowTextUI.text = "화살이 없습니다!";
-        yield return new WaitForSeconds(2f); 
-        noArrowTextUI.gameObject.SetActive(false); // 메시지 숨김
+        NoArrowTextUI.gameObject.SetActive(true); // 메시지 표시
+        NoArrowTextUI.text = "화살이 없습니다!";
+        yield return new WaitForSeconds(2f);
+        NoArrowTextUI.gameObject.SetActive(false); // 메시지 숨김
     }
     private void SetAimingTrue()
     {

@@ -6,12 +6,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class ItemManager : MonoBehaviour
 {
     public UnityEvent OnDataChanged;
 
     public static ItemManager Instance { get; private set; }
+
+    // 체력 아이템 없을 때 띄우는 텍스트
+    public TextMeshProUGUI NoHealthItemTextUI;
 
     private void Awake()
     {
@@ -29,6 +33,7 @@ public class ItemManager : MonoBehaviour
 
     private void Start()
     {
+        NoHealthItemTextUI.text = string.Empty;
         ItemList.Add(new Item(ItemType.Health, 0));
         ItemList.Add(new Item(ItemType.Arrow, 5));
 
@@ -76,6 +81,7 @@ public class ItemManager : MonoBehaviour
                 // 아이템이 있고, 최대 체력이 아닐 때만 아이템 사용 가능
                 if (ItemList[i].Count > 0)
                 {
+
                     if (itemType == ItemType.Health)
                     {
                         ThirdPersonController thirdPersonController = GameObject.FindWithTag("Player").GetComponent<ThirdPersonController>();
@@ -99,8 +105,6 @@ public class ItemManager : MonoBehaviour
                     }
                     else if (itemType == ItemType.Arrow)
                     {
-                        // 화살 아이템 사용 로직
-                        Debug.Log("화살 아이템 사용됨!");
                         ItemList[i].Count -= 1; // 아이템 개수 감소
                         OnDataChanged?.Invoke();
                         return true;
@@ -108,6 +112,10 @@ public class ItemManager : MonoBehaviour
                 }
                 else
                 {
+      
+                    
+                    StartCoroutine(ShowNoHealthItemMessage());
+                    
                     // 아이템이 없을 때의 처리
                     Debug.Log($"{itemType} 아이템이 없어 사용할 수 없습니다.");
                     return false; // 아이템이 없으므로 false 반환
@@ -115,6 +123,14 @@ public class ItemManager : MonoBehaviour
             }
         }
         return false; // 해당하는 아이템 타입을 찾지 못했을 때
+    }
+
+    IEnumerator ShowNoHealthItemMessage()
+    {
+        NoHealthItemTextUI.gameObject.SetActive(true);
+        NoHealthItemTextUI.text = "체력 아이템이 없습니다 !";
+        yield return new WaitForSeconds(2f);
+        NoHealthItemTextUI.gameObject.SetActive(false);
     }
 }
 
