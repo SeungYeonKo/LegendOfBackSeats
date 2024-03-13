@@ -9,6 +9,6 @@ public class SpinLoadingUI : MonoBehaviour
     void Update()
     {
         // Time.deltaTime을 곱해 프레임률에 관계없이 일정한 속도로 회전
-        transform.Rotate(0, 0, -speed * Time.deltaTime);
+        transform.Rotate(0, 0, -speed * Time.unscaledDeltaTime);
     }
 }
