@@ -5923,7 +5923,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2125114104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6446,6 +6446,10 @@ PrefabInstance:
       propertyPath: AimUI
       value: 
       objectReference: {fileID: 464094654}
+    - target: {fileID: 8601190463117251918, guid: d99184b144396224ca042645e2c5615e, type: 3}
+      propertyPath: IsAiming
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8700055633664796444, guid: d99184b144396224ca042645e2c5615e, type: 3}
       propertyPath: BombObject
       value: 

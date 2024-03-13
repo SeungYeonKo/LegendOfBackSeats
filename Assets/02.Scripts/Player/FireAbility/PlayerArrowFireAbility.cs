@@ -38,6 +38,10 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     public bool IsAiming;
 
+    // UI
+    public GameObject AimUI;
+
+
     // 화살 개수
     public int ArrowStartCount = 5;
     public int ArrowCurrentCount;
@@ -50,24 +54,30 @@ public class PlayerArrowFireAbility : MonoBehaviour
         Power = 100f;
         _offset = new Vector3(0, 20, 0);
         ArrowCurrentCount = ArrowStartCount;
+
+        AimUI.SetActive(false);
     }
 
     private void Update()
     {
-        
+
+
         if (ArrowCurrentCount > 0)
         {
             if (Input.GetMouseButtonDown(1))
             {
                 _animator.SetTrigger("DrawArrow");
 
+
             }
             if (Input.GetMouseButton(1))
             {
+
                 if (_zoomProgress < 1)
                 {
                     _zoomProgress += Time.deltaTime / ZoomInDuration;
                     Vcam.m_Lens.FieldOfView = Mathf.Lerp(NormalFOV, ZoomFOV, _zoomProgress);
+
                 }
                 /*            Power += Time.deltaTime * 2f;
                             Power = Mathf.Min(MAX_POWER, Power);*/
@@ -80,6 +90,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
                 Power = 100f;
                 _animator.SetTrigger("AimRecoil");
                 Vcam.m_Lens.FieldOfView = NormalFOV;
+
             }
         }
     }
@@ -97,12 +108,16 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     private void SetAimingTrue()
     {
-            IsAiming = true;
+          IsAiming = true;
+        AimUI.SetActive(true);
+
     }
 
     private void SetAimingFalse()
     {
         IsAiming = false;
+        AimUI.SetActive(false);
+
     }
 
     public void RefreshUI()
