@@ -28,20 +28,21 @@ public class Item
             return false;
         }
 
-        Count -= 1;
 
-        if (ItemType == ItemType.Health)
+        ThirdPersonController thirdPersonController = GameObject.FindWithTag("Player").GetComponent<ThirdPersonController>();
+
+        if (ItemType == ItemType.Health && thirdPersonController.CurrentHealth < thirdPersonController.MaxHealth)
         {
-            
-            // Health아이템 사용시 플레이어 체력 +5
-            ThirdPersonController ThirdPersonController = GameObject.FindWithTag("Player").GetComponent<ThirdPersonController>();
-            if(ThirdPersonController.CurrentHealth <= ThirdPersonController.MaxHealth)
-            {
-                ThirdPersonController.CurrentHealth += 5;
-                Debug.Log("체력 +5!");
-            }
+            // Health아이템 사용시 플레이어 체력 +5, 최대 체력을 초과하지 않게 함
+            int healthToAdd = Mathf.Min(5, thirdPersonController.MaxHealth - thirdPersonController.CurrentHealth);
+            thirdPersonController.CurrentHealth += healthToAdd;
+            Debug.Log($"체력 +{healthToAdd}!");
+
+            Count -= 1; 
+            return true;
         }
-        return true;
+
+        return false; 
     }
 }
 
