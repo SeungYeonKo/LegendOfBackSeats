@@ -32,7 +32,9 @@ namespace StarterAssets
         public Image StaminaSlider;
         private const float TOLERANCE = 0.1f;
         private bool _isFatigue;
-
+        // 넉백
+        public float KnockbackPower = 0.5f;
+        public Image DamageScreen;
 
 
         [Tooltip("How fast the character turns to face movement direction")]
@@ -177,7 +179,6 @@ namespace StarterAssets
             GroundedCheck();
             Move();
             MakeVisbleStaminaSlider();
-            ShowHealthStatus();
         }
 
         private void LateUpdate()
@@ -247,11 +248,26 @@ namespace StarterAssets
         public void Hit(int damage)
         {
             CurrentHealth -= damage;
+            
+            StartCoroutine(Damage_Coroutine());
             if (CurrentHealth < 0)
             {
                 Die();
             }
         }
+        private IEnumerator Damage_Coroutine()
+        {
+            yield return new WaitForSecondsRealtime(0.1f);
+            DamageScreen.gameObject.SetActive(true);
+            yield return new WaitForSecondsRealtime(0.1f);
+            DamageScreen.gameObject.SetActive(false);
+            yield return new WaitForSecondsRealtime(0.1f);
+            DamageScreen.gameObject.SetActive(true);
+            yield return new WaitForSecondsRealtime(0.1f);
+            DamageScreen.gameObject.SetActive(false);
+
+        }
+
         private void Die()
         {
             _animator.SetTrigger("Die");
@@ -353,10 +369,15 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
         }
-        public void ShowHealthStatus()
+/*        private void KnockBackbyBomb()
         {
-
-        }
+                Transform target = GetComponent<PlayerBombFireAbility>().BombObject.transform;
+                Vector3 dir = transform.position - target.position;
+                dir.y = 0;
+                dir.Normalize();
+                _controller.Move(dir * KnockbackPower);
+                //_animator.SetTrigger("Damaged");
+        }*/
         private void JumpAndGravity()
         {
             if (Grounded)
