@@ -116,14 +116,12 @@ public class MonsterMove : MonoBehaviour, IHitable
         if (_idleTimer >= IDLE_DURATION)
         {
             _idleTimer = 0f;
-            Debug.Log("Monster : Idle -> Patrol");
             _animator.SetTrigger("IdleToPatrol");
             _currentState = MonsterState.Patrol;
         }
 
         if (Vector3.Distance(_target.position, transform.position) <= FindDistance && _idleTimer >= IDLE_DURATION / 2)
         {
-            Debug.Log("Monster: Idle -> Trace");
             _animator.SetTrigger("IdleToTrace");
             _currentState = MonsterState.Trace;
         }
@@ -144,7 +142,6 @@ public class MonsterMove : MonoBehaviour, IHitable
             // 공격 범위 내에 있으면 Attack 상태로 전환
             if (_currentState != MonsterState.Attack)   // 현재 상태가 Attack이 아닐 때만 전환
             {
-                Debug.Log("Monster : Trace -> Attack");
                 _animator.SetTrigger("TraceToAttack");
                 _currentState = MonsterState.Attack;
             }
@@ -152,7 +149,6 @@ public class MonsterMove : MonoBehaviour, IHitable
         else if (Vector3.Distance(_target.position, transform.position) >= FindDistance)
         {
             // 플레이어와의 거리가 찾기 범위를 벗어나면 Comeback 상태로 전환
-            Debug.Log("Monster : Trace -> Comeback");
             _animator.SetTrigger("TraceToComeback");
             _currentState = MonsterState.Comeback;
         }
@@ -168,7 +164,6 @@ public class MonsterMove : MonoBehaviour, IHitable
         // 플레이어가 감지 범위 내에 있으면 상태를 Trace로 변경하여 플레이어를 추적
         if (Vector3.Distance(_target.position, transform.position) <= FindDistance)
         {
-            Debug.Log("Monster : Patrol -> Trace");
             _animator.SetTrigger("PatrolToTrace");
             _currentState = MonsterState.Trace;
         }
@@ -183,7 +178,6 @@ public class MonsterMove : MonoBehaviour, IHitable
     private IEnumerator WaitAndComeback()
     {
         yield return new WaitForSeconds(2f);  // 대기 시간 조절 필요
-        Debug.Log("Monster : Patrol -> Comeback");
         _animator.SetTrigger("PatrolToComeback");
         _currentState = MonsterState.Comeback;
     }
@@ -212,7 +206,6 @@ public class MonsterMove : MonoBehaviour, IHitable
 
         if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= TOLERANCE)
         {
-            Debug.Log("Monster : Comeback -> idle");
             _animator.SetTrigger("ComebackToIdle");
 
             _currentState = MonsterState.Idle;
@@ -231,14 +224,13 @@ public class MonsterMove : MonoBehaviour, IHitable
         {
              // 공격 애니메이션 실행
              _animator.SetTrigger("Attack");
-            PlayerAttack();
+            //PlayerAttack();
             _attackTimer = 0f; // 공격 후 타이머 리셋
         }
         else if (distanceToTarget > AttackDistance)
         {
             _attackTimer = 0f;
             // 플레이어와의 거리가 공격 범위를 벗어난 경우 Trace 상태로 전환
-            Debug.Log("Monster : Attack -> Trace");
             _animator.SetTrigger("AttackToTrace");
             _currentState = MonsterState.Trace;
             _attackTimer = 0f;
@@ -261,12 +253,9 @@ public class MonsterMove : MonoBehaviour, IHitable
         _knockbackProgress += Time.deltaTime / KNOCKBACK_DURATION;
         transform.position = Vector3.Lerp(_knockbackStartPosition, _knockbackEndPosition, _knockbackProgress);
         _animator.SetTrigger("Damaged");
-        Debug.Log("Monster : 넉백!");
         if (_knockbackProgress > 1)
         {
             _knockbackProgress = 0f;
-
-            Debug.Log("Monster : Damaged -> Trace");
             _animator.SetTrigger("DamagedToTrace");
             _currentState = MonsterState.Trace;
         }
@@ -278,12 +267,10 @@ public class MonsterMove : MonoBehaviour, IHitable
         if (Health <= 0)
         {
             _currentState = MonsterState.Die;
-            Debug.Log("Monster : Any -> Die");
             Die();
         }
         else
         {
-            Debug.Log("Monster : Any -> Damaged");
             _animator.SetTrigger("Damaged");
             _currentState = MonsterState.Damaged;
         }
@@ -317,9 +304,6 @@ public class MonsterMove : MonoBehaviour, IHitable
         IHitable playerHitable = _target.GetComponent<IHitable>();
         if (playerHitable != null)
         {
-            Debug.Log("때렸다!");
-
-            //DamageInfo damageInfo = new DamageInfo(DamageType.Normal, Damage);
             playerHitable.Hit(Damage);
             _attackTimer = 0f;
         }
