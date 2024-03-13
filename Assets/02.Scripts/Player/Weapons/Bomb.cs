@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,10 +14,12 @@ public class Bomb : MonoBehaviour
     private Collider[] _colliders = new Collider[10];
     public int Damage = 10;
     public GameObject ExplosionEffectPrefab;
-   
+    private CinemachineImpulseSource _impulseSource;
+
 
     void OnEnable()
     {
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
         state = BombState.Carry;
     }
     void Update()
@@ -39,6 +42,7 @@ public class Bomb : MonoBehaviour
                 Debug.Log(hitableObject);
             }
         }
+        _impulseSource.GenerateImpulse(1);
         GameObject effect = GameObject.Instantiate(ExplosionEffectPrefab);
         effect.SetActive(true);
         effect.transform.SetParent(null);

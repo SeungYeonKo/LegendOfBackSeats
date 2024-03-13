@@ -59,7 +59,7 @@ public class PlayerBombFireAbility : MonoBehaviour
         {
             _currentStage = BombFireStage.Carry;
             _animator.SetBool("Carry", true);
-            SpawnBomb();
+            //SpawnBomb();
             Debug.Log("Neutral -> Carry");
         }
         else if (Input.GetKeyDown(KeyCode.Tab) && IsThrown)
@@ -85,7 +85,7 @@ public class PlayerBombFireAbility : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             _currentStage = BombFireStage.Neutral;
-            ThrowBomb();
+           // ThrowBomb();
             Debug.Log("Carry -> Throw -> Neutral");
             _animator.SetBool("Carry", false);
             _animator.SetTrigger("Throw");
