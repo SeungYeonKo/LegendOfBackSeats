@@ -178,7 +178,6 @@ namespace StarterAssets
             Move();
             MakeVisbleStaminaSlider();
             ShowHealthStatus();
-
         }
 
         private void LateUpdate()

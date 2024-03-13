@@ -88,7 +88,6 @@ public class ItemManager : MonoBehaviour
                 return result;
             }
         }
-
         return false;
     }
 }
