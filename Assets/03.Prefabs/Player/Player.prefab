@@ -1675,6 +1675,7 @@ GameObject:
   - component: {fileID: 8700055633664796444}
   - component: {fileID: 8601190463117251918}
   - component: {fileID: 2549880065361718309}
+  - component: {fileID: -4690508020172142911}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1866,6 +1867,7 @@ MonoBehaviour:
   IsCarrying: 0
   IsThrown: 0
   BombPosition: {fileID: 4360479982756321216}
+  BombPutdownPosition: {fileID: 0}
   BombObject: {fileID: 0}
 --- !u!114 &8601190463117251918
 MonoBehaviour:
@@ -1884,7 +1886,10 @@ MonoBehaviour:
   ArrowPlace: {fileID: 836933195503167702}
   Power: 3
   IsAiming: 0
-  ArrowCount: 5
+  AimUI: {fileID: 0}
+  ArrowStartCount: 5
+  ArrowCurrentCount: 0
+  ArrowCountText: {fileID: 0}
 --- !u!208 &2549880065361718309
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -1901,6 +1906,18 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &-4690508020172142911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8952940822073519346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7c7a9404be6d6042b23f9917a647bd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &658817806154012911
 PrefabInstance:
   m_ObjectHideFlags: 0
