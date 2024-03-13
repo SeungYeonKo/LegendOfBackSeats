@@ -1089,7 +1089,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4360479982756321216}
   m_Layer: 6
-  m_Name: BombPosition
+  m_Name: BombCarryPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1657,6 +1657,37 @@ Transform:
   - {fileID: 5713025968019938757}
   m_Father: {fileID: 8910293359233995381}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8625305051207323407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4491927184984211030}
+  m_Layer: 6
+  m_Name: BombPutdownPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4491927184984211030
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8625305051207323407}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0.77}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4567340450170375005}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8952940822073519346
 GameObject:
   m_ObjectHideFlags: 0
@@ -1704,6 +1735,7 @@ Transform:
   - {fileID: 5652560048111443360}
   - {fileID: 836933195503167702}
   - {fileID: 4360479982756321216}
+  - {fileID: 4491927184984211030}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!95 &5293559401614117722
@@ -1867,7 +1899,11 @@ MonoBehaviour:
   IsCarrying: 0
   IsThrown: 0
   BombPosition: {fileID: 4360479982756321216}
+<<<<<<< HEAD
   BombPutdownPosition: {fileID: 0}
+=======
+  BombPutdownPosition: {fileID: 4491927184984211030}
+>>>>>>> 356267d7ff1759e94b4e39429f8757f3b5a89522
   BombObject: {fileID: 0}
 --- !u!114 &8601190463117251918
 MonoBehaviour:
