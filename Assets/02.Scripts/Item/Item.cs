@@ -28,7 +28,6 @@ public class Item
             return false;
         }
 
-
         ThirdPersonController thirdPersonController = GameObject.FindWithTag("Player").GetComponent<ThirdPersonController>();
 
         if (ItemType == ItemType.Health && thirdPersonController.CurrentHealth < thirdPersonController.MaxHealth)
@@ -41,7 +40,14 @@ public class Item
             Count -= 1; 
             return true;
         }
-
+      /*  if (ItemType == ItemType.Arrow)
+        {
+            // Arrow 아이템 사용 로직 구현
+            // 예: 화살 사용 로직, 화살 수 감소 등
+            Debug.Log("화살 사용됨!");
+            Count -= 1; // 화살 아이템을 사용했으므로 Count 감소
+            return true;
+        }*/
         return false; 
     }
 }

@@ -39,10 +39,13 @@ public class ItemManager : MonoBehaviour
         if (itemType == ItemType.Health)
         {
             itemCountToAdd = 1; // 체력 1개 추가
+            Debug.Log("health아이템 1추가");
+
         }
         else if (itemType == ItemType.Arrow)
         {
             itemCountToAdd = 2; // 화살 2개 추가
+            Debug.Log("Arrow아이템 2추가");
         }
 
         // 수량을 업데이트
@@ -59,6 +62,7 @@ public class ItemManager : MonoBehaviour
             }
         }
     }
+
    // 아이템 개수 조회
     public int GetItemCount(ItemType itemType)
     {

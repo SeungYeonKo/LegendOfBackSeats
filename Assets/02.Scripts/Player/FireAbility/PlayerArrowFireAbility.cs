@@ -41,7 +41,6 @@ public class PlayerArrowFireAbility : MonoBehaviour
     // UI
     public GameObject AimUI;
 
-
     // 화살 개수
     public int ArrowStartCount = 5;
     public int ArrowCurrentCount;
@@ -60,8 +59,6 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     private void Update()
     {
-
-
         if (ArrowCurrentCount > 0)
         {
             if (Input.GetMouseButtonDown(1))
