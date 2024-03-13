@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2062249823721200425
 Transform:
   m_ObjectHideFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4094373394693600475}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.242006, y: 6.7337675, z: 17.17025}
+  m_LocalPosition: {x: 21.492268, y: 6.308146, z: 13.52565}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -147,6 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43f115b9b6318f41a5432a833e735bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BurstingExplosionRadius: 3
+  Damage: 10
+  ExplosionEffectPrefab: {fileID: 3443878919840884240, guid: ade212ef5474a52488c2060839ce85a9, type: 3}
 --- !u!1 &6877382206105011875
 GameObject:
   m_ObjectHideFlags: 0

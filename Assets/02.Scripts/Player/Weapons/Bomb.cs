@@ -12,6 +12,8 @@ public class Bomb : MonoBehaviour
     public float BurstingExplosionRadius = 3f;
     private Collider[] _colliders = new Collider[10];
     public int Damage = 10;
+    public GameObject ExplosionEffectPrefab;
+   
 
     void OnEnable()
     {
@@ -37,6 +39,11 @@ public class Bomb : MonoBehaviour
                 Debug.Log(hitableObject);
             }
         }
+        GameObject effect = GameObject.Instantiate(ExplosionEffectPrefab);
+        effect.SetActive(true);
+        effect.transform.SetParent(null);
+        effect.transform.position = transform.position;
+        
         this.gameObject.SetActive(false);
     }
 }
