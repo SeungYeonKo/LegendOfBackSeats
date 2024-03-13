@@ -42,13 +42,16 @@ public class PlayerArrowFireAbility : MonoBehaviour
     public GameObject AimUI;
 
     // 화살 개수
-    public int ArrowStartCount = 5;
+    public int ArrowStartCount = 5; 
     public int ArrowCurrentCount;
     // 현재 화살 개수 텍스트
     public TextMeshProUGUI ArrowCountText;
+    // 화살 없을 때 띄우는 텍스트
+    public TextMeshProUGUI noArrowTextUI;
 
     private void Start()
     {
+        noArrowTextUI.text = string.Empty;
         _animator = GetComponent<Animator>();
         Power = 100f;
         _offset = new Vector3(0, 20, 0);
@@ -64,8 +67,6 @@ public class PlayerArrowFireAbility : MonoBehaviour
             if (Input.GetMouseButtonDown(1))
             {
                 _animator.SetTrigger("DrawArrow");
-
-
             }
             if (Input.GetMouseButton(1))
             {
@@ -82,39 +83,48 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
             if (Input.GetMouseButtonUp(1))
             {
-
                 _zoomProgress = 0;
                 Power = 100f;
                 _animator.SetTrigger("AimRecoil");
                 Vcam.m_Lens.FieldOfView = NormalFOV;
-
             }
         }
     }
 
     void FireArrow()
     {
-            // 화살 인스턴스를 생성하고 위치 및 회전을 초기화
-            Arrow arrowInstance = Instantiate<Arrow>(ArrowPrefab, ArrowPlace.position, Quaternion.identity);
+        // 화살 발사 로직
+        Arrow arrowInstance = Instantiate<Arrow>(ArrowPrefab, ArrowPlace.position, Quaternion.identity);
+        arrowInstance.transform.forward = Camera.main.transform.forward + _offset;
+        arrowInstance.Shoot(Camera.main.transform.forward, Power);
 
-            arrowInstance.transform.forward = Camera.main.transform.forward + _offset;
+        Debug.Log("화살 사용됨!");
+        ArrowCurrentCount--; // 화살 개수 감소
+        RefreshUI(); // UI 업데이트
+        if (ArrowCurrentCount <= 0)
+        {
+            StartCoroutine(ShowNoArrowMessage());
+            return; // 화살이 없으면 메소드 종료
+        }
 
-            arrowInstance.Shoot(Camera.main.transform.forward, Power);
-            
     }
-
+    IEnumerator ShowNoArrowMessage()
+    {
+        noArrowTextUI.gameObject.SetActive(true); // 메시지 표시
+        noArrowTextUI.text = "화살이 없습니다!";
+        yield return new WaitForSeconds(2f); 
+        noArrowTextUI.gameObject.SetActive(false); // 메시지 숨김
+    }
     private void SetAimingTrue()
     {
           IsAiming = true;
         AimUI.SetActive(true);
-
     }
 
     private void SetAimingFalse()
     {
         IsAiming = false;
         AimUI.SetActive(false);
-
     }
 
     public void RefreshUI()

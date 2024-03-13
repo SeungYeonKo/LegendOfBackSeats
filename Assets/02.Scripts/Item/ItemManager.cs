@@ -1,3 +1,4 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -35,17 +36,17 @@ public class ItemManager : MonoBehaviour
     // 1. 아이템 추가(생성)
     public void AddItem(ItemType itemType)
     {
+        PlayerArrowFireAbility fireArrow = GameObject.FindWithTag("Player").GetComponent<PlayerArrowFireAbility>();
         int itemCountToAdd = 0;
         if (itemType == ItemType.Health)
         {
             itemCountToAdd = 1; // 체력 1개 추가
-            Debug.Log("health아이템 1추가");
-
         }
         else if (itemType == ItemType.Arrow)
         {
             itemCountToAdd = 2; // 화살 2개 추가
-            Debug.Log("Arrow아이템 2추가");
+            fireArrow.ArrowCurrentCount += 2;
+            fireArrow.RefreshUI(); // 화살 UI 업데이트
         }
 
         // 수량을 업데이트
@@ -54,7 +55,7 @@ public class ItemManager : MonoBehaviour
             if (item.ItemType == itemType)
             {
                 item.Count += itemCountToAdd;
-                Debug.Log($"{itemType} 아이템추가.  현재 개수: {item.Count}");
+                Debug.Log($"{itemType} 아이템추가");
 
                 // 데이터 변경 이벤트를 호출
                 OnDataChanged?.Invoke();
@@ -63,7 +64,7 @@ public class ItemManager : MonoBehaviour
         }
     }
 
-   // 아이템 개수 조회
+    // 아이템 개수 조회
     public int GetItemCount(ItemType itemType)
     {
         for (int i = 0; i < ItemList.Count; i++)
@@ -81,18 +82,35 @@ public class ItemManager : MonoBehaviour
     {
         for (int i = 0; i < ItemList.Count; i++)
         {
-            if (ItemList[i].ItemType == itemType)
+            if (ItemList[i].ItemType == itemType && ItemList[i].TryUse())
             {
-                bool result = ItemList[i].TryUse();
-
-                if (OnDataChanged != null)
+                if (itemType == ItemType.Arrow)
                 {
-                    OnDataChanged.Invoke();
+                    // 화살 아이템 사용 시 UI 업데이트
+                    PlayerArrowFireAbility fireArrow = GameObject.FindWithTag("Player").GetComponent<PlayerArrowFireAbility>();
+                    fireArrow.RefreshUI();
+                    /*UI_ItemInventory uiupdate = GameObject.FindWithTag("Item").GetComponent<UI_ItemInventory>();
+                    uiupdate.Refresh();*/
                 }
-                return result;
+
+                OnDataChanged?.Invoke();
+                return true;
             }
         }
         return false;
+    }
+
+    void UpdatePlayerArrowCount(ItemType itemType)
+    {
+        if (itemType == ItemType.Arrow)
+        {
+            PlayerArrowFireAbility playerArrowFireAbility = GameObject.FindWithTag("Player").GetComponent<PlayerArrowFireAbility>();
+            if (playerArrowFireAbility != null)
+            {
+                // ArrowCurrentCount를 업데이트
+                playerArrowFireAbility.ArrowCurrentCount += 2;
+            }
+        }
     }
 }
 
