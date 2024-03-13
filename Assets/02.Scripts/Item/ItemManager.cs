@@ -31,7 +31,7 @@ public class ItemManager : MonoBehaviour
     {
         ItemList.Add(new Item(ItemType.Health, 0));
         ItemList.Add(new Item(ItemType.Arrow, 5));
-       
+
         OnDataChanged.Invoke();
     }
 
@@ -71,36 +71,50 @@ public class ItemManager : MonoBehaviour
     {
         for (int i = 0; i < ItemList.Count; i++)
         {
-            if (ItemList[i].ItemType == itemType )
+            if (ItemList[i].ItemType == itemType)
             {
-               ItemList[i].Count -= 1;
-                switch (itemType)
+                // 아이템이 있고, 최대 체력이 아닐 때만 아이템 사용 가능
+                if (ItemList[i].Count > 0)
                 {
-                    case ItemType.Health:
+                    if (itemType == ItemType.Health)
                     {
                         ThirdPersonController thirdPersonController = GameObject.FindWithTag("Player").GetComponent<ThirdPersonController>();
                         if (thirdPersonController.CurrentHealth < thirdPersonController.MaxHealth)
                         {
-                            // Health아이템 사용시 플레이어 체력 +5, 최대 체력을 초과하지 않게 함
+                            // 최대 체력이 아니면 아이템 사용
                             int healthToAdd = Mathf.Min(5, thirdPersonController.MaxHealth - thirdPersonController.CurrentHealth);
                             thirdPersonController.CurrentHealth += healthToAdd;
-                            Debug.Log($"체력 아이템 사용! 현재 체력 :{thirdPersonController.CurrentHealth}");
+                            Debug.Log($"체력 아이템 사용! 현재 체력: {thirdPersonController.CurrentHealth}");
+
+                            ItemList[i].Count -= 1; // 아이템 개수 감소
+                            OnDataChanged?.Invoke();
                             return true;
                         }
-                        break;
+                        else
+                        {
+                            // 이미 최대 체력이면 아이템 사용하지 않음
+                            Debug.Log("이미 최대 체력입니다. 아이템을 사용할 수 없습니다.");
+                            return false;
+                        }
                     }
-
-                    case ItemType.Arrow:
+                    else if (itemType == ItemType.Arrow)
                     {
-                        Debug.Log("화살 사용됨!");
-                        break;
+                        // 화살 아이템 사용 로직
+                        Debug.Log("화살 아이템 사용됨!");
+                        ItemList[i].Count -= 1; // 아이템 개수 감소
+                        OnDataChanged?.Invoke();
+                        return true;
                     }
                 }
-                OnDataChanged?.Invoke();
-                return true;
+                else
+                {
+                    // 아이템이 없을 때의 처리
+                    Debug.Log($"{itemType} 아이템이 없어 사용할 수 없습니다.");
+                    return false; // 아이템이 없으므로 false 반환
+                }
             }
         }
-        return false;
+        return false; // 해당하는 아이템 타입을 찾지 못했을 때
     }
 }
 
