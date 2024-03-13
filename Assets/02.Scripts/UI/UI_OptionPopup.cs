@@ -7,9 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class UI_OptionPopup : MonoBehaviour
 {
+
     public void Open()
     {
         gameObject.SetActive(true);
+
     }
 
     public void Close()
@@ -37,6 +39,8 @@ public class UI_OptionPopup : MonoBehaviour
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(2);
         Debug.Log("다시하기 버튼 클릭");
+        Time.timeScale = 1f;
+
 
     }
 
