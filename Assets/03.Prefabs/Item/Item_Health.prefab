@@ -124,6 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemType: 0
   EatDistance: 5
+  Count: 1
 --- !u!1 &7512363052981115235
 GameObject:
   m_ObjectHideFlags: 0

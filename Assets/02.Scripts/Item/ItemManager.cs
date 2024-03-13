@@ -1,6 +1,7 @@
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,6 +10,7 @@ using UnityEngine.UI;
 public class ItemManager : MonoBehaviour
 {
     public UnityEvent OnDataChanged;
+
 
     public static ItemManager Instance { get; private set; }
 
@@ -30,31 +32,19 @@ public class ItemManager : MonoBehaviour
     {
         ItemList.Add(new Item(ItemType.Health, 0));
         ItemList.Add(new Item(ItemType.Arrow, 5));
+       
         OnDataChanged.Invoke();
     }
 
     // 1. 아이템 추가(생성)
-    public void AddItem(ItemType itemType)
+    public void AddItem(ItemType itemType, int count)
     {
-        PlayerArrowFireAbility fireArrow = GameObject.FindWithTag("Player").GetComponent<PlayerArrowFireAbility>();
-        int itemCountToAdd = 0;
-        if (itemType == ItemType.Health)
-        {
-            itemCountToAdd = 1; // 체력 1개 추가
-        }
-        else if (itemType == ItemType.Arrow)
-        {
-            itemCountToAdd = 2; // 화살 2개 추가
-            fireArrow.ArrowCurrentCount += 2;
-            fireArrow.RefreshUI(); // 화살 UI 업데이트
-        }
-
         // 수량을 업데이트
         foreach (var item in ItemList)
         {
             if (item.ItemType == itemType)
             {
-                item.Count += itemCountToAdd;
+                item.Count += count;
                 Debug.Log($"{itemType} 아이템추가");
 
                 // 데이터 변경 이벤트를 호출
@@ -82,35 +72,40 @@ public class ItemManager : MonoBehaviour
     {
         for (int i = 0; i < ItemList.Count; i++)
         {
-            if (ItemList[i].ItemType == itemType && ItemList[i].TryUse())
+            if (ItemList[i].ItemType == itemType )
             {
-                if (itemType == ItemType.Arrow)
+               ItemList[i].Count -= 1;
+                switch (itemType)
                 {
-                    // 화살 아이템 사용 시 UI 업데이트
-                    PlayerArrowFireAbility fireArrow = GameObject.FindWithTag("Player").GetComponent<PlayerArrowFireAbility>();
-                    fireArrow.RefreshUI();
-                    /*UI_ItemInventory uiupdate = GameObject.FindWithTag("Item").GetComponent<UI_ItemInventory>();
-                    uiupdate.Refresh();*/
+                    case ItemType.Health:
+                    {
+                        ThirdPersonController thirdPersonController = GameObject.FindWithTag("Player").GetComponent<ThirdPersonController>();
+                        if (thirdPersonController.CurrentHealth < thirdPersonController.MaxHealth)
+                        {
+                            // Health아이템 사용시 플레이어 체력 +5, 최대 체력을 초과하지 않게 함
+                            int healthToAdd = Mathf.Min(5, thirdPersonController.MaxHealth - thirdPersonController.CurrentHealth);
+                            thirdPersonController.CurrentHealth += healthToAdd;
+                            Debug.Log($"체력 아이템 사용! 현재 체력 :{thirdPersonController.CurrentHealth}");
+                            return true;
+                        }
+                        break;
+                    }
+
+
+                    case ItemType.Arrow:
+                    {
+                        Debug.Log("화살 사용됨!");
+                        break;
+                    }
                 }
+
+
 
                 OnDataChanged?.Invoke();
                 return true;
             }
         }
         return false;
-    }
-
-    void UpdatePlayerArrowCount(ItemType itemType)
-    {
-        if (itemType == ItemType.Arrow)
-        {
-            PlayerArrowFireAbility playerArrowFireAbility = GameObject.FindWithTag("Player").GetComponent<PlayerArrowFireAbility>();
-            if (playerArrowFireAbility != null)
-            {
-                // ArrowCurrentCount를 업데이트
-                playerArrowFireAbility.ArrowCurrentCount += 2;
-            }
-        }
     }
 }
 

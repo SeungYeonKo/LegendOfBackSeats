@@ -19,6 +19,8 @@ public class ItemObject : MonoBehaviour
     private const float TRACE_DURATION = 0.3f;
     private float _progress = 0;
 
+    public int Count;
+
     private void Start()
     {
         _player = GameObject.FindWithTag("Player").transform;
@@ -74,7 +76,7 @@ public class ItemObject : MonoBehaviour
             yield return null;
         }
 
-        ItemManager.Instance.AddItem(ItemType);
+        ItemManager.Instance.AddItem(ItemType, Count);
         gameObject.SetActive(false);
     }
 }

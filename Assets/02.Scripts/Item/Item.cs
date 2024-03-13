@@ -21,12 +21,16 @@ public class Item
         Count = count;
     }
 
-    public bool TryUse()
+ /*   public bool TryUse()
     {
         if (Count == 0)
         {
             return false;
         }
+
+        return true;
+
+        Count -= 1;
 
         // Health Item
         ThirdPersonController thirdPersonController = GameObject.FindWithTag("Player").GetComponent<ThirdPersonController>();
@@ -36,21 +40,16 @@ public class Item
             int healthToAdd = Mathf.Min(5, thirdPersonController.MaxHealth - thirdPersonController.CurrentHealth);
             thirdPersonController.CurrentHealth += healthToAdd;
             Debug.Log($"체력 아이템 사용! 현재 체력 :{thirdPersonController.CurrentHealth}");
-
-            Count -= 1; 
             return true;
         }
-
         // Arrow
-        PlayerArrowFireAbility fire = GameObject.FindWithTag("Player").GetComponent<PlayerArrowFireAbility>();
-        if (fire.ArrowCurrentCount > 0)
+        if (ItemType == ItemType.Arrow)
         {
             Debug.Log("화살 사용됨!");
-            Count -= 1; 
             return true;
         }
         return false; 
-    }
+    }*/
 }
 
 

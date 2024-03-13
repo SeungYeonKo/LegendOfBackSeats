@@ -41,9 +41,6 @@ public class PlayerArrowFireAbility : MonoBehaviour
     // UI
     public GameObject AimUI;
 
-    // 화살 개수
-    public int ArrowStartCount = 5; 
-    public int ArrowCurrentCount;
     // 현재 화살 개수 텍스트
     public TextMeshProUGUI ArrowCountText;
     // 화살 없을 때 띄우는 텍스트
@@ -55,14 +52,13 @@ public class PlayerArrowFireAbility : MonoBehaviour
         _animator = GetComponent<Animator>();
         Power = 100f;
         _offset = new Vector3(0, 20, 0);
-        ArrowCurrentCount = ArrowStartCount;
-
+   
         AimUI.SetActive(false);
     }
 
     private void Update()
     {
-        if (ArrowCurrentCount > 0)
+        if (ItemManager.Instance.GetItemCount(ItemType.Arrow) >  0)
         {
             if (Input.GetMouseButtonDown(1))
             {
@@ -99,14 +95,16 @@ public class PlayerArrowFireAbility : MonoBehaviour
         arrowInstance.Shoot(Camera.main.transform.forward, Power);
 
         Debug.Log("화살 사용됨!");
-        ArrowCurrentCount--; // 화살 개수 감소
-        RefreshUI(); // UI 업데이트
-        if (ArrowCurrentCount <= 0)
+
+        ItemManager.Instance.TryUseItem(ItemType.Arrow);
+
+
+        if (ItemManager.Instance.GetItemCount(ItemType.Arrow) <= 0)
         {
             StartCoroutine(ShowNoArrowMessage());
+
             return; // 화살이 없으면 메소드 종료
         }
-
     }
     IEnumerator ShowNoArrowMessage()
     {
@@ -125,16 +123,6 @@ public class PlayerArrowFireAbility : MonoBehaviour
     {
         IsAiming = false;
         AimUI.SetActive(false);
-    }
-
-    public void RefreshUI()
-    {
-        ArrowCountText.text = $"{ArrowCurrentCount}";
-    }
-
-    public void CountArrow()
-    {
-        ArrowCurrentCount -= 1;
     }
 }
 
