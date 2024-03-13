@@ -25,6 +25,7 @@ public class Gamemanager : MonoBehaviour
 
     public UI_OptionPopup OptionUI;
 
+    private bool _isOptionOpened;
 
     private void Awake()
     {

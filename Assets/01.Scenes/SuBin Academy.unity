@@ -198,6 +198,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 36398821}
   m_CullTransparentMesh: 1
+--- !u!224 &139444736 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7136823703782447793, guid: 9fa5b576c324c844e9cf25c27bbab72d, type: 3}
+  m_PrefabInstance: {fileID: 729462691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &150026149
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,7 +302,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 150026153}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1111910977}
+        m_TargetAssemblyTypeName: UI_OptionPopup, Assembly-CSharp
+        m_MethodName: OnExitButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &150026153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,7 +779,7 @@ MonoBehaviour:
   OnDataChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1645774998}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UI_ItemInventory, Assembly-CSharp
         m_MethodName: Refresh
         m_Mode: 1
@@ -3076,7 +3093,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1045477025}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1111910977}
+        m_TargetAssemblyTypeName: UI_OptionPopup, Assembly-CSharp
+        m_MethodName: OnContinueButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1045477025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6415,22 +6444,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
---- !u!224 &1645774997 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 641193713303024292, guid: 9fa5b576c324c844e9cf25c27bbab72d, type: 3}
-  m_PrefabInstance: {fileID: 729462691}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1645774998 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3692845171766009299, guid: 9fa5b576c324c844e9cf25c27bbab72d, type: 3}
-  m_PrefabInstance: {fileID: 729462691}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3f7753454e4ba6459d9c084a9f08c96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1752280523
 GameObject:
   m_ObjectHideFlags: 0
@@ -6942,7 +6955,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1842915689}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1111910977}
+        m_TargetAssemblyTypeName: UI_OptionPopup, Assembly-CSharp
+        m_MethodName: OnTitlebutton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1842915689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7109,7 +7134,7 @@ RectTransform:
   - {fileID: 982949549}
   - {fileID: 4826766641975712415}
   - {fileID: 47282210689978480}
-  - {fileID: 1645774997}
+  - {fileID: 139444736}
   - {fileID: 2125197180}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7259,17 +7284,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4154220426052414867, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
   m_PrefabInstance: {fileID: 1225193699}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2100218340 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6208475280896968877, guid: 9fa5b576c324c844e9cf25c27bbab72d, type: 3}
-  m_PrefabInstance: {fileID: 729462691}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2103900516
 GameObject:
   m_ObjectHideFlags: 0
@@ -7369,7 +7383,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2103900520}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1111910977}
+        m_TargetAssemblyTypeName: UI_OptionPopup, Assembly-CSharp
+        m_MethodName: OnResumeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2103900520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11146,7 +11172,7 @@ MonoBehaviour:
   Power: 3
   IsAiming: 0
   AimUI: {fileID: 6349102838546395717}
-  ArrowCountText: {fileID: 2100218340}
+  ArrowCountText: {fileID: 0}
   noArrowTextUI: {fileID: 2125197181}
 --- !u!1 &8352240150782035402
 GameObject:
