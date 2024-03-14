@@ -726,6 +726,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterType_2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4013771096594881156, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
+      propertyPath: Type1_AttackSound
+      value: 
+      objectReference: {fileID: 1862462844}
+    - target: {fileID: 4013771096594881156, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
+      propertyPath: Type2_AttackSound
+      value: 
+      objectReference: {fileID: 827915055}
     - target: {fileID: 6934651117650995639, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -992,6 +1000,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterType_2
       objectReference: {fileID: 0}
+    - target: {fileID: 4013771096594881156, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
+      propertyPath: Type1_AttackSound
+      value: 
+      objectReference: {fileID: 1862462844}
+    - target: {fileID: 4013771096594881156, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
+      propertyPath: Type2_AttackSound
+      value: 
+      objectReference: {fileID: 827915055}
     - target: {fileID: 6934651117650995639, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1091,6 +1107,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   NoHealthItemTextUI: {fileID: 356501659}
+  MaxHealthTextUI: {fileID: 0}
+  HealthItemSound: {fileID: 2107410432}
 --- !u!4 &509203872
 Transform:
   m_ObjectHideFlags: 0
@@ -1347,6 +1365,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775160450}
   m_CullTransparentMesh: 1
+--- !u!82 &827915055 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2406626606066866315, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
+  m_PrefabInstance: {fileID: 907313951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &847351763
 GameObject:
   m_ObjectHideFlags: 0
@@ -1427,6 +1450,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterType_2
       objectReference: {fileID: 0}
+    - target: {fileID: 4013771096594881156, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
+      propertyPath: Type1_AttackSound
+      value: 
+      objectReference: {fileID: 1862462844}
+    - target: {fileID: 4013771096594881156, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
+      propertyPath: Type2_AttackSound
+      value: 
+      objectReference: {fileID: 827915055}
     - target: {fileID: 6934651117650995639, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1476,6 +1507,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
+--- !u!1001 &907313951
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4773778924343947300, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
+      propertyPath: m_Name
+      value: SoundController
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016162062846738325, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016162062846738325, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016162062846738325, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016162062846738325, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016162062846738325, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016162062846738325, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016162062846738325, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016162062846738325, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016162062846738325, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016162062846738325, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
 --- !u!1 &931813018
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,6 +1965,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8838596122569436125, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: Type1_AttackSound
+      value: 
+      objectReference: {fileID: 1862462844}
+    - target: {fileID: 8838596122569436125, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: Type2_AttackSound
+      value: 
+      objectReference: {fileID: 827915055}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1994,6 +2090,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8838596122569436125, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: Type1_AttackSound
+      value: 
+      objectReference: {fileID: 1862462844}
+    - target: {fileID: 8838596122569436125, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: Type2_AttackSound
+      value: 
+      objectReference: {fileID: 827915055}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2321,6 +2425,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8838596122569436125, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: Type1_AttackSound
+      value: 
+      objectReference: {fileID: 1862462844}
+    - target: {fileID: 8838596122569436125, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: Type2_AttackSound
+      value: 
+      objectReference: {fileID: 827915055}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2382,6 +2494,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8838596122569436125, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: Type1_AttackSound
+      value: 
+      objectReference: {fileID: 1862462844}
+    - target: {fileID: 8838596122569436125, guid: 77c8db447ebfc8c4d8404fd8f52e5bec, type: 3}
+      propertyPath: Type2_AttackSound
+      value: 
+      objectReference: {fileID: 827915055}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2404,6 +2524,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterType_2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4013771096594881156, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
+      propertyPath: Type1_AttackSound
+      value: 
+      objectReference: {fileID: 1862462844}
+    - target: {fileID: 4013771096594881156, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
+      propertyPath: Type2_AttackSound
+      value: 
+      objectReference: {fileID: 827915055}
     - target: {fileID: 6934651117650995639, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2879,6 +3007,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1862462844 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3222082017462507626, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
+  m_PrefabInstance: {fileID: 907313951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1874101122
 GameObject:
   m_ObjectHideFlags: 0
@@ -3065,6 +3198,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterType_2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4013771096594881156, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
+      propertyPath: Type1_AttackSound
+      value: 
+      objectReference: {fileID: 1862462844}
+    - target: {fileID: 4013771096594881156, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
+      propertyPath: Type2_AttackSound
+      value: 
+      objectReference: {fileID: 827915055}
     - target: {fileID: 6934651117650995639, guid: 9b7c00f1675e8ab4aa44fff5d7f360fe, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3130,6 +3271,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f7753454e4ba6459d9c084a9f08c96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &2107410432 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6596011484892720101, guid: d31ce4c11b9c575478dfe82dff0c1217, type: 3}
+  m_PrefabInstance: {fileID: 907313951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2125114103
 GameObject:
   m_ObjectHideFlags: 0
@@ -7255,3 +7401,4 @@ SceneRoots:
   - {fileID: 1984089633}
   - {fileID: 291843444}
   - {fileID: 509203872}
+  - {fileID: 907313951}

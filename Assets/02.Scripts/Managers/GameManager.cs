@@ -49,11 +49,16 @@ public class Gamemanager : MonoBehaviour
             Pause();
             OptionUI.Open();
         }
+
+        if (State == GameState.Over)
+        {
+            Pause();
+        }
     }
 
     public void GameOver()
     {
-        Debug.Log("게임 오버");
+        //Debug.Log("게임 오버");
         Time.timeScale = 0f;
         State = GameState.Over;
         GameOverUI.Open();
@@ -81,7 +86,7 @@ public class Gamemanager : MonoBehaviour
 
     public void OnOptionEscKeyClickeed()
     {
-        Debug.Log("옵션창 나타내기");
+        //Debug.Log("옵션창 나타내기");
         Pause();
         OptionUI.Open();
     }

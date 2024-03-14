@@ -22,6 +22,7 @@ public class UI_GameOverPopup : MonoBehaviour
         //UIGameOverElement.alpha = MinAlpha;
         _fadeInProgress = 0f;
         _isGameOverUIOpened = false;
+
     }
 
     private void Update()
