@@ -263,8 +263,6 @@ public class MonsterMove : MonoBehaviour, IHitable
 
     public void FireProjectile()
     {
-
-        Debug.Log("파이어 공격이다 이놈아~~~~");
         GameObject fireballInstance = Instantiate(FireballPrefab);
         fireballInstance.transform.position = FirePosition.position;
 

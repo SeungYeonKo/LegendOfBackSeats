@@ -20,11 +20,15 @@ public class FireBall : MonoBehaviour
         _rigidbody.AddForce(dir * FireBallSpeed);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.collider.CompareTag("Player"))
+        // 플레이어에게 데미지를 입히기
+        IHitable hitable = other.GetComponent<IHitable>();
+        if (hitable != null)
         {
-            Destroy(gameObject);
+           // hitable.Hit(Damage);
         }
+
+        Destroy(gameObject); // Fireball 파괴
     }
 }
