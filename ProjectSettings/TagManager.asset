@@ -9,6 +9,7 @@ TagManager:
   - Monster
   - Bomb
   - Item
+  - FireBall
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Monster
   - Arrow
   - Breakable
-  - 
+  - FireBall
   - 
   - 
   - 

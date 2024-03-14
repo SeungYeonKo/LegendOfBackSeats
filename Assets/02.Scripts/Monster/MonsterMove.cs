@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
+public enum MonsterType
+{
+    Type1,
+    Type2
+}
 
 public enum MonsterState
 {
@@ -18,6 +23,8 @@ public enum MonsterState
 
 public class MonsterMove : MonoBehaviour, IHitable
 {
+    public MonsterType MonsterType;
+
     private NavMeshAgent _navMeshAgent;
     private Animator _animator;
     private MonsterState _currentState = MonsterState.Idle;
@@ -60,6 +67,10 @@ public class MonsterMove : MonoBehaviour, IHitable
     // 공격 아이템 사운드
     public AudioSource Type1_AttackSound;
     public AudioSource Type2_AttackSound;
+
+    // Type2
+    public GameObject FireballPrefab;
+    public Transform FirePosition;
 
     void Start()
     {
@@ -217,28 +228,43 @@ public class MonsterMove : MonoBehaviour, IHitable
 
     private void Attack()
     {
-        // 플레이어와의 거리를 체크
         float distanceToTarget = Vector3.Distance(_target.position, transform.position);
-
-        // 공격 딜레이 타이머를 증가시킵니다.
         _attackTimer += Time.deltaTime;
-        // 플레이어가 공격 범위 내에 있고, 공격 딜레이 시간이 충족되었는지 확인
-        if ( _attackTimer >= AttackDelay)
+
+        if (_attackTimer >= AttackDelay)
         {
-            Type1_AttackSound.Play();
-             // 공격 애니메이션 실행
-             _animator.SetTrigger("Attack");
-            //PlayerAttack();
-            _attackTimer = 0f; // 공격 후 타이머 리셋
+            if(MonsterType == MonsterType.Type1)
+            {
+                if (distanceToTarget <= AttackDistance)
+                {
+                    Type1_AttackSound.Play();
+                    _animator.SetTrigger("Attack"); 
+                }
+            }
+            else if(MonsterType == MonsterType.Type2)
+            {
+                if (distanceToTarget <= AttackDistance)
+                {
+                    Type2_AttackSound.Play();
+                    _animator.SetTrigger("Attack");
+                    FireProjectile(); 
+                }
+            }
+            _attackTimer = 0f; 
         }
-        else if (distanceToTarget > AttackDistance)
+        if (distanceToTarget > AttackDistance || distanceToTarget > FindDistance)
         {
             _attackTimer = 0f;
-            // 플레이어와의 거리가 공격 범위를 벗어난 경우 Trace 상태로 전환
             _animator.SetTrigger("AttackToTrace");
             _currentState = MonsterState.Trace;
-            _attackTimer = 0f;
         }
+    }
+
+    public void FireProjectile()
+    {
+        Debug.Log("파이어 공격이다 이놈아~~~~");
+        GameObject fireballInstance = Instantiate(FireballPrefab, FirePosition.position, FirePosition.rotation);
+        FireBall fireballScript = fireballInstance.GetComponent<FireBall>();
     }
 
     private void Damaged()
