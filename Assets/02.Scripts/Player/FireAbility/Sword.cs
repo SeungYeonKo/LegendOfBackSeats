@@ -20,10 +20,18 @@ public class Sword : MonoBehaviour
         Traileffect.enabled = false;
 
     }
-    public void Use()
+    public void EnableTrail()
     {
-        StartCoroutine(Attack_Coroutine());
-
+        Traileffect.Clear();
+        MeleeArea.enabled = true;
+        Traileffect.enabled = true;
+    }
+    public void DisableTrail()
+    {
+        Traileffect.Clear();
+        MeleeArea.enabled = false;
+        Traileffect.enabled = false;
+ 
     }
     private void Update()
     {
@@ -33,17 +41,15 @@ public class Sword : MonoBehaviour
         }
     }
 
-    private IEnumerator Attack_Coroutine()
+/*    private IEnumerator AutoDisable_Coroutine(float timer)
     {
-        yield return new WaitForSeconds(0.1f);
-        MeleeArea.enabled = true;
-        Traileffect.enabled = true;
-        Debug.Log("Sword Collider enabled");
-        yield return new WaitForSeconds(0.25f);
-        Traileffect.enabled = false;
-        MeleeArea.enabled = false;
-
-    }
+        yield return new WaitForSeconds(timer);
+        if (MeleeArea.enabled && Traileffect.enabled)
+        {
+            MeleeArea.enabled = false;
+            Traileffect.enabled = false;
+        }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
