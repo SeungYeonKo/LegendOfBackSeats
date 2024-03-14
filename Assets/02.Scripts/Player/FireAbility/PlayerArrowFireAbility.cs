@@ -63,7 +63,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
-                _animator.SetTrigger("DrawArrow");
+                _animator.SetTrigger("DrawArrow");   
             }
             if (Input.GetMouseButton(1))
             {
@@ -77,13 +77,19 @@ public class PlayerArrowFireAbility : MonoBehaviour
                 /*            Power += Time.deltaTime * 2f;
                             Power = Mathf.Min(MAX_POWER, Power);*/
             }
-
             if (Input.GetMouseButtonUp(1))
             {
                 _zoomProgress = 0;
                 Power = 100f;
                 _animator.SetTrigger("AimRecoil");
                 Vcam.m_Lens.FieldOfView = NormalFOV;
+            }
+        }
+        if(Input.GetMouseButtonDown(1))
+        {
+            if (ItemManager.Instance.GetItemCount(ItemType.Arrow) <= 0)
+            {
+                    StartCoroutine(ShowNoArrowMessage());
             }
         }
     }
@@ -102,7 +108,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
         if (ItemManager.Instance.GetItemCount(ItemType.Arrow) <= 0)
         {
-            StartCoroutine(ShowNoArrowMessage());
+            
 
             return; // 화살이 없으면 메소드 종료
         }
