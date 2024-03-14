@@ -21,6 +21,7 @@ public class UI_OptionPopup : MonoBehaviour
         Gamemanager.Instance.Continue();
     }
 
+
     private void Awake()
     {
         gameObject.SetActive(false);
@@ -45,6 +46,7 @@ public class UI_OptionPopup : MonoBehaviour
 
     }
 
+
     public void OnTitlebutton()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -65,5 +67,7 @@ public class UI_OptionPopup : MonoBehaviour
 #endif
 
     }
+
+
 
 }

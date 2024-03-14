@@ -34,8 +34,12 @@ public class MeleeAttackAbility : MonoBehaviour
         }
 
     }
-    void UseSwordForAnimator()
+    void SetActiveSword()
     {
-        _sword.Use();
+        _sword.EnableTrail();
+    }
+    void SetDisableSword()
+    {
+        _sword.DisableTrail();
     }
 }

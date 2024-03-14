@@ -24,7 +24,7 @@ public class Gamemanager : MonoBehaviour
     public GameState State { get; private set; } = GameState.Ready;
 
     public UI_OptionPopup OptionUI;
-    public UI_GameOverPopup GameOverUI;
+    public GameObject GameOverUI;
 
     private bool _isOptionOpened;
 
@@ -61,9 +61,16 @@ public class Gamemanager : MonoBehaviour
         //Debug.Log("게임 오버");
         Time.timeScale = 0f;
         State = GameState.Over;
-        GameOverUI.Open();
-    }
+        Debug.Log("Gameover Coroutine");
+        StartCoroutine(GameOverUIPopup_Coroutine());
 
+    }
+    private IEnumerator GameOverUIPopup_Coroutine()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+
+        GameOverUI.SetActive(true);
+    }
 
     public void Pause()
     {
@@ -81,7 +88,6 @@ public class Gamemanager : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
     }
 
     public void OnOptionEscKeyClickeed()
@@ -90,8 +96,6 @@ public class Gamemanager : MonoBehaviour
         Pause();
         OptionUI.Open();
     }
-
-
 
 
 

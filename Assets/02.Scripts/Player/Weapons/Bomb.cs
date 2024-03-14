@@ -42,7 +42,7 @@ public class Bomb : MonoBehaviour
                 Debug.Log(hitableObject);
             }
         }
-        _impulseSource.GenerateImpulse(1);
+        _impulseSource.GenerateImpulse(2);
         GameObject effect = GameObject.Instantiate(ExplosionEffectPrefab);
         effect.SetActive(true);
         effect.transform.SetParent(null);
