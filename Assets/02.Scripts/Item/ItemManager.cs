@@ -19,6 +19,9 @@ public class ItemManager : MonoBehaviour
     // 최대 체력인데 체력 아이템 먹을 때 띄우는 텍스트
     public TextMeshProUGUI MaxHealthTextUI;
 
+    // 체력 아이템 사운드
+    public AudioSource HealthItemSound;
+
     private void Awake()
     {
         if (Instance == null)
@@ -95,6 +98,9 @@ public class ItemManager : MonoBehaviour
                             int healthToAdd = Mathf.Min(5, thirdPersonController.MaxHealth - thirdPersonController.CurrentHealth);
                             thirdPersonController.CurrentHealth += healthToAdd;
                             Debug.Log($"체력 아이템 사용! 현재 체력: {thirdPersonController.CurrentHealth}");
+
+                            // 사운드 재생
+                            HealthItemSound.Play();
 
                             ItemList[i].Count -= 1; // 아이템 개수 감소
                             OnDataChanged?.Invoke();

@@ -23,6 +23,7 @@ public class ItemObject : MonoBehaviour
 
     private void Start()
     {
+
         _player = GameObject.FindWithTag("Player").transform;
         _startPosition = transform.position;
     }

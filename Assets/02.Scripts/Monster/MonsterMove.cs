@@ -57,6 +57,9 @@ public class MonsterMove : MonoBehaviour, IHitable
     private float _knockbackProgress = 0f;
     public float KnockbackPower = 1.2f;
 
+    // 공격 아이템 사운드
+    public AudioSource Type1_AttackSound;
+    public AudioSource Type2_AttackSound;
 
     void Start()
     {
@@ -222,6 +225,7 @@ public class MonsterMove : MonoBehaviour, IHitable
         // 플레이어가 공격 범위 내에 있고, 공격 딜레이 시간이 충족되었는지 확인
         if ( _attackTimer >= AttackDelay)
         {
+            Type1_AttackSound.Play();
              // 공격 애니메이션 실행
              _animator.SetTrigger("Attack");
             //PlayerAttack();
