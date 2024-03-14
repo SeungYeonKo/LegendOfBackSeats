@@ -7,23 +7,22 @@ using UnityEngine.InputSystem.iOS;
 
 public class UI_GameOverPopup : MonoBehaviour
 {
-    [Header ("게임오버 화면 페이드 인")]
+    //[Header ("게임오버 화면 페이드 인")]
     public CanvasGroup UIGameOverElement;
     private const float MinAlpha = 0f;  // 최소 알파
     private const float MaxAlpha = 1f;  // 최대 알파
 
-    public float FadeInDuration = 2.0f;
+    public float ActiveDuration = 4f;
     private float _fadeInProgress;
 
     private bool _isGameOverUIOpened;
 
     private void Start()
     {
-        //UIGameOverElement.alpha = MinAlpha;
-        _fadeInProgress = 0f;
-        _isGameOverUIOpened = false;
-
+        UIGameOverElement.alpha = MinAlpha;
+        //_fadeInProgress = 0f;
     }
+
 
     private void Update()
     {
@@ -37,30 +36,29 @@ public class UI_GameOverPopup : MonoBehaviour
         */
     }
 
+
     public void Open()
-    {
+    {   
         Debug.Log("게임 오버 오픈!");
-        gameObject.SetActive(true);
-        _isGameOverUIOpened = true;
-        
+        //gameObject.SetActive(true);
+        UIGameOverElement.alpha = MinAlpha;
+
+        Debug.Log("코루틴 시작");
+     //   StartCoroutine(GameOverUIOpen_Coroutine());
     }
 
 
     public void Close()
     {
-        _isGameOverUIOpened = false;
         gameObject.SetActive(false);
         //_fadeInProgress = 0f;
-        //UIGameOverElement.alpha = MinAlpha;
-
+        UIGameOverElement.alpha = MinAlpha;
     }
 
 
     private void Awake()
     {
-        UIGameOverElement.alpha = MinAlpha;
-        gameObject.SetActive(false);
-        _isGameOverUIOpened= false;
+        //UIGameOverElement.alpha = MinAlpha;
     }
 
 
