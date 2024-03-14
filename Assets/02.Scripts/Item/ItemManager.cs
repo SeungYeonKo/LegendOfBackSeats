@@ -16,6 +16,8 @@ public class ItemManager : MonoBehaviour
 
     // 체력 아이템 없을 때 띄우는 텍스트
     public TextMeshProUGUI NoHealthItemTextUI;
+    // 최대 체력인데 체력 아이템 먹을 때 띄우는 텍스트
+    public TextMeshProUGUI MaxHealthTextUI;
 
     private void Awake()
     {
@@ -34,6 +36,8 @@ public class ItemManager : MonoBehaviour
     private void Start()
     {
         NoHealthItemTextUI.text = string.Empty;
+        MaxHealthTextUI.text = string.Empty;
+
         ItemList.Add(new Item(ItemType.Health, 0));
         ItemList.Add(new Item(ItemType.Arrow, 5));
 
@@ -98,8 +102,8 @@ public class ItemManager : MonoBehaviour
                         }
                         else
                         {
-                            // 이미 최대 체력이면 아이템 사용하지 않음
-                            Debug.Log("이미 최대 체력입니다. 아이템을 사용할 수 없습니다.");
+                            // 이미 최대 체력이면 아이템 사용하지 않고 text 띄우기
+                            StartCoroutine(ShowMaxHealthMessage());
                             return false;
                         }
                     }
@@ -112,8 +116,7 @@ public class ItemManager : MonoBehaviour
                 }
                 else
                 {
-      
-                    
+                    // 체력 아이템이 없는데 아이템을 먹으면 text 띄우기
                     StartCoroutine(ShowNoHealthItemMessage());
                     
                     // 아이템이 없을 때의 처리
@@ -131,6 +134,14 @@ public class ItemManager : MonoBehaviour
         NoHealthItemTextUI.text = "체력 아이템이 없습니다 !";
         yield return new WaitForSeconds(2f);
         NoHealthItemTextUI.gameObject.SetActive(false);
+    }
+
+    IEnumerator ShowMaxHealthMessage()
+    {
+        MaxHealthTextUI.gameObject.SetActive(true);
+        MaxHealthTextUI.text = "이미 최대 체력입니다.";
+        yield return new WaitForSeconds(2f);
+        MaxHealthTextUI.gameObject.SetActive(false) ;
     }
 }
 
