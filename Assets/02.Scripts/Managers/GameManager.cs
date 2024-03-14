@@ -24,6 +24,7 @@ public class Gamemanager : MonoBehaviour
     public GameState State { get; private set; } = GameState.Ready;
 
     public UI_OptionPopup OptionUI;
+    public UI_GameOverPopup GameOverUI;
 
     private bool _isOptionOpened;
 
@@ -52,8 +53,10 @@ public class Gamemanager : MonoBehaviour
 
     public void GameOver()
     {
+        Debug.Log("게임 오버");
         Time.timeScale = 0f;
-        State = GameState.Over; 
+        State = GameState.Over;
+        GameOverUI.Open();
     }
 
 

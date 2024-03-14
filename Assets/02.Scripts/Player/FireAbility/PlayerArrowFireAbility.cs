@@ -43,6 +43,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     // 현재 화살 개수 텍스트
     public TextMeshProUGUI ArrowCountText;
+
     // 화살 없을 때 띄우는 텍스트
     public TextMeshProUGUI NoArrowTextUI;
 
