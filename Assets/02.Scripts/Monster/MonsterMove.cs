@@ -259,12 +259,15 @@ public class MonsterMove : MonoBehaviour, IHitable
             _currentState = MonsterState.Trace;
         }
     }
+    
 
     public void FireProjectile()
     {
-        Debug.Log("파이어 공격이다 이놈아~~~~");
-        GameObject fireballInstance = Instantiate(FireballPrefab, FirePosition.position, FirePosition.rotation);
-        FireBall fireballScript = fireballInstance.GetComponent<FireBall>();
+        GameObject fireballInstance = Instantiate(FireballPrefab);
+        fireballInstance.transform.position = FirePosition.position;
+
+        FireBall fireBall = fireballInstance.GetComponent<FireBall>();
+        fireBall.Shoot(_target.position);
     }
 
     private void Damaged()
@@ -338,4 +341,5 @@ public class MonsterMove : MonoBehaviour, IHitable
             _attackTimer = 0f;
         }
     }
+   
 }
