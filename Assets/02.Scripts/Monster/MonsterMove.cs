@@ -72,6 +72,8 @@ public class MonsterMove : MonoBehaviour, IHitable
     public GameObject FireballPrefab;
     public Transform FirePosition;
 
+    public GameObject DieEffectPrefab;
+
     void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -319,10 +321,12 @@ public class MonsterMove : MonoBehaviour, IHitable
     private void Die()
     {
         _animator.SetTrigger("Die");
+        
         if (_dieCoroutine == null)
         {
             _dieCoroutine = StartCoroutine(Die_Coroutine());
         }
+   
     }
     private IEnumerator Die_Coroutine()
     {
@@ -331,13 +335,19 @@ public class MonsterMove : MonoBehaviour, IHitable
 
         HealthSliderUI.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(2f);
-
         Destroy(gameObject);
-
         // 죽을때 아이템 생성
         ItemObjectFactory.Instance.MakePercent(transform.position);
+        // 파티클 효과를 생성하고 2초 대기
+        Instantiate(DieEffectPrefab, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(3f);
+
+        
+        
     }
+
+   
+
     public void PlayerAttack()
     {
         IHitable playerHitable = _target.GetComponent<IHitable>();
