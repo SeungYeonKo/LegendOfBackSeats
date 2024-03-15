@@ -232,14 +232,11 @@ public class MonsterMove : MonoBehaviour, IHitable
         _attackTimer += Time.deltaTime;
 
         if (_attackTimer >= AttackDelay)
-        { // 플레이어를 바라보도록 몬스터 회전
-            Vector3 directionToTarget = _target.position - transform.position;
-            directionToTarget.y = 0; // Y축 회전만 고려
-            if (directionToTarget != Vector3.zero) // 방향 벡터가 0이 아닐 때만 회전 처리
-            {
-                Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10); // 부드러운 회전을 위해 Slerp 사용
-            }
+        {
+            // 플레이어를 바라보도록
+            Vector3 lookAtTarget = new Vector3(_target.position.x, transform.position.y, _target.position.z);
+            transform.LookAt(lookAtTarget);
+
             if (MonsterType == MonsterType.Type1)
             {
                 if (distanceToTarget <= AttackDistance)
