@@ -42,6 +42,7 @@ public class Bomb : MonoBehaviour
                 if (c.gameObject.CompareTag("Player"))
                 {
                     _impulseSource.GenerateImpulse(2f);
+                    //_impulseSource.
                 }
                 //Debug.Log(hitableObject);
             }
