@@ -90,7 +90,10 @@ public class MonsterMove : MonoBehaviour, IHitable
     void Update()
     {
         HealthSliderUI.value = (float)Health / (float)MaxHealth;
-
+        if (_currentState == MonsterState.Trace || _currentState == MonsterState.Attack)
+        {
+            LookAtPlayerSmoothly();
+        }
         switch (_currentState)
         {
             case MonsterState.Idle:
@@ -233,10 +236,7 @@ public class MonsterMove : MonoBehaviour, IHitable
 
         if (_attackTimer >= AttackDelay)
         {
-            // 플레이어를 바라보도록
-            Vector3 lookAtTarget = new Vector3(_target.position.x, transform.position.y, _target.position.z);
-            transform.LookAt(lookAtTarget);
-
+     
             if (MonsterType == MonsterType.Type1)
             {
                 if (distanceToTarget <= AttackDistance)
@@ -247,6 +247,8 @@ public class MonsterMove : MonoBehaviour, IHitable
             }
             else if(MonsterType == MonsterType.Type2)
             {
+                Vector3 lookAtTarget = new Vector3(_target.position.x, transform.position.y, _target.position.z);
+                transform.LookAt(lookAtTarget);
                 if (distanceToTarget <= AttackDistance)
                 {
                     Type2_AttackSound.Play();
@@ -345,5 +347,11 @@ public class MonsterMove : MonoBehaviour, IHitable
             _attackTimer = 0f;
         }
     }
-   
+    void LookAtPlayerSmoothly()
+    {
+        Vector3 directionToTarget = _target.position - transform.position;
+        directionToTarget.y = 0; //수평 회전만
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5); // 회전 속도 조절
+    }
 }
