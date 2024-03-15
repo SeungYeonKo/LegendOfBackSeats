@@ -13,6 +13,17 @@ public class FireBall : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        StartCoroutine(FireballDestroy());
+    }
+
+    private IEnumerator FireballDestroy()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+    } 
+
     public void Shoot(Vector3 targertPosition)
     {
         // 1.  방향을 구한다.
@@ -24,7 +35,7 @@ public class FireBall : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // 플레이어에게만 데미지를 입히기
-        if (other.CompareTag("Player")) // "Player"는 플레이어 게임오브젝트의 태그와 일치해야 합니다.
+        if (other.CompareTag("Player")) 
         {
             IHitable hitable = other.GetComponent<IHitable>();
             if (hitable != null)
