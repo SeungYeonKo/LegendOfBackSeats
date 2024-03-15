@@ -12,6 +12,8 @@ public enum BombFireStage
 }
 public class PlayerBombFireAbility : MonoBehaviour
 {
+    public AudioSource BoomSound;
+
     private BombFireStage _currentStage;
     private Animator _animator;
     public bool IsCarrying;
@@ -127,6 +129,8 @@ public class PlayerBombFireAbility : MonoBehaviour
     {
         _bomb.ExplodeBomb();
         IsThrown = false;
+        BoomSound.Play();
+
         Debug.Log("Explode");
     }
     void PutBack()
