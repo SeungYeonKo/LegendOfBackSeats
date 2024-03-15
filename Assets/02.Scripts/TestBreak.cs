@@ -16,6 +16,8 @@ public class TestBreak : MonoBehaviour, IHitable
         _animator.SetBool("Break", true);
         _collider = GetComponent<BoxCollider>();
         _collider.enabled = false;
+        // todo: 카메라 2초간 비춰주기
+
     }
     
     void Update()
@@ -23,10 +25,4 @@ public class TestBreak : MonoBehaviour, IHitable
         
     }
 
-    private IEnumerator Break_Coroutine()
-    {
-        yield return new WaitForSeconds(5f);
-        _animator.SetBool("Break", true);
-        
-    }
 }

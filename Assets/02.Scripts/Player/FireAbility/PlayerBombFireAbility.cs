@@ -60,7 +60,7 @@ public class PlayerBombFireAbility : MonoBehaviour
             _currentStage = BombFireStage.Carry;
             _animator.SetBool("Carry", true);
             //SpawnBomb();
-            Debug.Log("Neutral -> Carry");
+            // Debug.Log("Neutral -> Carry");
         }
         else if (Input.GetKeyDown(KeyCode.Tab) && IsThrown)
         {

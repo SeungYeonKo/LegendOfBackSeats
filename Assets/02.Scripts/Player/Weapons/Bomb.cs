@@ -39,10 +39,14 @@ public class Bomb : MonoBehaviour
             if (hitableObject != null)
             {
                 hitableObject.Hit(Damage);
-                Debug.Log(hitableObject);
+                if (c.gameObject.CompareTag("Player"))
+                {
+                    _impulseSource.GenerateImpulse(2f);
+                }
+                //Debug.Log(hitableObject);
             }
         }
-        _impulseSource.GenerateImpulse(2);
+        _impulseSource.GenerateImpulse(0.5f);
         GameObject effect = GameObject.Instantiate(ExplosionEffectPrefab);
         effect.SetActive(true);
         effect.transform.SetParent(null);
