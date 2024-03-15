@@ -10,6 +10,8 @@ public class MeleeAttackAbility : MonoBehaviour
 
     private Sword _sword;
 
+    public AudioSource SwordAttackSound;
+
     void Start()
     {
         _playerAnimator = GetComponent<Animator>();
@@ -22,6 +24,7 @@ public class MeleeAttackAbility : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && MeleeWeapon.gameObject.activeSelf == true)
         {
             _playerAnimator.SetTrigger("Attack");
+            SwordAttackSound.Play();
         }
 
         if (_bowFireAbility.IsAiming)
