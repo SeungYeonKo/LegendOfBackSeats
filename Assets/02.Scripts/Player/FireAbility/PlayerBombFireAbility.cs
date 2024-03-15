@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
+
 
 public enum BombFireStage
 {
@@ -16,10 +14,16 @@ public class PlayerBombFireAbility : MonoBehaviour
 
     private BombFireStage _currentStage;
     private Animator _animator;
-    public bool IsCarrying;
-    public bool IsThrown;
+    private bool _isCarrying;
+    private bool _isThrown;
+    private bool _isBombPrepared;
+    public float CoolTime = 5.0f;
+
     private PlayerArrowFireAbility _arrowFireAbility;
     private MeleeAttackAbility _meleeAttackAbility;
+    [Header("Bomb Reload Slider")]
+    public Image BombReloadSlider;
+
     [Header ("Bomb Put Position")]
     public Transform BombPosition;
     public Transform BombPutdownPosition;
@@ -38,7 +42,9 @@ public class PlayerBombFireAbility : MonoBehaviour
     void Start()
     {
         _currentStage = BombFireStage.Neutral;
-        IsCarrying = false;
+        _isCarrying = false;
+        _isBombPrepared = true;
+        BombReloadSlider.fillAmount = 0;
     }
     void Update()
     {
@@ -57,14 +63,14 @@ public class PlayerBombFireAbility : MonoBehaviour
         _meleeAttackAbility.enabled = true;
         _arrowFireAbility.enabled = true;
 
-        if (Input.GetKeyDown(KeyCode.Tab) && !IsThrown)
+        if (Input.GetKeyDown(KeyCode.Tab) && !_isThrown && _isBombPrepared)
         {
             _currentStage = BombFireStage.Carry;
             _animator.SetBool("Carry", true);
             //SpawnBomb();
             // Debug.Log("Neutral -> Carry");
         }
-        else if (Input.GetKeyDown(KeyCode.Tab) && IsThrown)
+        else if (Input.GetKeyDown(KeyCode.Tab) && _isThrown)
         {
             ExplodeBomb();
             _currentStage = BombFireStage.Neutral;
@@ -73,7 +79,7 @@ public class PlayerBombFireAbility : MonoBehaviour
     }
     void CarryBomb()
     {
-        IsCarrying = true;
+        _isCarrying = true;
         _meleeAttackAbility.enabled = false;
         _arrowFireAbility.enabled = false;
 
@@ -114,8 +120,8 @@ public class PlayerBombFireAbility : MonoBehaviour
     }
     void ThrowBomb()
     {
-        IsThrown = true;
-        IsCarrying = false;
+        _isThrown = true;
+        _isCarrying = false;
         _bombRigidBody.isKinematic = false;
         BombObject.transform.SetParent(null);
         Vector3 throwingDir = transform.forward;
@@ -128,21 +134,39 @@ public class PlayerBombFireAbility : MonoBehaviour
     void ExplodeBomb()
     {
         _bomb.ExplodeBomb();
-        IsThrown = false;
+        _isThrown = false;
         BoomSound.Play();
-
         Debug.Log("Explode");
+        _isBombPrepared = false;
+        BombReloadSlider.fillAmount = 0;
+        StartCoroutine(BombPrepareTime_Coroutine(CoolTime));
+    }
+    private IEnumerator BombSliderValue_Coroutine(float cooltime)
+    {
+        while (BombReloadSlider.fillAmount < 1)
+        {
+            BombReloadSlider.fillAmount += Time.deltaTime/5f;
+            yield return null;
+        }
+        BombReloadSlider.fillAmount = 0;
+
+    }
+    private IEnumerator BombPrepareTime_Coroutine(float cooltime)
+    {
+        StartCoroutine(BombSliderValue_Coroutine(CoolTime));
+        yield return new WaitForSeconds(cooltime);
+        _isBombPrepared = true;
     }
     void PutBack()
     {
-        IsCarrying = false;
+        _isCarrying = false;
         BombObject.SetActive(false);
         Debug.Log("Putback -> Neutral");
     }
     void PutDown()
     {
-        IsCarrying = false;
-        IsThrown = true;
+        _isCarrying = false;
+        _isThrown = true;
 
         BombObject.transform.SetParent(null);
         BombObject.transform.position = BombPutdownPosition.position;
