@@ -8,11 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class LoadingScene : MonoBehaviour
 {
-    
-
     void Start()
     {
         StartCoroutine(WaitAndLoadNextScene(3)); // 5초 대기 후 다음 씬 로드
+
     }
 
     IEnumerator WaitAndLoadNextScene(float waitTime)
