@@ -9,7 +9,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
     // 화살 구현 방법: 
     // - 조준: 마우스 오른쪽 버튼
     // - 발사: 마우스 오른쪽 버튼을 누르고 있는 동안 마우스 왼쪽 버튼 누르면 발사
-    // 
+    
 
     [Header("플레이어 활 쏠때")]
     public CinemachineVirtualCamera Vcam;
@@ -47,6 +47,11 @@ public class PlayerArrowFireAbility : MonoBehaviour
     // 화살 없을 때 띄우는 텍스트
     public TextMeshProUGUI NoArrowTextUI;
 
+    public AudioSource BowDrawSound;
+    public AudioSource BowShotSound;
+
+
+
     private void Start()
     {
         NoArrowTextUI.text = string.Empty;
@@ -63,7 +68,8 @@ public class PlayerArrowFireAbility : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
-                _animator.SetTrigger("DrawArrow");   
+                BowDrawSound.Play();
+                _animator.SetTrigger("DrawArrow");
             }
             if (Input.GetMouseButton(1))
             {
@@ -81,6 +87,8 @@ public class PlayerArrowFireAbility : MonoBehaviour
             {
                 _zoomProgress = 0;
                 Power = 100f;
+                
+                BowShotSound.Play();
                 _animator.SetTrigger("AimRecoil");
                 Vcam.m_Lens.FieldOfView = NormalFOV;
             }
@@ -107,9 +115,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
 
         if (ItemManager.Instance.GetItemCount(ItemType.Arrow) <= 0)
-        {
-            
-
+        { 
             return; // 화살이 없으면 메소드 종료
         }
     }
