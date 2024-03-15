@@ -14,6 +14,10 @@ public class MonsterAttack : MonoBehaviour
     public void AttackEvent()
     {
         Debug.Log("어택");
-        _owner.PlayerAttack();
+        if(_owner.MonsterType == MonsterType.Type1)
+        {
+            _owner.PlayerAttack();
+        }
+        
     }
 }

@@ -238,7 +238,7 @@ public class MonsterMove : MonoBehaviour, IHitable
                 if (distanceToTarget <= AttackDistance)
                 {
                     Type1_AttackSound.Play();
-                    _animator.SetTrigger("Attack"); 
+                    _animator.SetTrigger("Attack");
                 }
             }
             else if(MonsterType == MonsterType.Type2)
