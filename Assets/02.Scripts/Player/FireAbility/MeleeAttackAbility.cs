@@ -21,7 +21,7 @@ public class MeleeAttackAbility : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && MeleeWeapon.gameObject.activeSelf == true)
+        if (Input.GetMouseButtonDown(0) && MeleeWeapon.gameObject.activeSelf == true && Gamemanager.Instance.State == GameState.Go)
         {
             _playerAnimator.SetTrigger("Attack");
             SwordAttackSound.Play();

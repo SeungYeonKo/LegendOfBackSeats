@@ -64,7 +64,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     private void Update()
     {
-        if (ItemManager.Instance.GetItemCount(ItemType.Arrow) >  0)
+        if (ItemManager.Instance.GetItemCount(ItemType.Arrow) >  0 && Gamemanager.Instance.State == GameState.Go)
         {
             if (Input.GetMouseButtonDown(1))
             {

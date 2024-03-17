@@ -23,10 +23,10 @@ namespace StarterAssets
         public int CurrentHealth;
 
         [Tooltip("Move speed of the character in m/s")]
-        public float MoveSpeed = 5f;
+        public float MoveSpeed = 10f;
 
         [Tooltip("Sprint speed of the character in m/s")]
-        public float SprintSpeed = 15f;
+        public float SprintSpeed = 20f;
         private float _currentStamina;
         private float MaxStamina = 20f;
         public Image StaminaSlider;
