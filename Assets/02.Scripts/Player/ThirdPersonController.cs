@@ -177,7 +177,10 @@ namespace StarterAssets
 
             JumpAndGravity();
             GroundedCheck();
-            Move();
+            if (Gamemanager.Instance.State == GameState.Go)
+            {
+                Move();
+            }
             MakeVisbleStaminaSlider();
         }
 

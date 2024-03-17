@@ -21,7 +21,7 @@ public class Gamemanager : MonoBehaviour
 {
     // 게임의 상태는 처음에 "준비"상태
     public static Gamemanager Instance { get; private set; }
-    public GameState State { get; private set; } = GameState.Ready;
+    public GameState State { get; private set; } = GameState.Go;
 
     public UI_OptionPopup OptionUI;
     public GameObject GameOverUI;
