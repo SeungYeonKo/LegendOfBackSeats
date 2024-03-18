@@ -410,6 +410,7 @@ GameObject:
   m_Component:
   - component: {fileID: 330129907}
   - component: {fileID: 330129908}
+  - component: {fileID: 330129909}
   m_Layer: 0
   m_Name: StartRoomCam
   m_TagString: Untagged
@@ -425,14 +426,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330129906}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.07754458, y: 0.6779572, z: -0.072271876, w: 0.7274186}
-  m_LocalPosition: {x: 0, y: 9.75, z: 16.26}
+  m_LocalRotation: {x: 0.07325065, y: 0.41084003, z: -0.033137824, w: 0.9081557}
+  m_LocalPosition: {x: 0, y: 9.75, z: 7.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 626271286}
   m_Father: {fileID: 608052420}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.1197507, y: 0.000002770924, z: 0.0000003252817}
 --- !u!114 &330129908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,6 +473,27 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 626271286}
+--- !u!95 &330129909
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330129906}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &409716307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1329,6 +1351,10 @@ PlayableDirector:
     value: {fileID: 3920886088359458901}
   - key: {fileID: 6530411341373214446, guid: 6d6865b98abce7744870b335f5bbb3a0, type: 2}
     value: {fileID: 1918628331}
+  - key: {fileID: -3561603631450447133, guid: 6d6865b98abce7744870b335f5bbb3a0, type: 2}
+    value: {fileID: 330129909}
+  - key: {fileID: -3525728587690344630, guid: 6d6865b98abce7744870b335f5bbb3a0, type: 2}
+    value: {fileID: 2081491570}
   m_ExposedReferences:
     m_References:
     - fbd22d1d71503a24a872361972e489ce: {fileID: 330129908}
@@ -1791,7 +1817,7 @@ Transform:
   m_GameObject: {fileID: 1606010982}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 69.2, y: 26.2, z: -212}
+  m_LocalPosition: {x: 69.2, y: 26.2, z: -171.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2078,6 +2104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2081491568}
   - component: {fileID: 2081491569}
+  - component: {fileID: 2081491570}
   m_Layer: 0
   m_Name: SkyViewCam
   m_TagString: Untagged
@@ -2093,14 +2120,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2081491567}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.52581614, y: 0.000000029271437, z: -0.000000018094786, w: 0.8505983}
-  m_LocalPosition: {x: 69.2, y: 46.21, z: -222}
+  m_LocalRotation: {x: 0.5010043, y: -0.46885478, z: 0.37790823, w: 0.6215748}
+  m_LocalPosition: {x: 79, y: 73.1, z: -174.1}
   m_LocalScale: {x: 1, y: 2.0164, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 416372492}
   m_Father: {fileID: 608052420}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.01603328, y: 359.9426, z: 0.2645062}
 --- !u!114 &2081491569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2140,6 +2167,27 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 416372492}
+--- !u!95 &2081491570
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081491567}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6625499108529003
 GameObject:
   m_ObjectHideFlags: 0
