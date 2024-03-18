@@ -10,6 +10,7 @@ TagManager:
   - Bomb
   - Item
   - FireBall
+  - Wall
   layers:
   - Default
   - TransparentFX
