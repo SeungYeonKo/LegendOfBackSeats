@@ -21,7 +21,7 @@ public class TrapArrow : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
-                thirdPersonController.Hit(10);
+                thirdPersonController.Hit(1);
                 
                 Debug.Log("트랩화살에 맞음! :  체력 -1");
             }
