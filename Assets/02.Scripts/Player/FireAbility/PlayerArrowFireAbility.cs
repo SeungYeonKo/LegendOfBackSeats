@@ -95,7 +95,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
                 Vcam.m_Lens.FieldOfView = NormalFOV;
             }
         }
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetMouseButtonDown(1) && Gamemanager.Instance.State == GameState.Go)
         {
             if (ItemManager.Instance.GetItemCount(ItemType.Arrow) <= 0)
             {

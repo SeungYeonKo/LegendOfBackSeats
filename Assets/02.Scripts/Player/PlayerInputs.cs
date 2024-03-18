@@ -23,7 +23,9 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
 		{
-			MoveInput(value.Get<Vector2>());
+
+                MoveInput(value.Get<Vector2>());
+            
 		}
 
 		public void OnLook(InputValue value)
@@ -48,22 +50,36 @@ namespace StarterAssets
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
+		if (Gamemanager.Instance.State == GameState.Go)
+		{
 			move = newMoveDirection;
-		} 
+		}
+		}
 
 		public void LookInput(Vector2 newLookDirection)
 		{
-			look = newLookDirection;
+			if (Gamemanager.Instance.State == GameState.Go)
+			{
+				look = newLookDirection;
+			}
+
 		}
 
 		public void JumpInput(bool newJumpState)
 		{
-			jump = newJumpState;
+			if (Gamemanager.Instance.State == GameState.Go)
+			{
+				jump = newJumpState;
+			}
 		}
 
 		public void SprintInput(bool newSprintState)
 		{
-			sprint = newSprintState;
+			if (Gamemanager.Instance.State == GameState.Go)
+			{
+				sprint = newSprintState;
+			}
+
 		}
 
 		private void OnApplicationFocus(bool hasFocus)

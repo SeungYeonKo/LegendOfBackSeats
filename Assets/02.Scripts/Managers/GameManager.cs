@@ -19,9 +19,8 @@ public enum GameState
 
 public class Gamemanager : MonoBehaviour
 {
-    // 게임의 상태는 처음에 "준비"상태
     public static Gamemanager Instance { get; private set; }
-    public GameState State { get; private set; } = GameState.Go;
+    public GameState State = GameState.Go;
 
     public UI_OptionPopup OptionUI;
     public GameObject GameOverUI;
@@ -47,14 +46,18 @@ public class Gamemanager : MonoBehaviour
             Pause();
 
         }
-        if (State == GameState.Go)
+        else if (State == GameState.Go)
         {
             Continue();
         }
 
-        if (State == GameState.Over)
+        else if (State == GameState.Over)
         {
             GameOver();
+        }
+        else if (State == GameState.CutScene)
+        {
+            OnCutScene();
         }
     }
 
@@ -63,8 +66,9 @@ public class Gamemanager : MonoBehaviour
         //Debug.Log("게임 오버");
         Time.timeScale = 0f;
         State = GameState.Over;
-        Debug.Log("Gameover Coroutine");
         StartCoroutine(GameOverUIPopup_Coroutine());
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
     private IEnumerator GameOverUIPopup_Coroutine()
     {
@@ -74,7 +78,10 @@ public class Gamemanager : MonoBehaviour
     }
     public void OnCutScene()
     {
+        Time.timeScale = 1f;
         State = GameState.CutScene;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     public void Pause()
     {
