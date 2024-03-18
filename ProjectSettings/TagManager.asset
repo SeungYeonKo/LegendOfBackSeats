@@ -11,6 +11,7 @@ TagManager:
   - Item
   - FireBall
   - Wall
+  - StaticBuilding
   layers:
   - Default
   - TransparentFX
