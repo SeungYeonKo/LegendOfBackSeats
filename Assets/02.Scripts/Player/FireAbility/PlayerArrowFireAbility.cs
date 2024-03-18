@@ -27,6 +27,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
         private float _arrow_Timer = 0f;*/
     private float _arrowPowerFactor;
 
+
     public Arrow ArrowPrefab; // 발사할 화살 객체
 
     private Animator _animator;   // 
@@ -49,6 +50,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
 
     public AudioSource BowDrawSound;
     public AudioSource BowShotSound;
+
 
 
 
