@@ -5,23 +5,17 @@ using UnityEngine;
 
 public class TrapStartArea : MonoBehaviour
 {
-
-    //private ArrowSpawner arrowSpawner;
-
-    private void Start()
-    {
-        // ArrowSpawner 컴포넌트를 씬에서 찾기
-        //arrowSpawner = FindObjectOfType<ArrowSpawner>();
-
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //ArrowSpawner arrowSpawner = GetComponent<ArrowSpawner>();
-        if (other.CompareTag("Player"))
+        private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("트랩시작지점 밟음");
-           
+            if (other.CompareTag("Player"))
+            {
+                Debug.Log("트랩시작지점 밟음");
+            // 씬 내의 모든 ArrowSpawner 인스턴스를 찾는 부분
+            ArrowSpawner[] arrowSpawners = FindObjectsOfType<ArrowSpawner>();
+            foreach (ArrowSpawner spawner in arrowSpawners)
+            {
+                spawner.StartSpawning(); // 각 ArrowSpawner에 대해 화살 발사를 시작
+            }
+           }
         }
     }
-}

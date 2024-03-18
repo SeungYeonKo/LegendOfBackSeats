@@ -14,7 +14,7 @@ public class ArrowSpawner : MonoBehaviour
     public int PoolSize = 20;
     public List<TrapArrow> ArrowPool;
 
-
+    public bool _isActive = false;
 
     private void Awake()
     {
@@ -33,9 +33,18 @@ public class ArrowSpawner : MonoBehaviour
         SetRandomSpawnInterval();
         SpawnTimer = SpawnInterval;
     }
-
     private void Update()
     {
+        if (_isActive)
+        {
+            StartSpawning();
+        }
+    }
+
+    public void StartSpawning() 
+    {
+        _isActive = true;
+
         SpawnTimer -= Time.deltaTime;
         if (SpawnTimer <= 0f)
         {
@@ -45,6 +54,13 @@ public class ArrowSpawner : MonoBehaviour
             Debug.Log("화살 랜덤 생성!");
         }
     }
+
+    public void StopSpawning()
+    {
+        _isActive = false;
+        SpawnTimer = SpawnInterval;
+    }
+
 
     private void SetRandomSpawnInterval()
     {
