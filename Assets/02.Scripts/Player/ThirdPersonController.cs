@@ -253,7 +253,7 @@ namespace StarterAssets
             CurrentHealth -= damage;
             
             StartCoroutine(Damage_Coroutine());
-            if (CurrentHealth < 0)
+            if (CurrentHealth <= 0)
             {
                 Die();
             }
@@ -268,7 +268,6 @@ namespace StarterAssets
             DamageScreen.gameObject.SetActive(true);
             yield return new WaitForSecondsRealtime(0.1f);
             DamageScreen.gameObject.SetActive(false);
-
         }
 
         private void Die()
