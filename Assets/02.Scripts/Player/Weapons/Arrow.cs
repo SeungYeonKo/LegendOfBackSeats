@@ -70,9 +70,20 @@ public class Arrow : MonoBehaviour
 
         }
        
+
     }
     private void OnCollisionStay(Collision collision)
     {
-        GameObject gronds = collision.collider.gameObject;
+        if (collision.gameObject.CompareTag(""))
+        {
+            StartCoroutine(DestroyArrowAfterSeconds_Coroutine(7));
+        }
+    }
+
+    IEnumerator DestroyArrowAfterSeconds_Coroutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        Destroy(gameObject);
     }
 }
