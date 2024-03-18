@@ -14,7 +14,7 @@ public class PlayerBombFireAbility : MonoBehaviour
 
     private BombFireStage _currentStage;
     private Animator _animator;
-    private bool _isCarrying;
+    private bool _isCarrying = false;
     private bool _isThrown;
     private bool _isBombPrepared;
     public float CoolTime = 5.0f;

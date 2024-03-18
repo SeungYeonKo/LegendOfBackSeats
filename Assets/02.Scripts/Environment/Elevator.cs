@@ -32,7 +32,7 @@ public class Elevator : MonoBehaviour
         while (elapsedTime < timeToMove)
         {
             transform.position = Vector3.Lerp(currentPos, targetPosition, (elapsedTime / timeToMove));
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
 

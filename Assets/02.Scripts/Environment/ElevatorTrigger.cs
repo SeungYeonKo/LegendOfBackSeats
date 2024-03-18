@@ -15,7 +15,7 @@ public class ElevatorTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        _timer += Time.deltaTime;
+        _timer += Time.unscaledDeltaTime;
         if (other.CompareTag("Player") && _timer > ActivatedTime)
         {
             _elevator.TriggerActivated = true;
