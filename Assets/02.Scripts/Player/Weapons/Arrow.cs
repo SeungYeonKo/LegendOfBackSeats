@@ -74,9 +74,9 @@ public class Arrow : MonoBehaviour
     }
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag(""))
+        if (collision.gameObject.CompareTag("StaticBuilding"))
         {
-            StartCoroutine(DestroyArrowAfterSeconds_Coroutine(7));
+            StartCoroutine(DestroyArrowAfterSeconds_Coroutine(4));
         }
     }
 
