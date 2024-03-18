@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public enum GameState
 {
-    Ready, // 대기
+    CutScene, // 대기
     Go, // 시작
     Pause,
     Over,  // 게임오버
@@ -38,21 +38,23 @@ public class Gamemanager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (State == GameState.Pause)
         {
             Pause();
-            OptionUI.Open();
+
+        }
+        if (State == GameState.Go)
+        {
+            Continue();
         }
 
         if (State == GameState.Over)
         {
-            Pause();
+            GameOver();
         }
     }
 
@@ -63,7 +65,6 @@ public class Gamemanager : MonoBehaviour
         State = GameState.Over;
         Debug.Log("Gameover Coroutine");
         StartCoroutine(GameOverUIPopup_Coroutine());
-
     }
     private IEnumerator GameOverUIPopup_Coroutine()
     {
@@ -71,14 +72,19 @@ public class Gamemanager : MonoBehaviour
 
         GameOverUI.SetActive(true);
     }
-
+    public void OnCutScene()
+    {
+        State = GameState.CutScene;
+    }
     public void Pause()
     {
+ 
         State = GameState.Pause;
         Time.timeScale = 0f;
-
+        OptionUI.Open();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
     }
 
     public void Continue()
@@ -88,14 +94,20 @@ public class Gamemanager : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Pause();
+            OptionUI.Open();
+            Debug.Log("Pause Menu");
+        }
     }
 
-    public void OnOptionEscKeyClickeed()
+/*    public void OnOptionEscKeyClickeed()
     {
         //Debug.Log("옵션창 나타내기");
         Pause();
         OptionUI.Open();
-    }
+    }*/
 
 
 

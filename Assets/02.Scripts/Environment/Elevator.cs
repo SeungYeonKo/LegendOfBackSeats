@@ -6,11 +6,16 @@ using UnityEngine;
 public class Elevator : MonoBehaviour
 {
     public Transform TargetFloor;
-    private bool _isMoving = false; 
+    private bool _isMoving = false;
+    public bool IsEndingScene = false;
+    public bool TriggerActivated = false;
 
     private void Update()
     {
-         MoveElevator();
+        if (TriggerActivated)
+        {
+            MoveElevator();
+        }
     }
 
     private void MoveElevator()
@@ -19,7 +24,6 @@ public class Elevator : MonoBehaviour
         Vector3 targetPosition = TargetFloor.position;
         StartCoroutine(MoveToPosition(targetPosition, 2f));
     }
-
     private IEnumerator MoveToPosition(Vector3 targetPosition, float timeToMove)
     {
         Vector3 currentPos = transform.position;
@@ -34,6 +38,8 @@ public class Elevator : MonoBehaviour
 
         transform.position = targetPosition;
         _isMoving = false;
+        TriggerActivated = false;
     }
+    
 }
 

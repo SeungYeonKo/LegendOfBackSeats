@@ -5,6 +5,7 @@ using UnityEngine;
 public class TestBreak : MonoBehaviour, IHitable
 {
     public Animator _animator;
+    public bool IsFirstWall;
     private BoxCollider _collider;
 
     void Start()
@@ -19,10 +20,24 @@ public class TestBreak : MonoBehaviour, IHitable
         // todo: 카메라 2초간 비춰주기
 
     }
-    
-    void Update()
+    public void CloseUpCamera()
     {
-        
+
     }
 
+/*    private IEnumerator SwitchCameraCoroutine()
+    {
+        // 대체 카메라 활성화
+        alternateCamera.gameObject.SetActive(true);
+        mainCamera.gameObject.SetActive(false);
+
+        // 2초간 대체 카메라로 유지
+        yield return new WaitForSeconds(2f);
+
+        // 기본 카메라로 전환
+        alternateCamera.gameObject.SetActive(false);
+        mainCamera.gameObject.SetActive(true);
+
+        isSwitching = false;
+    }*/
 }
