@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class TestBreak : MonoBehaviour, IHitable
 {
-    public Animator _animator;
+    private Animator _animator;
     public bool IsFirstWall;
     private BoxCollider _collider;
-
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
     void Start()
     {
 
@@ -17,11 +21,11 @@ public class TestBreak : MonoBehaviour, IHitable
         _animator.SetBool("Break", true);
         _collider = GetComponent<BoxCollider>();
         _collider.enabled = false;
+        if (IsFirstWall)
+        {
+            Gamemanager.Instance.PlayableDirector.Play(Gamemanager.Instance.TimeLines[1]);
+        }
         // todo: 카메라 2초간 비춰주기
-
-    }
-    public void CloseUpCamera()
-    {
 
     }
 

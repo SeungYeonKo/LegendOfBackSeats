@@ -8,11 +8,14 @@ public class TrapStartArea : MonoBehaviour
 {
     public TextMeshProUGUI AvoidArrowTextUI;
     private CinemachineImpulseSource _impulseSource;
+    private BoxCollider _collider;
 
     private void Start()
     {
         AvoidArrowTextUI.text = string.Empty;
+        _collider = GetComponent<BoxCollider>();
     }
+
 
     private void OnTriggerEnter(Collider other)
         {
@@ -28,6 +31,7 @@ public class TrapStartArea : MonoBehaviour
                     spawner.StartSpawning(); // 각 ArrowSpawner에 대해 화살 발사를 시작
                 }
             _impulseSource.GenerateImpulse(1.5f);
+            _collider.enabled = false;
         }
         }
 

@@ -443,18 +443,19 @@ MonoBehaviour:
   Health: 0
   MaxHealth: 10
   HealthSliderUI: {fileID: 1632218275139265738}
-  MoveSpeed: 5
+  MoveSpeed: 20
   StartPosition: {x: 0, y: 0, z: 0}
   Damage: 3
-  FindDistance: 15
+  FindDistance: 30
   AttackDistance: 5
-  MoveDistance: 40
-  MovementRange: 20
+  MoveDistance: 50
+  MovementRange: 40
   KnockbackPower: 4
   Type1_AttackSound: {fileID: 0}
   Type2_AttackSound: {fileID: 0}
   FireballPrefab: {fileID: 1274600735070645292, guid: adc903e803a4e264d9e485a62e53e19c, type: 3}
   FirePosition: {fileID: 0}
+  DieEffectPrefab: {fileID: 0}
 --- !u!114 &8748662039689748842
 MonoBehaviour:
   m_ObjectHideFlags: 0

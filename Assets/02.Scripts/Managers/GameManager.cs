@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
-
-
+using UnityEngine.Timeline;
 
 
 public enum GameState
 {
-    CutScene, // 대기
+    CutScene, 
     Go, // 시작
     Pause,
-    Over,  // 게임오버
+    Over,
 }
 
 
@@ -24,8 +24,10 @@ public class Gamemanager : MonoBehaviour
 
     public UI_OptionPopup OptionUI;
     public GameObject GameOverUI;
+    [HideInInspector]
+    public PlayableDirector PlayableDirector;
+    public List<TimelineAsset> TimeLines;
 
-    private bool _isOptionOpened;
 
     private void Awake()
     {
@@ -37,6 +39,11 @@ public class Gamemanager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+       PlayableDirector = GetComponent<PlayableDirector>();
+}
+    private void Start()
+    {
+        PlayableDirector.Play(TimeLines[0]);
     }
 
     private void Update()
@@ -82,6 +89,14 @@ public class Gamemanager : MonoBehaviour
         State = GameState.CutScene;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        if (PlayableDirector.state != PlayState.Playing)
+        {
+            Continue();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PlayableDirector.time = 15.25f;
+        }
     }
     public void Pause()
     {
@@ -106,6 +121,10 @@ public class Gamemanager : MonoBehaviour
             Pause();
             OptionUI.Open();
             Debug.Log("Pause Menu");
+        }
+        if (PlayableDirector.state == PlayState.Playing)
+        {
+            OnCutScene();
         }
     }
 

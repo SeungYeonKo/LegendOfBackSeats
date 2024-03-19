@@ -57,6 +57,10 @@ public class PlayerBombFireAbility : MonoBehaviour
                 CarryBomb();
                 break;
         }
+        if (!_isCarrying && !_isThrown)
+        {
+            BombObject.SetActive(false);
+        }
     }
     void Neutral()
     {
@@ -82,7 +86,11 @@ public class PlayerBombFireAbility : MonoBehaviour
         _isCarrying = true;
         _meleeAttackAbility.enabled = false;
         _arrowFireAbility.enabled = false;
-
+        if (_isCarrying && !BombObject.activeSelf)
+        {
+            Neutral();
+            _isThrown = false;
+        }
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             _currentStage = BombFireStage.Neutral;

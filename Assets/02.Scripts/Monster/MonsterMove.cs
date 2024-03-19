@@ -35,7 +35,7 @@ public class MonsterMove : MonoBehaviour, IHitable
     public Slider HealthSliderUI;
 
     // 이동
-    public float MoveSpeed = 4f;
+    public float MoveSpeed = 10f;
     public Vector3 StartPosition;
 
     // 공격

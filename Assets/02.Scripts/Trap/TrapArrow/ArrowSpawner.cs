@@ -31,6 +31,7 @@ public class ArrowSpawner : MonoBehaviour
 
     private void Start()
     {
+        
         SetRandomSpawnInterval();
         SpawnTimer = SpawnInterval;
     }
