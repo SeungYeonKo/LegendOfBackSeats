@@ -28,7 +28,7 @@ public class Sword : MonoBehaviour
     }
     public void DisableTrail()
     {
-        Traileffect.Clear();
+        //Traileffect.Clear();
         MeleeArea.enabled = false;
         Traileffect.enabled = false;
  

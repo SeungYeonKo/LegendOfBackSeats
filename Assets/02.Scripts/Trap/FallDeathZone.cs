@@ -10,6 +10,7 @@ public class FallDeathZone : MonoBehaviour
         {
             Gamemanager.Instance.GameOver();
             CameraManager.Instance.DefaultCamera.Follow = null;
+            CameraManager.Instance.DefaultCamera.LookAt = other.transform;
         }
     }
 }
