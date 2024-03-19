@@ -5,6 +5,7 @@ using UnityEngine;
 public class ArrowSpawner : MonoBehaviour
 {
     public GameObject TrapArrowPrefab;
+    public AudioSource TrapArrowSound;
 
     public float MinSpawnInterval = 6f;
     public float MaxSpawnInterval = 14f;
@@ -38,6 +39,7 @@ public class ArrowSpawner : MonoBehaviour
         if (_isActive)
         {
             StartSpawning();
+            
         }
     }
 
@@ -74,6 +76,7 @@ public class ArrowSpawner : MonoBehaviour
             if (!arrow.gameObject.activeInHierarchy)
             {
                 arrow.gameObject.SetActive(true);
+                TrapArrowSound.Play();
                 arrow.gameObject.transform.position = this.transform.position;
                 arrow.gameObject.transform.rotation = this.transform.rotation;
                 return; // 활성화된 화살을 발사한 후 루프를 종료
