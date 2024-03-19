@@ -44,5 +44,4 @@ public class LobbyScene : MonoBehaviour
 #endif
 
     }
-
 }

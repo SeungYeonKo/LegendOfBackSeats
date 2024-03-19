@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/01.Scenes/LoadingScene.unity
     guid: 7d81a63e8f9c8d541857f590278f817f
   - enabled: 1
-    path: Assets/01.Scenes/SuBin Academy.unity
-    guid: b1ae372d41cce6846a7671502c42686d
+    path: Assets/01.Scenes/LegendOfBackSeats.unity
+    guid: fd67ed07461792347a378b618e353b2d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}

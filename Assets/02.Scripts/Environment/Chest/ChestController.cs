@@ -105,6 +105,7 @@ public class ChestController : MonoBehaviour
         {
             GetChest_KeyItemUI.gameObject.SetActive(true);
         }
+        StartCoroutine(GetChestItemUi_Coroutine());
 
     }
 
