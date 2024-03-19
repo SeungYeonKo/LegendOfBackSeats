@@ -17,7 +17,7 @@ public class LobbyScene : MonoBehaviour
 
     void Start()
     {
-        
+        Tutorial.SetActive(false);
     }
 
     void Update()
