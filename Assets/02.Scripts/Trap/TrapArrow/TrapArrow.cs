@@ -7,6 +7,7 @@ public class TrapArrow : MonoBehaviour
 {
     Rigidbody _rigidbody;
     public float Speed = 7f;
+    public AudioSource TrapArrowSound;
 
     void Start()
     {
