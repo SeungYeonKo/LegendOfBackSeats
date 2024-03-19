@@ -7,6 +7,7 @@ using UnityEngine;
 public class TrapStartArea : MonoBehaviour
 {
     public TextMeshProUGUI AvoidArrowTextUI;
+    private CinemachineImpulseSource _impulseSource;
 
     private void Start()
     {
@@ -21,11 +22,13 @@ public class TrapStartArea : MonoBehaviour
                 Debug.Log("트랩시작지점 밟음");
                 // 씬 내의 모든 ArrowSpawner 인스턴스를 찾는 부분
                 ArrowSpawner[] arrowSpawners = FindObjectsOfType<ArrowSpawner>();
-                foreach (ArrowSpawner spawner in arrowSpawners)
+            _impulseSource = GetComponent<CinemachineImpulseSource>();
+            foreach (ArrowSpawner spawner in arrowSpawners)
                 {
                     spawner.StartSpawning(); // 각 ArrowSpawner에 대해 화살 발사를 시작
                 }
-           }
+            _impulseSource.GenerateImpulse(1.5f);
+        }
         }
 
     IEnumerator ShowAvoidArrowMessage()
