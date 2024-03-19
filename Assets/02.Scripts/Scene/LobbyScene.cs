@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LobbyScene : MonoBehaviour
 {
+    public GameObject Tutorial;
 
     private enum SceneNames
     {
@@ -16,7 +17,7 @@ public class LobbyScene : MonoBehaviour
 
     void Start()
     {
-        
+        Tutorial.SetActive(false);
     }
 
     void Update()
@@ -30,7 +31,7 @@ public class LobbyScene : MonoBehaviour
     }
     public void OnTutorialButton()
     {
-
+        Tutorial.SetActive(true);
     }
     public void OnGameExitButton()
     {
