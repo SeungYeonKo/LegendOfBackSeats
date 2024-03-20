@@ -7,6 +7,8 @@ public class ElevatorTrigger : MonoBehaviour
     private Elevator _elevator;
     private float _timer = 0;
     public float ActivatedTime = 0.5f;
+    public bool IsEndingScene;
+
     private void Awake()
     {
         _elevator = GetComponentInParent<Elevator>();
@@ -19,6 +21,11 @@ public class ElevatorTrigger : MonoBehaviour
         if (other.CompareTag("Player") && _timer > ActivatedTime)
         {
             _elevator.TriggerActivated = true;
+            if (IsEndingScene)
+            {
+                _elevator.IsEndingScene = true;
+
+            }
             _timer = 0;
         }
     }

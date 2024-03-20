@@ -21,7 +21,7 @@ public class LoadingScene : MonoBehaviour
 
         // 다음 씬 로드
         // 'NextScene'을 로드하고자 하는 씬의 이름 또는 인덱스로 교체하세요.
-        SceneManager.LoadScene("SuBin Academy");
+        SceneManager.LoadScene("LegendOfBackSeats");
     }
 
 }
