@@ -4,16 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public enum Items
-{
-    Arrow,   // 화살 아이템
-    Health,  // 체력 아이템
-    Key      // 열쇠 아이템
-}
-
 public class ChestController : MonoBehaviour
 {
-
+    public ItemType item;
    
     public GameObject Player;
     public GameObject ChestInteractionUI;
@@ -35,7 +28,7 @@ public class ChestController : MonoBehaviour
 
     private bool _isNear = false;
 
-    public Items item;
+
 
     void Start()
     {
@@ -93,15 +86,18 @@ public class ChestController : MonoBehaviour
         _animator.SetBool("Opened", true);
 
 
-        if (item == Items.Health)
+        if (item == ItemType.Health)
         {
             GetChest_HealthItemUI.gameObject.SetActive(true);
+            ItemManager.Instance.AddItem(ItemType.Health, 1);
+            
         }
-        else if (item == Items.Arrow)
+        else if (item == ItemType.Arrow)
         {
             GetChest_ArrowItemUI.gameObject.SetActive(true);
+            ItemManager.Instance.AddItem(ItemType.Arrow, 2);
         }
-        else if (item == Items.Key)
+        else if (item == ItemType.Key)
         {
             GetChest_KeyItemUI.gameObject.SetActive(true);
         }

@@ -7,7 +7,8 @@ using UnityEngine;
 public enum ItemType
 {
     Health,
-    Arrow
+    Arrow,
+    Key
 }
 
 public class Item
