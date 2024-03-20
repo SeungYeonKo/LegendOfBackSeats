@@ -24,6 +24,8 @@ public class ChestController : MonoBehaviour
     public Animator _animator;
     public float ChestOpenDistance = 5f;
 
+    public AudioSource ChestOpenSound;
+
     
 
     private bool _isNear = false;
@@ -81,6 +83,7 @@ public class ChestController : MonoBehaviour
     private void OpenChest()
     {
         Debug.Log("상자가 열렸다!");
+        ChestOpenSound.Play();
         ChestInteractionUI.SetActive(false);
         _animator.SetTrigger("Open");
         _animator.SetBool("Opened", true);
