@@ -14,6 +14,7 @@ public enum GameState
     Go, // 시작
     Pause,
     Over,
+    Ending,
 }
 
 
@@ -66,6 +67,10 @@ public class Gamemanager : MonoBehaviour
         {
             OnCutScene();
         }
+        else if (State == GameState.Ending)
+        {
+            OnEnding();
+        }
     }
 
     public void GameOver()
@@ -96,6 +101,17 @@ public class Gamemanager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PlayableDirector.time = 15.25f;
+        }
+    }
+    public void OnEnding()
+    {
+        Time.timeScale = 0.5f;
+        State = GameState.Ending;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        if (PlayableDirector.state != PlayState.Playing)
+        {
+            Continue();
         }
     }
     public void Pause()
