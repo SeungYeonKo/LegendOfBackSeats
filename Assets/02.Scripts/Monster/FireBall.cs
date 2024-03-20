@@ -45,6 +45,10 @@ public class FireBall : MonoBehaviour
             }
             Destroy(gameObject); // 파이어볼 파괴
         }
+        else if (other.CompareTag("Wall"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
 
