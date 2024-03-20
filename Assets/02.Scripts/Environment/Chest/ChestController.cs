@@ -8,7 +8,7 @@ public class ChestController : MonoBehaviour
 {
     public ItemType item;
 
-    public AudioSource OpenChestSound;
+    public AudioSource OpenChest_AudioSource;
    
     public GameObject Player;
     public GameObject ChestInteractionUI;
@@ -35,6 +35,9 @@ public class ChestController : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();
+        OpenChest_AudioSource = GetComponent<AudioSource>();
+
+
         _animator.SetBool("Opened", false);
 
         ChestItemEffect1.SetActive(false);
@@ -85,6 +88,7 @@ public class ChestController : MonoBehaviour
         Debug.Log("상자가 열렸다!");
         ChestInteractionUI.SetActive(false);
         _animator.SetTrigger("Open");
+        OpenChest_AudioSource.Play();
         _animator.SetBool("Opened", true);
 
 
