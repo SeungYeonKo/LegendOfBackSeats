@@ -9,7 +9,7 @@ public class EndingDoorController : MonoBehaviour
 
 
     public Animator _animator;
-    public float DoorOpenDistance = 10f;
+    public float DoorOpenDistance = 5f;
 
     private bool _isNear = false;
 
@@ -20,12 +20,13 @@ public class EndingDoorController : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _animator.SetBool("Opened", false);
-
     }
 
     void Update()
     {
         CheckPlayerDistance();
+
+        Debug.Log(Vector3.Distance(Player.transform.position, transform.position));
 
         if (_isNear && Input.GetKeyDown(KeyCode.E) /* && ItemManager.Instance.ItemList[2].Count >= 1*/)
         {
@@ -43,10 +44,10 @@ public class EndingDoorController : MonoBehaviour
         {
             if (!_isNear && !_animator.GetBool("Opened") /* &&ItemManager.Instance.ItemList[2].Count >= 1*/) // 플레이어가 근처에 처음 도달했을 때 (열쇠가 있을 경우) 한 번만 UI를 활성화
             {
+                Debug.Log("플레이어 열쇠 사용 가능");
                 UseKeyInteractionUI.SetActive(true);
                 _isNear = true;
             }
-
         }
         else
         {
@@ -63,6 +64,5 @@ public class EndingDoorController : MonoBehaviour
        UseKeyInteractionUI.SetActive(false);
         _animator.SetTrigger("Open");
         _animator.SetBool("Opened", true);
-
     }
 }
