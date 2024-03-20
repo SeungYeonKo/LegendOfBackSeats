@@ -26,7 +26,6 @@ public class EndingDoorController : MonoBehaviour
     {
         CheckPlayerDistance();
 
-        Debug.Log(Vector3.Distance(Player.transform.position, transform.position));
 
         if (_isNear && Input.GetKeyDown(KeyCode.E) /* && ItemManager.Instance.ItemList[2].Count >= 1*/)
         {
