@@ -100,6 +100,7 @@ public class ChestController : MonoBehaviour
         else if (item == ItemType.Key)
         {
             GetChest_KeyItemUI.gameObject.SetActive(true);
+            ItemManager.Instance.AddItem(ItemType.Key, 1);
         }
         StartCoroutine(GetChestItemUi_Coroutine());
 
