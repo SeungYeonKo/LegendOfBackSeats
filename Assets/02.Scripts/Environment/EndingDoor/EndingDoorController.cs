@@ -13,7 +13,7 @@ public class EndingDoorController : MonoBehaviour
 
     private bool _isNear = false;
 
-    
+    public AudioSource DoorOpen_Audio;
 
 
     void Start()
@@ -32,7 +32,8 @@ public class EndingDoorController : MonoBehaviour
 
             OpenEndingDoor();
             _animator.SetBool("Opened", true);
-
+            
+            DoorOpen_Audio.Play();
         }
 
     }
