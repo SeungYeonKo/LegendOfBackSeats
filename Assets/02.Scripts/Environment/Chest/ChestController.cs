@@ -50,7 +50,7 @@ public class ChestController : MonoBehaviour
     {
         CheckPlayerDistance();
 
-        if (_isNear && Input.GetKeyDown(KeyCode.E))
+        if (_isNear && Input.GetKeyDown(KeyCode.E) && !_animator.GetBool("Opened"))
         {
 
             OpenChest();
@@ -59,7 +59,6 @@ public class ChestController : MonoBehaviour
 
         }
     }
-
 
     private void CheckPlayerDistance()
     {
@@ -81,7 +80,6 @@ public class ChestController : MonoBehaviour
             }
         }
     }
-
 
     private void OpenChest()
     {
