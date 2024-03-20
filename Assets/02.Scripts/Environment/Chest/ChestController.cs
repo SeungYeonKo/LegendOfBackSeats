@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 public class ChestController : MonoBehaviour
 {
     public ItemType item;
+
+    public AudioSource OpenChestSound;
    
     public GameObject Player;
     public GameObject ChestInteractionUI;
