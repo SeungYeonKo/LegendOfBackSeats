@@ -6,7 +6,7 @@ public class EndingDoorController : MonoBehaviour
 {
     public GameObject Player;
     public GameObject UseKeyInteractionUI;
-
+    public GameObject NeedKeyUI;
 
     public Animator _animator;
     public float DoorOpenDistance = 5f;
@@ -27,7 +27,7 @@ public class EndingDoorController : MonoBehaviour
         CheckPlayerDistance();
 
 
-        if (_isNear && Input.GetKeyDown(KeyCode.E) /* && ItemManager.Instance.ItemList[2].Count >= 1*/)
+        if (_isNear && Input.GetKeyDown(KeyCode.E) && ItemManager.Instance.ItemList[2].Count >= 1)
         {
 
             OpenEndingDoor();
@@ -42,22 +42,36 @@ public class EndingDoorController : MonoBehaviour
     {
         if (Vector3.Distance(Player.transform.position, transform.position) < DoorOpenDistance)
         {
-            if (!_isNear && !_animator.GetBool("Opened") /* &&ItemManager.Instance.ItemList[2].Count >= 1*/) // 플레이어가 근처에 처음 도달했을 때 (열쇠가 있을 경우) 한 번만 UI를 활성화
+            if (!_isNear && !_animator.GetBool("Opened")  &&ItemManager.Instance.ItemList[2].Count >= 1) // 플레이어가 근처에 처음 도달했을 때 (열쇠가 있을 경우) 한 번만 UI를 활성화
             {
                 Debug.Log("플레이어 열쇠 사용 가능");
                 UseKeyInteractionUI.SetActive(true);
                 _isNear = true;
             }
+            else if (!_isNear && !_animator.GetBool("Opened") && ItemManager.Instance.ItemList[2].Count <= 0)
+            {
+                Debug.Log("플레이어 열쇠 사용 불가능");
+                NeedKeyUI.SetActive(true);
+                _isNear = true;
+            }             
+
         }
+
         else
         {
-            if (_isNear && !_animator.GetBool("Opened")/* &&ItemManager.Instance.ItemList[2].Count >= 1*/) // 플레이어가 멀어졌을 때 한 번만 UI를 비활성화
+            if (_isNear && !_animator.GetBool("Opened") &&ItemManager.Instance.ItemList[2].Count >= 1) // 플레이어가 멀어졌을 때 한 번만 UI를 비활성화
             {
                 UseKeyInteractionUI.SetActive(false);
                 _isNear = false;
             }
+            else if (!_isNear && !_animator.GetBool("Opened") && ItemManager.Instance.ItemList[2].Count <= 0)
+            {
+                NeedKeyUI.SetActive(true);
+                _isNear = false;
+            }
         }
     }
+
     private void OpenEndingDoor()
     {
         Debug.Log("문이 열렸다!");
