@@ -43,6 +43,7 @@ public class ItemManager : MonoBehaviour
 
         ItemList.Add(new Item(ItemType.Health, 0));
         ItemList.Add(new Item(ItemType.Arrow, 5));
+        ItemList.Add(new Item(ItemType.Key, 0));
 
         OnDataChanged.Invoke();
     }

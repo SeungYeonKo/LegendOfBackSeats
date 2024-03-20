@@ -8,10 +8,10 @@ public class ChestController : MonoBehaviour
 {
     public ItemType item;
 
-    public AudioSource OpenChest_AudioSource;
    
     public GameObject Player;
     public GameObject ChestInteractionUI;
+
 
     [Header("상자 이펙트")]
     public GameObject ChestItemEffect1;
@@ -26,9 +26,9 @@ public class ChestController : MonoBehaviour
     public Animator _animator;
     public float ChestOpenDistance = 5f;
 
-    public AudioSource ChestOpenSound;
+    public AudioSource ChestOpen_Audio;
 
-    
+
 
     private bool _isNear = false;
 
@@ -37,8 +37,6 @@ public class ChestController : MonoBehaviour
     void Start()
     {
         _animator = GetComponent<Animator>();
-        OpenChest_AudioSource = GetComponent<AudioSource>();
-
 
         _animator.SetBool("Opened", false);
 
@@ -88,12 +86,12 @@ public class ChestController : MonoBehaviour
     private void OpenChest()
     {
         Debug.Log("상자가 열렸다!");
-        ChestOpenSound.Play();
+
+
         ChestInteractionUI.SetActive(false);
         _animator.SetTrigger("Open");
-        OpenChest_AudioSource.Play();
         _animator.SetBool("Opened", true);
-
+        ChestOpen_Audio.Play();
 
         if (item == ItemType.Health)
         {
@@ -111,6 +109,7 @@ public class ChestController : MonoBehaviour
             GetChest_KeyItemUI.gameObject.SetActive(true);
             ItemManager.Instance.AddItem(ItemType.Key, 1);
         }
+
         StartCoroutine(GetChestItemUi_Coroutine());
 
     }
