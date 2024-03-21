@@ -72,7 +72,7 @@ public class PlayerArrowFireAbility : MonoBehaviour
             {
                 BowDrawSound.Play();
                 _animator.SetTrigger("DrawArrow");
-                if (_animator.)
+                
             }
             if (Input.GetMouseButton(1))
             {
