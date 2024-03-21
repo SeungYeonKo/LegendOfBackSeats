@@ -108,8 +108,8 @@ public class Gamemanager : MonoBehaviour
     {
         Time.timeScale = 0.5f;
         State = GameState.Ending;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
     public void Pause()
     {
