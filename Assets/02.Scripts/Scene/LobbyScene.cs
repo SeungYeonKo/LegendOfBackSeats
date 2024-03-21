@@ -34,6 +34,11 @@ public class LobbyScene : MonoBehaviour
     {
         Tutorial.SetActive(true);
     }
+
+    public void OffTutoralButton()
+    {
+        Tutorial.SetActive(false);
+    }
     public void OnGameExitButton()
     {
         Debug.Log("게임 종료 버튼 클릭");
