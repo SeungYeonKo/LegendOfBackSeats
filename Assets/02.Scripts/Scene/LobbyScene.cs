@@ -17,6 +17,7 @@ public class LobbyScene : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f;
         Tutorial.SetActive(false);
     }
 

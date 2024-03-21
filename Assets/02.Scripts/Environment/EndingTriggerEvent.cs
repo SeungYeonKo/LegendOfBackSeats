@@ -33,10 +33,11 @@ public class EndingTriggerEvent : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Ending Event Trigger");
+            _triggerCollider.enabled = false;
+          
             // Ending
             // ending effect Coroutine
-            Gamemanager.Instance.OnCutScene();
-            Gamemanager.Instance.PlayableDirector.Play(Gamemanager.Instance.TimeLines[2]);
+
 
             StartCoroutine(EndingEffect_Coroutine());
         }
@@ -49,6 +50,7 @@ public class EndingTriggerEvent : MonoBehaviour
             EffectsToTurnOn[i].SetActive(true);
             yield return new WaitForSeconds(Effect_Gap);
         }
-
+        Gamemanager.Instance.OnEnding();
+        Gamemanager.Instance.PlayableDirector.Play(Gamemanager.Instance.TimeLines[2]);
     }
 }

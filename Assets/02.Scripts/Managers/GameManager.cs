@@ -45,6 +45,7 @@ public class Gamemanager : MonoBehaviour
     private void Start()
     {
         PlayableDirector.Play(TimeLines[0]);
+        OnCutScene();
     }
 
     private void Update()
@@ -107,12 +108,8 @@ public class Gamemanager : MonoBehaviour
     {
         Time.timeScale = 0.5f;
         State = GameState.Ending;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        if (PlayableDirector.state != PlayState.Playing)
-        {
-            Continue();
-        }
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
     public void Pause()
     {
@@ -138,10 +135,10 @@ public class Gamemanager : MonoBehaviour
             OptionUI.Open();
             Debug.Log("Pause Menu");
         }
-        if (PlayableDirector.state == PlayState.Playing)
+/*        if (PlayableDirector.state == PlayState.Playing)
         {
             OnCutScene();
-        }
+        }*/
     }
 
 /*    public void OnOptionEscKeyClickeed()
