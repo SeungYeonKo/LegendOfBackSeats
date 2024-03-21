@@ -20,6 +20,8 @@ public class EndingDoorController : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _animator.SetBool("Opened", false);
+
+        NeedKeyUI.SetActive(false);
     }
 
     void Update()
@@ -64,9 +66,9 @@ public class EndingDoorController : MonoBehaviour
                 UseKeyInteractionUI.SetActive(false);
                 _isNear = false;
             }
-            else if (!_isNear && !_animator.GetBool("Opened") && ItemManager.Instance.ItemList[2].Count <= 0)
+            else if (_isNear && !_animator.GetBool("Opened") && ItemManager.Instance.ItemList[2].Count <= 0)
             {
-                NeedKeyUI.SetActive(true);
+                NeedKeyUI.SetActive(false);
                 _isNear = false;
             }
         }

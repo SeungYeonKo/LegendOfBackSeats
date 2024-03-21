@@ -43,6 +43,10 @@ public class ChestController : MonoBehaviour
         ChestItemEffect1.SetActive(false);
         ChestItemEffect2.SetActive(false);
         ChestItemEffect3.SetActive(false);
+
+        GetChest_ArrowItemUI.gameObject.SetActive(false);
+        GetChest_HealthItemUI.gameObject.SetActive(false);
+        GetChest_KeyItemUI.gameObject.SetActive(false);
     }
 
 
