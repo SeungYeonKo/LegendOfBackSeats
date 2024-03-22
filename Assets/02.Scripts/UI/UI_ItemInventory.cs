@@ -10,7 +10,7 @@ public class UI_ItemInventory : MonoBehaviour
 
     public void Refresh()
     {
-        HealthItemCountText.text = $"x{ItemManager.Instance.GetItemCount(ItemType.Health)}";
-        ArrowItemCountText.text = $"x{ItemManager.Instance.GetItemCount(ItemType.Arrow)}";
+        HealthItemCountText.text = $"{ItemManager.Instance.GetItemCount(ItemType.Health)}";
+        ArrowItemCountText.text = $"{ItemManager.Instance.GetItemCount(ItemType.Arrow)}";
     }
 }
