@@ -15,7 +15,6 @@ public class TrapEndArea : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("트랩끝남지점 밟음");
             ArrowSpawner[] arrowSpawners = FindObjectsOfType<ArrowSpawner>();
             foreach (ArrowSpawner spawner in arrowSpawners)
             {
