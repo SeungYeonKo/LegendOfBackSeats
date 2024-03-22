@@ -7,15 +7,15 @@ public class csShurikenEffectChanger : MonoBehaviour
 {
 	public void ShurikenParticleScaleChange(float _Value)
 	{
-		ParticleSystem[] ParticleSystems = GetComponentsInChildren<ParticleSystem>();
+        UnityEngine.ParticleSystem[] ParticleSystems = GetComponentsInChildren<UnityEngine.ParticleSystem>();
 
         transform.localScale *= _Value;
 
-		foreach(ParticleSystem _ParticleSystem in ParticleSystems) {
+		foreach(UnityEngine.ParticleSystem _ParticleSystem in ParticleSystems) {
 			_ParticleSystem.startSpeed *= _Value;
 			_ParticleSystem.startSize *= _Value;
 			_ParticleSystem.gravityModifier *= _Value;
-			SerializedObject _SerializedObject = new SerializedObject(_ParticleSystem);
+            SerializedObject _SerializedObject = new SerializedObject(_ParticleSystem);
 			_SerializedObject.FindProperty("CollisionModule.particleRadius").floatValue *= _Value;
 			_SerializedObject.FindProperty("ShapeModule.radius").floatValue *= _Value;
 			_SerializedObject.FindProperty("ShapeModule.boxX").floatValue *= _Value;
