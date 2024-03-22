@@ -30,8 +30,6 @@ public class UI_OptionPopup : MonoBehaviour
 
     public void OnContinueButton()
     {
-        Debug.Log("계속하기 버튼 클릭");
-
         Close();
     }
 
@@ -40,10 +38,7 @@ public class UI_OptionPopup : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(2);
-        Debug.Log("다시하기 버튼 클릭");
         Time.timeScale = 1f;
-
-
     }
 
 
@@ -51,14 +46,11 @@ public class UI_OptionPopup : MonoBehaviour
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(0);
-        Debug.Log("다시하기 버튼 클릭");
-
     }
 
 
     public void OnExitButton()
     {
-        Debug.Log("게임 종료 버튼 클릭");
         Application.Quit();
 
 #if UNITY_EDITOR

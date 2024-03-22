@@ -22,7 +22,6 @@ public class TrapStartArea : MonoBehaviour
             if (other.CompareTag("Player"))
             {
                 StartCoroutine(ShowAvoidArrowMessage());
-                Debug.Log("트랩시작지점 밟음");
                 // 씬 내의 모든 ArrowSpawner 인스턴스를 찾는 부분
                 ArrowSpawner[] arrowSpawners = FindObjectsOfType<ArrowSpawner>();
             _impulseSource = GetComponent<CinemachineImpulseSource>();

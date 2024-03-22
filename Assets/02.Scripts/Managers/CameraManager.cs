@@ -28,7 +28,6 @@ public class CameraManager : MonoBehaviour
     {
         if (cameraIndex < 0 || cameraIndex >= Cameras.Count)
         {
-            Debug.LogError("Camera index out of range.");
             return;
         }
 

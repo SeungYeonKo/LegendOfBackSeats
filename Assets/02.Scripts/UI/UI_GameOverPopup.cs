@@ -23,27 +23,11 @@ public class UI_GameOverPopup : MonoBehaviour
         //_fadeInProgress = 0f;
     }
 
-
-    private void Update()
-    {
-        /*
-        if (_isGameOverUIOpened && _fadeInProgress < 1)
-        {
-            Debug.Log(_fadeInProgress);
-            _fadeInProgress += Time.deltaTime / FadeInDuration;
-            UIGameOverElement.alpha = Mathf.Lerp(MinAlpha, MaxAlpha, _fadeInProgress);
-        }
-        */
-    }
-
-
     public void Open()
     {   
-        Debug.Log("게임 오버 오픈!");
         //gameObject.SetActive(true);
         UIGameOverElement.alpha = MinAlpha;
 
-        Debug.Log("코루틴 시작");
      //   StartCoroutine(GameOverUIOpen_Coroutine());
     }
 

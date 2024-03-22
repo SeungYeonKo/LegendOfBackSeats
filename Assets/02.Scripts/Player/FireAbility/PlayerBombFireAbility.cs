@@ -71,8 +71,6 @@ public class PlayerBombFireAbility : MonoBehaviour
         {
             _currentStage = BombFireStage.Carry;
             _animator.SetBool("Carry", true);
-            //SpawnBomb();
-            // Debug.Log("Neutral -> Carry");
         }
         else if (Input.GetKeyDown(KeyCode.Tab) && _isThrown)
         {
@@ -96,13 +94,11 @@ public class PlayerBombFireAbility : MonoBehaviour
             _currentStage = BombFireStage.Neutral;
             PutBack();
             _animator.SetBool("Carry", false);
-            Debug.Log("Carry -> Putback -> Neutral");
         }
         if (Input.GetMouseButtonDown(0))
         {
             _currentStage = BombFireStage.Neutral;
            // ThrowBomb();
-            Debug.Log("Carry -> Throw -> Neutral");
             _animator.SetBool("Carry", false);
             _animator.SetTrigger("Throw");
         }
@@ -110,7 +106,6 @@ public class PlayerBombFireAbility : MonoBehaviour
         {
             _currentStage = BombFireStage.Neutral;
             PutDown();
-            Debug.Log("Carry -> Putdown -> Neutral");
             _animator.SetBool("Carry", false);
             _animator.SetTrigger("Putdown");
         }
@@ -144,7 +139,6 @@ public class PlayerBombFireAbility : MonoBehaviour
         _bomb.ExplodeBomb();
         _isThrown = false;
         BoomSound.Play();
-        Debug.Log("Explode");
         _isBombPrepared = false;
         BombReloadSlider.fillAmount = 0;
         StartCoroutine(BombPrepareTime_Coroutine(CoolTime));
@@ -169,7 +163,6 @@ public class PlayerBombFireAbility : MonoBehaviour
     {
         _isCarrying = false;
         BombObject.SetActive(false);
-        Debug.Log("Putback -> Neutral");
     }
     void PutDown()
     {

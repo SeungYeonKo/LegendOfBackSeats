@@ -42,7 +42,6 @@ public class EndingTriggerEvent : MonoBehaviour
                 mainBGM.MainBGMSound.Stop();
                 EndingBGM.Play();
             }
-            Debug.Log("Ending Event Trigger");
             _triggerCollider.enabled = false;
           
             // Ending

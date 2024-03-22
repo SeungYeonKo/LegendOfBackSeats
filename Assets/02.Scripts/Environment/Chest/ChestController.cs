@@ -87,9 +87,6 @@ public class ChestController : MonoBehaviour
 
     private void OpenChest()
     {
-        Debug.Log("상자가 열렸다!");
-
-
         ChestInteractionUI.SetActive(false);
         _animator.SetTrigger("Open");
         _animator.SetBool("Opened", true);

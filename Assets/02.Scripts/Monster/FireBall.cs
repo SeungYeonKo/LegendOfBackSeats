@@ -41,7 +41,6 @@ public class FireBall : MonoBehaviour
             if (hitable != null)
             {
                 hitable.Hit(Damage);
-                Debug.Log("파이어볼에 맞았다!");
             }
             Destroy(gameObject); // 파이어볼 파괴
         }

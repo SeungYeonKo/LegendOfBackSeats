@@ -112,8 +112,6 @@ public class PlayerArrowFireAbility : MonoBehaviour
         arrowInstance.transform.forward = Camera.main.transform.forward + _offset;
         arrowInstance.Shoot(Camera.main.transform.forward, Power);
 
-        Debug.Log("화살 사용됨!");
-
         ItemManager.Instance.TryUseItem(ItemType.Arrow);
 
 

@@ -31,7 +31,6 @@ public class Bomb : MonoBehaviour
 
         int layer = (LayerMask.GetMask("Monster") | LayerMask.GetMask("Player") | LayerMask.GetMask("Breakable"));
         int count = Physics.OverlapSphereNonAlloc(transform.position, BurstingExplosionRadius, _colliders, layer);
-        //Debug.Log(count);
         for (int i = 0; i < count; i++)
         {
             Collider c = _colliders[i];
@@ -44,7 +43,6 @@ public class Bomb : MonoBehaviour
                     _impulseSource.GenerateImpulse(2f);
                     //_impulseSource.
                 }
-                //Debug.Log(hitableObject);
             }
         }
         _impulseSource.GenerateImpulse(0.5f);

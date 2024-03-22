@@ -76,7 +76,6 @@ public class Gamemanager : MonoBehaviour
 
     public void GameOver()
     {
-        //Debug.Log("게임 오버");
         Time.timeScale = 0f;
         State = GameState.Over;
         StartCoroutine(GameOverUIPopup_Coroutine());
@@ -133,7 +132,6 @@ public class Gamemanager : MonoBehaviour
         {
             Pause();
             OptionUI.Open();
-            Debug.Log("Pause Menu");
         }
 /*        if (PlayableDirector.state == PlayState.Playing)
         {

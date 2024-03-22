@@ -54,7 +54,6 @@ public class ArrowSpawner : MonoBehaviour
             SpawnArrow();
             SetRandomSpawnInterval();
             SpawnTimer = SpawnInterval;
-            Debug.Log("화살 랜덤 생성!");
         }
     }
 

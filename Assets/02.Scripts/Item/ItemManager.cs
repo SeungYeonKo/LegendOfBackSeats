@@ -57,7 +57,6 @@ public class ItemManager : MonoBehaviour
             if (item.ItemType == itemType)
             {
                 item.Count += count;
-                Debug.Log($"{itemType} 아이템추가");
 
                 // 데이터 변경 이벤트를 호출
                 OnDataChanged?.Invoke();
@@ -98,7 +97,6 @@ public class ItemManager : MonoBehaviour
                             // 최대 체력이 아니면 아이템 사용
                             int healthToAdd = Mathf.Min(5, thirdPersonController.MaxHealth - thirdPersonController.CurrentHealth);
                             thirdPersonController.CurrentHealth += healthToAdd;
-                            Debug.Log($"체력 아이템 사용! 현재 체력: {thirdPersonController.CurrentHealth}");
 
                             // 사운드 재생
                             HealthItemSound.Play();
@@ -125,9 +123,6 @@ public class ItemManager : MonoBehaviour
                 {
                     // 체력 아이템이 없는데 아이템을 먹으면 text 띄우기
                     StartCoroutine(ShowNoHealthItemMessage());
-                    
-                    // 아이템이 없을 때의 처리
-                    Debug.Log($"{itemType} 아이템이 없어 사용할 수 없습니다.");
                     return false; // 아이템이 없으므로 false 반환
                 }
             }

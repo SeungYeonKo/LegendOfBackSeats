@@ -41,7 +41,6 @@ public class LobbyScene : MonoBehaviour
     }
     public void OnGameExitButton()
     {
-        Debug.Log("게임 종료 버튼 클릭");
         Application.Quit();
 
 #if UNITY_EDITOR

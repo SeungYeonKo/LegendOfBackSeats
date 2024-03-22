@@ -23,13 +23,10 @@ public class TrapArrow : MonoBehaviour
             if (other.CompareTag("Player"))
             {
                 thirdPersonController.Hit(1);
-                
-                Debug.Log("트랩화살에 맞음! :  체력 -1");
             }
         }
         else if (other.CompareTag("Wall"))
         {
-            Debug.Log("벽에 쿵");
             gameObject.SetActive(false);
         }
     }
