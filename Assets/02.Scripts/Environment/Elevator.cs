@@ -6,7 +6,7 @@ using UnityEngine;
 public class Elevator : MonoBehaviour
 {
     public Transform TargetFloor;
-    private bool _isMoving = false;
+    // private bool _isMoving = false;
     public bool IsEndingScene = false;
     public bool TriggerActivated = false;
 
@@ -20,7 +20,7 @@ public class Elevator : MonoBehaviour
 
     private void MoveElevator()
     {
-        _isMoving = true;
+       // _isMoving = true;
         Vector3 targetPosition = TargetFloor.position;
         StartCoroutine(MoveToPosition(targetPosition, 2f));
     }
@@ -37,7 +37,7 @@ public class Elevator : MonoBehaviour
         }
 
         transform.position = targetPosition;
-        _isMoving = false;
+       // _isMoving = false;
         TriggerActivated = false;
     }
     
